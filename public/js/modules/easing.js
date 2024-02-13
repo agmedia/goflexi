@@ -1,0 +1,1 @@
+CNVS.Easing=function(){var i=SEMICOLON.Core;return{init:function(n){i.loadJS({file:"plugins.easing.js",id:"canvas-easing-js",jsFolder:!0}),i.isFuncTrue(function(){return"undefined"!=typeof jQuery&&void 0!==jQuery.easing.easeOutQuad}).then(function(n){if(!n)return!1;i.initFunction({class:"has-plugin-easing",event:"pluginEasingReady"})})}}}();

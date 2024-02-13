@@ -1,0 +1,1 @@
+CNVS.Bootstrap=function(){var n=SEMICOLON.Core;return{init:function(t){n.loadJS({file:"plugins.bootstrap.js",id:"canvas-bootstrap-js",jsFolder:!0}),n.isFuncTrue(function(){return"undefined"!=typeof bootstrap}).then(function(t){if(!t)return!1;n.initFunction({class:"has-plugin-bootstrap",event:"pluginBootstrapReady"})})}}}();

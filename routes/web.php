@@ -16,6 +16,7 @@ use App\Http\Controllers\Back\Settings\OptionController;
 use App\Http\Controllers\Back\Settings\QuickMenuController;
 use App\Http\Controllers\Back\Settings\System\ApplicationController;
 use App\Http\Controllers\Back\UserController;
+use App\Http\Controllers\Front\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -193,12 +194,15 @@ Route::group(
      * FRONT ROUTES
      */
     Route::get('/', [HomeController::class, 'index'])->name('index');
+    Route::get('faq', [HomeController::class, 'faq'])->name('faq');
+    Route::get('/kontakt', [HomeController::class, 'contact'])->name('kontakt');
+    Route::post('/kontakt/posalji', [HomeController::class, 'sendContactMessage'])->name('poruka');
 
     /**
      *
      */
     Route::fallback(function () {
-        return view('front.404');
+        return view('errors.404');
     });
 
 });
