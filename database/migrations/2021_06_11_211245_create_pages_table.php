@@ -13,7 +13,7 @@ class CreatePagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('pages', function (Blueprint $table) {
+        /*Schema::create('pages', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');
             $table->string('group')->default('default');
@@ -42,7 +42,7 @@ class CreatePagesTable extends Migration
             $table->foreign('page_id')
                   ->references('id')->on('pages')
                   ->onDelete('cascade');
-        });
+        });*/
     }
 
     /**
@@ -52,8 +52,8 @@ class CreatePagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pages');
-        Schema::dropIfExists('page_translations');
+        /*Schema::dropIfExists('pages');
+        Schema::dropIfExists('page_translations');*/
     }
 }
 

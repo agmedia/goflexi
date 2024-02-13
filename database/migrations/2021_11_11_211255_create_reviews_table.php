@@ -13,7 +13,7 @@ class CreateReviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reviews', function (Blueprint $table) {
+        /*Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('apartment_id')->default(0)->index();
             $table->unsignedBigInteger('order_id')->default(0);
@@ -30,9 +30,9 @@ class CreateReviewsTable extends Migration
             $table->boolean('status')->default(true);
             $table->timestamps();
 
-            /*$table->foreign('apartment_id')
-                  ->references('id')->on('apartments');*/
-        });
+            $table->foreign('product_id')
+                  ->references('id')->on('products');
+        });*/
     }
 
     /**
@@ -42,7 +42,7 @@ class CreateReviewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reviews');
+        //Schema::dropIfExists('reviews');
     }
 }
 

@@ -13,7 +13,7 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        /*Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('parent_id')->index();
             $table->string('image')->default('media/avatars/avatar0.jpg');
@@ -38,7 +38,7 @@ class CreateCategoriesTable extends Migration
             $table->foreign('category_id')
                   ->references('id')->on('categories')
                   ->onDelete('cascade');
-        });
+        });*/
     }
 
     /**
@@ -48,7 +48,7 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
-        Schema::dropIfExists('category_translations');
+        /*Schema::dropIfExists('categories');
+        Schema::dropIfExists('category_translations');*/
     }
 }

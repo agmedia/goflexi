@@ -28,6 +28,8 @@
     <!-- [Template CSS Files] -->
     <link rel="stylesheet" href="{{ asset('assets/back/css/style.css') }}" id="main-style-link" >
     <link rel="stylesheet" href="{{ asset('assets/back/css/style-preset.css') }}" >
+    <link rel="stylesheet" href="{{ asset('assets/back/css/plugins/datepicker-bs5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/back/css/plugins/flatpickr.min.css') }}">
     <!-- Custom CSS-->
     @livewireStyles
    {{-- <link rel="stylesheet" href="{{ asset('assets/back/js/plugins/select2/css/select2.min.css') }}" >--}}
@@ -74,6 +76,8 @@
 <script src="{{ asset('assets/back/js/plugins/sweetalert2.all.min.js') }}"></script>
 <script src="{{ asset('assets/back/js/plugins/notifier.js') }}"></script>
 <script src="{{ asset('assets/back/js/plugins/ckeditor/classic/ckeditor.js') }}"></script>
+<script src="{{ asset('assets/back/js/plugins/datepicker-full.min.js') }}"></script>
+<script src="{{ asset('assets/back/js/plugins/flatpickr.min.js') }}"></script>
 
 @livewireScripts
 {{--<script src="{{ asset('assets/back/js/plugins/component.js') }}"></script>--}}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Back\Catalog\ProductController;
 use App\Http\Controllers\Back\Catalog\WidgetController;
 use App\Http\Controllers\Back\DashboardController;
 use App\Http\Controllers\Back\Marketing\FaqController;
@@ -32,6 +33,14 @@ Route::group(
 
         // CATALOG
         Route::prefix('catalog')->group(function () {
+            // PRODUCTS
+            Route::prefix('products')->group(function () {
+                Route::get('/', [ProductController::class, 'index'])->name('products');
+                Route::get('create', [ProductController::class, 'create'])->name('product.create');
+                Route::post('/', [ProductController::class, 'store'])->name('product.store');
+                Route::get('{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
+                Route::patch('{product}', [ProductController::class, 'update'])->name('product.update');
+            });
             // WIDGETS
             Route::prefix('widgets')->group(function () {
                 Route::get('/', [WidgetController::class, 'index'])->name('widgets');
@@ -110,7 +119,8 @@ Route::group(
 Route::prefix('api')->group(function () {
     // SETTINGS
     Route::post('maintenance/mode', [QuickMenuController::class, 'maintenanceMode'])->name('maintenance.mode');
-
+    // PRODUCTS
+    Route::post('destroy', [ProductController::class, 'destroy'])->name('product.api.destroy');
     // WIDGET
     Route::prefix('widget')->group(function () {
         Route::post('destroy', [WidgetController::class, 'destroy'])->name('widget.destroy');

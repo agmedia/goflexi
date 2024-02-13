@@ -21,8 +21,11 @@ class CreateOrdersTable extends Migration
             $table->integer('order_status_id')->unsigned();
             $table->string('invoice')->nullable();
             $table->decimal('total', 15, 4)->default(0);
-            $table->timestamp('date_from');
-            $table->timestamp('date_to');
+            $table->integer('adults')->default(0)->unsigned();
+            $table->integer('children')->default(0)->unsigned();
+            $table->string('type')->nullable(); // [ oneway, return ]
+            $table->string('child_seat')->nullable();
+            $table->string('baggage')->nullable();
             $table->string('payment_fname');
             $table->string('payment_lname');
             $table->string('payment_address');
@@ -68,13 +71,10 @@ class CreateOrdersTable extends Migration
             $table->string('signature');
             $table->string('payment_type', 16)->nullable();
             $table->string('payment_plan', 4)->nullable();
-            $table->string('payment_partner')->nullable();
-            $table->dateTime('datetime');
+            $table->string('partner')->nullable();
             $table->string('approval_code')->nullable();
-            $table->string('pg_order_id')->nullable();
+            $table->text('response')->nullable();
             $table->string('lang');
-            $table->string('stan')->nullable();
-            $table->string('error')->nullable();
             $table->timestamps();
 
             $table->foreign('order_id')
