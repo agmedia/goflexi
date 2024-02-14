@@ -88,7 +88,6 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        dd($request->toArray());
         $updated = $product->validateRequest($request)->edit();
 
         if ($updated) {

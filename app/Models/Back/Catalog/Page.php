@@ -95,6 +95,7 @@ class Page extends Model
 
         if ($id) {
             $page = $this->find($id);
+
             PageTranslation::saveTranslations($this->request, $page);
 
             return $page;

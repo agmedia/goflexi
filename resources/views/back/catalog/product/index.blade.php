@@ -46,7 +46,9 @@
                                              class="wid-40 rounded-circle">
                                     </div>
                                     <div class="col">
-                                        <h6 class="mb-0">{{ $product->from_city }} - {{ $product->to_city }}</h6>
+                                        <h6 class="mb-0">
+                                            <a href="{{ route('product.edit', ['product' => $product]) }}">{{ $product->from_city }} - {{ $product->to_city }}</a>
+                                        </h6>
                                         <p class="text-muted f-12 mb-0">Start: {{ \Illuminate\Support\Carbon::make($product->start_time) }}</p>
                                     </div>
                                 </div>
