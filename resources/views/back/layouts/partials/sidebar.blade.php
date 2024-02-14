@@ -26,6 +26,7 @@
                     <ul class="pc-submenu">
                         <li class="pc-item{{ request()->routeIs(['products', 'product.*']) ? ' active' : '' }}"><a class="pc-link" href="{{ route('products') }}">{{ __('Products') }}</a></li>
                         <li class="pc-item{{ request()->routeIs(['widgets', 'widget.*']) ? ' active' : '' }}"><a class="pc-link" href="{{ route('widgets') }}">{{ __('Widgets') }}</a></li>
+                        <li class="pc-item{{ request()->routeIs(['pages', 'page.*']) ? ' active' : '' }}"><a class="pc-link" href="{{ route('pages') }}">{{ __('Pages') }}</a></li>
                     </ul>
                 </li>
 

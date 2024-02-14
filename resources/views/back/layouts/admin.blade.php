@@ -78,6 +78,7 @@
 <script src="{{ asset('assets/back/js/plugins/ckeditor/classic/ckeditor.js') }}"></script>
 <script src="{{ asset('assets/back/js/plugins/datepicker-full.min.js') }}"></script>
 <script src="{{ asset('assets/back/js/plugins/flatpickr.min.js') }}"></script>
+<script src="{{ asset('assets/back/js/plugins/choices.min.js') }}"></script>
 
 @livewireScripts
 {{--<script src="{{ asset('assets/back/js/plugins/component.js') }}"></script>--}}

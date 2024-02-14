@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Back\Catalog\ProductController;
+use App\Http\Controllers\Back\Catalog\PageController;
 use App\Http\Controllers\Back\Catalog\WidgetController;
 use App\Http\Controllers\Back\DashboardController;
 use App\Http\Controllers\Back\Marketing\FaqController;
@@ -49,6 +50,14 @@ Route::group(
                 Route::post('/', [WidgetController::class, 'store'])->name('widget.store');
                 Route::get('{widget}/edit', [WidgetController::class, 'edit'])->name('widget.edit');
                 Route::patch('{widget}', [WidgetController::class, 'update'])->name('widget.update');
+            });
+            // PAGES
+            Route::prefix('pages')->group(function () {
+                Route::get('/', [PageController::class, 'index'])->name('pages');
+                Route::get('create', [PageController::class, 'create'])->name('page.create');
+                Route::post('/', [PageController::class, 'store'])->name('page.store');
+                Route::get('{page}/edit', [PageController::class, 'edit'])->name('page.edit');
+                Route::patch('{page}', [PageController::class, 'update'])->name('page.update');
             });
         });
 
@@ -121,12 +130,14 @@ Route::prefix('api')->group(function () {
     // SETTINGS
     Route::post('maintenance/mode', [QuickMenuController::class, 'maintenanceMode'])->name('maintenance.mode');
     // PRODUCTS
-    Route::post('destroy', [ProductController::class, 'destroy'])->name('product.api.destroy');
+    Route::post('product/destroy', [ProductController::class, 'destroy'])->name('product.api.destroy');
     // WIDGET
     Route::prefix('widget')->group(function () {
         Route::post('destroy', [WidgetController::class, 'destroy'])->name('widget.destroy');
         Route::get('get-links', [WidgetController::class, 'getLinks'])->name('widget.api.get-links');
     });
+    // PAGES
+    Route::post('page/destroy', [PageController::class, 'destroy'])->name('page.api.destroy');
 
     // SETTINGS
     Route::prefix('settings')->group(function () {

@@ -126,6 +126,27 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        /*******************************************************************************
+         *                                Copyright : AGmedia                           *
+         *                              email: filip@agmedia.hr                         *
+         *******************************************************************************/
+
+        'debug' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/debug.log'),
+            'level' => 'debug',
+        ],
+        'test' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/test.log'),
+            'level' => 'info',
+        ],
+        'error' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/error.log'),
+            'level' => 'critical',
+        ],
     ],
 
 ];
