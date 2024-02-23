@@ -12,10 +12,27 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label for="cod-title">Naslov</label>
-                                        <input type="text" class="form-control" id="cod-title" name="title">
+                                    <ul class="nav nav-pills" id="cod-title-tab" role="tablist">
+                                        @foreach(ag_lang() as $lang)
+                                            <li class="nav-item">
+                                                <a class="btn btn-icon btn-link-primary @if ($lang->code == current_locale()) active @endif" id="cod-title-{{ $lang->code }}-tab" data-bs-toggle="pill" href="#cod-title-{{ $lang->code }}" role="tab" aria-controls="cod-title-{{ $lang->code }}" aria-selected="true">
+                                                    <img src="{{ asset('assets/flags/' . $lang->code . '.png') }}" />
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+
+                                    <div class="tab-content" id="cod-title-tabContent">
+                                        @foreach(ag_lang() as $lang)
+                                            <div class="tab-pane fade show @if ($lang->code == current_locale()) active @endif" id="cod-title-{{ $lang->code }}" role="tabpanel" aria-labelledby="cod-title-{{ $lang->code }}-tab">
+                                                <div class="form-group">
+                                                    <label for="cod-title-{{ $lang->code }}">Naslov</label>
+                                                    <input type="text" class="form-control" id="cod-title-{{ $lang->code }}" name="title[{{ $lang->code }}]" placeholder="{{ $lang->code }}">
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
+
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
