@@ -1,16 +1,11 @@
 <div class="modal fade" id="payment-modal-bank" tabindex="-1" role="dialog" aria-labelledby="modal-payment-modal" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-popout" role="document">
         <div class="modal-content rounded">
-            <div class="block block-themed block-transparent mb-0">
-                <div class="block-header bg-primary">
-                    <h3 class="block-title">{{ __('back/app.payments.bank') }}</h3>
-                    <div class="block-options">
-                        <a class="text-muted font-size-h3" href="#" data-dismiss="modal" aria-label="Close">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="block-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="status-modalTitle">{{ __('back/app.payments.bank') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
                     <div class="row justify-content-center">
                         <div class="col-md-10">
                             <div class="row mb-3">
@@ -131,8 +126,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="block-content block-content-full text-right bg-light">
-                    <a class="btn btn-sm btn-light" data-dismiss="modal" aria-label="Close">
+            <div class="modal-footer">
+                <a class="btn btn-light-secondary float-start" data-bs-dismiss="modal" aria-label="Close">
                         {{ __('back/app.payments.cancel') }} <i class="fa fa-times ml-2"></i>
                     </a>
                     <button type="button" class="btn btn-sm btn-primary" onclick="event.preventDefault(); create_bank();">

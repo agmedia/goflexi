@@ -1,16 +1,12 @@
 <div class="modal fade" id="payment-modal-pickup" tabindex="-1" role="dialog" aria-labelledby="modal-payment-modal" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-popout" role="document">
         <div class="modal-content rounded">
-            <div class="block block-themed block-transparent mb-0">
-                <div class="block-header bg-primary">
-                    <h3 class="block-title">Isporuka pouzećem</h3>
-                    <div class="block-options">
-                        <a class="text-muted font-size-h3" href="#" data-dismiss="modal" aria-label="Close">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="block-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="status-modalTitle">Isporuka pouzećem</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
                     <div class="row justify-content-center">
                         <div class="col-md-10">
 
@@ -78,14 +74,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="block-content block-content-full text-right bg-light">
-                    <a class="btn btn-sm btn-light" data-dismiss="modal" aria-label="Close">
-                        Odustani <i class="fa fa-times ml-2"></i>
-                    </a>
-                    <button type="button" class="btn btn-sm btn-primary" onclick="event.preventDefault(); create_pickup();">
-                        Snimi <i class="fa fa-arrow-right ml-2"></i>
-                    </button>
-                </div>
+            <div class="modal-footer">
+                <a class="btn btn-light-secondary float-start" data-bs-dismiss="modal" aria-label="Close">
+                    Cancel <i class="fa fa-times m-l-10"></i>
+                </a>
+                <button type="button" class="btn btn-primary" onclick="event.preventDefault(); createStatus();">
+                    Save <i class="fa fa-arrow-right m-l-10"></i>
+                </button>
+            </div>
             </div>
         </div>
     </div>
@@ -132,6 +128,7 @@
          *
          * @param item
          */
+
         function edit_pickup(item) {
             $('#pickup-title').val(item.title);
             $('#pickup-min').val(item.min);
