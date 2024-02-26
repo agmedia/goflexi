@@ -22454,6 +22454,7 @@ pre[class*=language-] > code {
 .btn.btn-sm i, .introjs-tooltip .btn-sm.introjs-button i, .btn-group-sm > .btn i, .introjs-tooltip .btn-group-sm > .introjs-button i {
   font-size: 14px;
 }
+.langimg{right:5px;top:-5px}
 .btn.btn-icon, .introjs-tooltip .btn-icon.introjs-button {
   display: inline-flex;
   align-items: center;

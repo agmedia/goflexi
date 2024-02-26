@@ -14,7 +14,7 @@
                             <div class="row mb-3">
                                 <div class="col-md-8 position-relative">
 
-                                    <ul class="nav nav-pills position-absolute me-2" id="cod-title-tab" role="tablist" style="right:5px;top:-5px">
+                                    <ul class="nav nav-pills position-absolute langimg me-2" id="cod-title-tab" role="tablist" >
                                         @foreach(ag_lang() as $lang)
                                             <li class="nav-item">
                                                 <a class="btn btn-icon btn-sm btn-link-primary me-1  @if ($lang->code == current_locale()) active @endif" id="cod-title-{{ $lang->code }}-tab" data-bs-toggle="pill" href="#cod-title-{{ $lang->code }}" role="tab" aria-controls="cod-title-{{ $lang->code }}" aria-selected="true">
