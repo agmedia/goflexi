@@ -2,8 +2,9 @@
     <div class="modal-dialog modal-lg modal-dialog-popout" role="document">
         <div class="modal-content rounded">
 
-            <div class="modal-header">
+            <div class="modal-header d-flex justify-content-between">
                 <h5 class="modal-title" id="status-modalTitle">Gotovinom prilikom pouzeća</h5>
+
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
                 <div class="modal-body">
@@ -11,11 +12,12 @@
                         <div class="col-md-10">
 
                             <div class="row mb-3">
-                                <div class="col-md-8">
-                                    <ul class="nav nav-pills" id="cod-title-tab" role="tablist">
+                                <div class="col-md-8 position-relative">
+
+                                    <ul class="nav nav-pills position-absolute" id="cod-title-tab" role="tablist" style="right:5px">
                                         @foreach(ag_lang() as $lang)
                                             <li class="nav-item">
-                                                <a class="btn btn-icon btn-link-primary @if ($lang->code == current_locale()) active @endif" id="cod-title-{{ $lang->code }}-tab" data-bs-toggle="pill" href="#cod-title-{{ $lang->code }}" role="tab" aria-controls="cod-title-{{ $lang->code }}" aria-selected="true">
+                                                <a class=me-3 @if ($lang->code == current_locale()) active @endif" id="cod-title-{{ $lang->code }}-tab" data-bs-toggle="pill" href="#cod-title-{{ $lang->code }}" role="tab" aria-controls="cod-title-{{ $lang->code }}" aria-selected="true">
                                                     <img src="{{ asset('assets/flags/' . $lang->code . '.png') }}" />
                                                 </a>
                                             </li>
@@ -26,7 +28,7 @@
                                         @foreach(ag_lang() as $lang)
                                             <div class="tab-pane fade show @if ($lang->code == current_locale()) active @endif" id="cod-title-{{ $lang->code }}" role="tabpanel" aria-labelledby="cod-title-{{ $lang->code }}-tab">
                                                 <div class="form-group">
-                                                    <label for="cod-title-{{ $lang->code }}">Naslov</label>
+                                                    <label for="cod-title-{{ $lang->code }}">Naslov </label>
                                                     <input type="text" class="form-control" id="cod-title-{{ $lang->code }}" name="title[{{ $lang->code }}]" placeholder="{{ $lang->code }}">
                                                 </div>
                                             </div>
