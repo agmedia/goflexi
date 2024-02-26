@@ -15,7 +15,7 @@ File: style.css
 7.  Compact layout css
 8.  Horizontal layout css
 9.  Tab layout css
-10. Widget css 
+10. Widget css
 11. Avtar css
 12. Badge css
 13. Button css
@@ -22458,12 +22458,12 @@ pre[class*=language-] > code {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 20px;
+  border-radius: 5px;
   font-size: 14px;
   font-weight: 600;
   padding: 0;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 20px;
 }
 .btn.btn-icon.avtar-xs, .introjs-tooltip .btn-icon.avtar-xs.introjs-button {
   width: 20px;
