@@ -86,7 +86,7 @@
                         <li class="pc-item{{ request()->routeIs(['languages']) ? ' active' : '' }}"><a class="pc-link" href="{{ route('languages') }}">{{ __('Langiages') }}</a></li>
                         <li class="pc-item{{ request()->routeIs(['currencies']) ? ' active' : '' }}"><a class="pc-link" href="{{ route('currencies') }}">{{ __('Currencies') }}</a></li>
                         <li class="pc-item{{ request()->routeIs(['taxes']) ? ' active' : '' }}"><a class="pc-link" href="{{ route('taxes') }}">{{ __('Taxes') }}</a></li>
-                        <li class="pc-item{{ request()->routeIs(['geo-zones']) ? ' active' : '' }}"><a class="pc-link" href="{{ route('geozones') }}">{{ __('Geo Zones') }}</a></li>
+                        <li class="pc-item{{ request()->routeIs(['geo-zones', 'geozones.*']) ? ' active' : '' }}"><a class="pc-link" href="{{ route('geozones') }}">{{ __('Geo Zones') }}</a></li>
                         <li class="pc-item{{ request()->routeIs(['order-statuses']) ? ' active' : '' }}"><a class="pc-link" href="{{ route('order.statuses') }}">{{ __('Order Statuses') }}</a></li>
                         <li class="pc-item{{ request()->routeIs(['payments']) ? ' active' : '' }}"><a class="pc-link" href="{{ route('payments') }}">{{ __('Payment Methods') }}</a></li>
                     </ul>

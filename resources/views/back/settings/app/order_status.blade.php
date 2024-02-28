@@ -9,10 +9,15 @@
     <div class="page-header">
         <div class="page-block">
             <div class="row align-items-center">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="page-header-title">
                         <h2 class="mb-0">Order Status list</h2>
                     </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="javascript: void(0);" onclick="event.preventDefault(); openModal();" class="btn btn-primary">
+                        <i class="ti ti-plus f-18"></i> Add New Order Status
+                    </a>
                 </div>
             </div>
         </div>
@@ -25,11 +30,6 @@
         <div class="col-sm-12">
             <div class="card table-card">
                 <div class="card-body">
-                    <div class="text-end p-4">
-                        <a href="javascript: void(0);" onclick="event.preventDefault(); openModal();" class="btn btn-primary">
-                            <i class="ti ti-plus f-18"></i> Add New Order Status
-                        </a>
-                    </div>
                     <div class="table-responsive">
                         <table class="table table-hover" id="pc-dt-simple">
                             <thead>
@@ -49,7 +49,7 @@
                                         <h6>{{ isset($item->title->{current_locale()}) ? $item->title->{current_locale()} : $item->title }}</h6>
                                     </td>
                                     <td class="text-center">
-                                        <span class="badge rounded-pill bg-{{ isset($item->color) && $item->color ? $item->color : 'light' }} f-12">{{ isset($item->title->{current_locale()}) ? $item->title->{current_locale()} : $item->title }}</span>
+                                        <span class="badge rounded-pill bg-{{ isset($item->color) && $item->color ? $item->color : 'light-dark' }} f-12">{{ isset($item->title->{current_locale()}) ? $item->title->{current_locale()} : $item->title }}</span>
                                     </td>
                                     <td class="text-center">{{ $item->sort_order }}</td>
                                     <td class="text-end">
@@ -94,30 +94,11 @@
                 </div>
                 <div class="modal-body">
                     <div class="row justify-content-center mb-3">
-                        <div class="col-md-10">
-                            <div class="form-group">
-
-                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                    @foreach(ag_lang() as $lang)
-                                        <li class="nav-item">
-                                            <a class="nav-link @if ($lang->code == current_locale()) active @endif" id="pills-{{ $lang->code }}-tab" data-bs-toggle="pill" href="#pills-{{ $lang->code }}" role="tab" aria-controls="pills-{{ $lang->code }}" aria-selected="true">
-                                                <img src="{{ asset('assets/flags/' . $lang->code . '.png') }}" />
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                                <div class="tab-content" id="pills-tabContent">
-                                    @foreach(ag_lang() as $lang)
-                                        <div class="tab-pane fade show @if ($lang->code == current_locale()) active @endif" id="pills-{{ $lang->code }}" role="tabpanel" aria-labelledby="pills-{{ $lang->code }}-tab">
-                                            <input type="text" class="form-control" id="status-title-{{ $lang->code }}" name="title[{{ $lang->code }}]" placeholder="{{ $lang->code }}"  >
-                                        </div>
-                                    @endforeach
-                                </div>
-
-                            </div>
+                        <div class="col-md-10 position-relative">
+                            @include('back.layouts.translations.input', ['title' => 'Naslov', 'tab_title' => 'status-title', 'input_name' => 'title'])
 
                             <div class="form-group">
-                                <label for="status-price">Sort Order</label>
+                                <label for="status-price">{{ __('back/app.payments.sort_order') }}</label>
                                 <input type="text" class="form-control" id="status-sort-order" name="sort_order">
                             </div>
 
@@ -128,7 +109,7 @@
                                     <option value="secondary">Secondary</option>
                                     <option value="success">Success</option>
                                     <option value="info">Info</option>
-                                    <option value="light">Light</option>
+                                    <option value="light-dark">Light</option>
                                     <option value="danger">Danger</option>
                                     <option value="warning">Warning</option>
                                     <option value="dark">Dark</option>
@@ -141,10 +122,10 @@
                 </div>
                 <div class="modal-footer">
                     <a class="btn btn-light-secondary float-start" data-bs-dismiss="modal" aria-label="Close">
-                        Cancel <i class="fa fa-times m-l-10"></i>
+                        {{ __('back/app.payments.cancel') }} <i class="fa fa-times m-l-10"></i>
                     </a>
                     <button type="button" class="btn btn-primary" onclick="event.preventDefault(); createStatus();">
-                        Save <i class="fa fa-arrow-right m-l-10"></i>
+                        {{ __('back/app.payments.save') }} <i class="fa fa-arrow-right m-l-10"></i>
                     </button>
                 </div>
             </div>
@@ -157,26 +138,8 @@
 
     <script>
         $(() => {
-            $('#status-color-select').select({
-                /*minimumResultsForSearch: Infinity,
-                templateResult: formatColorOption,
-                templateSelection: formatColorOption*/
-            });
+
         });
-
-        /**
-         *
-         * @param state
-         * @return string
-         */
-        function formatColorOption(state) {
-            if (!state.id) { return state.text; }
-
-            let html = $(
-                '<span class="badge badge-pill badge-' + state.element.value + '"> ' + state.text + ' </span>'
-            );
-            return html;
-        }
 
         /**
          *
@@ -207,12 +170,7 @@
 
             axios.post("{{ route('api.order.status.store') }}", {data: item})
             .then(response => {
-                //console.log(response.data)
-                if (response.data.success) {
-                    location.reload();
-                } else {
-                    return errorToast.fire(response.data.message);
-                }
+                notificationResponse(response, 'status-modal');
             });
         }
 

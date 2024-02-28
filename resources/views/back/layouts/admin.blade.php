@@ -160,6 +160,24 @@
             time
         );
     }
+
+    /**
+     *
+     * @param response
+     * @param modal
+     */
+    function notificationResponse(response, modal = null) {
+        if (modal) {
+            $('#' + modal).modal('hide');
+        }
+
+        if (response.data.success) {
+            showSuccess();
+            setTimeout(() => { location.reload(); }, 1500);
+        } else {
+            showError();
+        }
+    }
 </script>
 
 @stack('js_after')

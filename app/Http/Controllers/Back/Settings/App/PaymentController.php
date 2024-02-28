@@ -37,6 +37,8 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
+        Log::info($request->toArray());
+
         $updated = Settings::setListItem('payment', 'list.' . $request->data['code'], $request->data);
 
         if ($updated) {
@@ -92,7 +94,7 @@ class PaymentController extends Controller
      */
     private function getActivePayments()
     {
-        $payments = Settings::getList('payment', 'list.%', false)->sortBy('title');
+        $payments = Settings::getList('payment', 'list.%', false)->sortBy('title.' . current_locale());
         $codes = collect(config('settings.payment.providers'))->keys()->toArray();
 
         foreach ($payments as $key => $payment) {

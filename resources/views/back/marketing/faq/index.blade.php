@@ -5,10 +5,15 @@
     <div class="page-header">
         <div class="page-block">
             <div class="row align-items-center">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="page-header-title">
                         <h2 class="mb-0">FAQ's</h2>
                     </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a class="btn btn-success my-2" href="{{ route('faqs.create') }}">
+                        <i class="ti ti-file-plus"></i>Dodaj Novi
+                    </a>
                 </div>
             </div>
         </div>
@@ -20,16 +25,6 @@
 
             <div class="card table-card">
                 <div class="card-body">
-                    <div class="text-end p-4">
-                        <div class="row">
-                            <div class="col-md-8"></div>
-                            <div class="col-md-4 text-end">
-                                <a class="btn btn-success my-2" href="{{ route('faqs.create') }}">
-                                    <i class="ti ti-file-plus"></i>Dodaj Novi
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                     <div class="table-responsive">
                         <table class="table table-hover" id="pc-dt-simple">
                             <thead>
@@ -62,7 +57,7 @@
                                 </tr>
                             @empty
                                 <tr class="text-center">
-                                    <td colspan="2">No data...</td>
+                                    <td colspan="4">No data...</td>
                                 </tr>
                             @endforelse
                             </tbody>

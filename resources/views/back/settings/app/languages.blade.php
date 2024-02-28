@@ -9,10 +9,15 @@
     <div class="page-header">
         <div class="page-block">
             <div class="row align-items-center">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="page-header-title">
                         <h2 class="mb-0">Languages list</h2>
                     </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="javascript: void(0);" onclick="event.preventDefault(); openModal();" class="btn btn-primary">
+                        <i class="ti ti-plus f-18"></i> Add New Language
+                    </a>
                 </div>
             </div>
         </div>
@@ -25,11 +30,6 @@
         <div class="col-sm-12">
             <div class="card table-card">
                 <div class="card-body">
-                    <div class="text-end p-4">
-                        <a href="../application/ecom_product-add.html" class="btn btn-primary">
-                            <i class="ti ti-plus f-18"></i> Add New Language
-                        </a>
-                    </div>
                     <div class="table-responsive">
                         <table class="table table-hover" id="pc-dt-simple">
                             <thead>
@@ -60,7 +60,7 @@
                                                 </a>
                                             </li>
                                             <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="Delete">
-                                                <a href="javascript:void(0)" class="avtar avtar-xs btn-link-danger btn-pc-default" onclick="event.preventDefault(); deleteCurrency({{ $item->id }});">
+                                                <a href="javascript:void(0)" class="avtar avtar-xs btn-link-danger btn-pc-default" onclick="event.preventDefault(); deleteSettingsItem({{ $item->id }}, '{{ route('api.languages.destroy') }}');">
                                                     <i class="ti ti-trash f-18"></i>
                                                 </a>
                                             </li>
@@ -84,104 +84,43 @@
 @endsection
 
 @push('modals')
-    <div class="modal fade" id="language-modal" tabindex="-1" role="dialog" aria-labelledby="language-modal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-popout" role="document">
-            <div class="modal-content rounded">
-                <div class="block block-themed block-transparent mb-0">
-                    <div class="block-header bg-primary">
-                        <h3 class="block-title">{{ __('back/app.languages.table_title') }}</h3>
-                        <div class="block-options">
-                            <a class="text-muted font-size-h3" href="#" data-dismiss="modal" aria-label="Close">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="block-content">
-                        <div class="row justify-content-center mb-3">
-                            <div class="col-md-10">
-                                <div class="form-group mb-4">
-                                    <label for="language-title" class="w-100">{{ __('back/app.languages.input_title') }} <span class="text-danger">*</span>
-                                        <ul class="nav nav-pills float-right">
-                                            @foreach(ag_lang() as $lang)
-                                                <li @if (current_locale() == $lang->code) class="active" @endif>
-                                                    <a class="btn btn-sm btn-outline-secondary ml-2 @if (current_locale() == $lang->code) active @endif " data-toggle="pill" href="#{{ $lang->code }}">
-                                                        <img src="{{ asset('media/flags/' . $lang->code . '.png') }}" />
-                                                    </a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </label>
 
-                                    <div class="tab-content">
-                                        @foreach(ag_lang() as $lang)
-                                            <div id="{{ $lang->code }}" class="tab-pane @if (current_locale() == $lang->code) active @endif">
-                                                <input type="text" class="form-control" id="language-title-{{ $lang->code }}" name="title[{{ $lang->code }}]" placeholder="{{ $lang->code }}" value="">
-                                                @error('title.*')
-                                                <span class="text-danger font-italic">Greška. Niste unijeli naslov.</span>
-                                                @enderror
-                                            </div>
-                                        @endforeach
-                                    </div>
+    <div id="language-modal" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="language-modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="language-modalTitle">{{ __('back/app.languages.table_title') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row justify-content-center mb-3">
+                        <div class="col-md-10 position-relative">
+                            @include('back.layouts.translations.input', ['title' => 'Naslov', 'tab_title' => 'language-title', 'input_name' => 'title'])
 
-                                </div>
-
-                                <div class="form-group mb-4">
-                                    <label for="language-code">{{ __('back/app.languages.code_title') }}</label>
-                                    <input type="text" class="form-control" id="language-code" name="code">
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="css-control css-control-sm css-control-success css-switch res">
-                                        <input type="checkbox" class="css-control-input" id="language-status" name="status">
-                                        <span class="css-control-indicator"></span> {{ __('back/app.languages.status_title') }}
-                                    </label>
-                                </div>
-
-                                <input type="hidden" id="language-id" name="id" value="0">
+                            <div class="form-group mb-4">
+                                <label for="language-code">{{ __('back/app.languages.code_title') }}</label>
+                                <input type="text" class="form-control" id="language-code" name="code">
                             </div>
+
+                            <div class="form-group">
+                                <label class="css-control css-control-sm css-control-success css-switch res">
+                                    <input type="checkbox" class="css-control-input" id="language-status" name="status">
+                                    <span class="css-control-indicator"></span> {{ __('back/app.languages.status_title') }}
+                                </label>
+                            </div>
+
+                            <input type="hidden" id="language-id" name="id" value="0">
                         </div>
-                    </div>
-                    <div class="block-content block-content-full text-right bg-light">
-                        <a class="btn btn-sm btn-light" data-dismiss="modal" aria-label="Close">
-                            {{ __('back/layout.btn.discard') }} <i class="fa fa-times ml-2"></i>
-                        </a>
-                        <button type="button" class="btn btn-sm btn-primary" onclick="event.preventDefault(); createCurrency();">
-                            {{ __('back/layout.btn.save') }} <i class="fa fa-arrow-right ml-2"></i>
-                        </button>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="delete-language-modal" tabindex="-1" role="dialog" aria-labelledby="language-modal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-popout" role="document">
-            <div class="modal-content rounded">
-                <div class="block block-themed block-transparent mb-0">
-                    <div class="block-header bg-primary">
-                        <h3 class="block-title">Obriši jezik</h3>
-                        <div class="block-options">
-                            <a class="text-muted font-size-h3" href="#" data-dismiss="modal" aria-label="Close">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="block-content">
-                        <div class="row justify-content-center mb-3">
-                            <div class="col-md-10">
-                                <h4>Jeste li sigurni da želite obrisati jezik?</h4>
-                                <input type="hidden" id="delete-language-id" value="0">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block-content block-content-full text-right bg-light">
-                        <a class="btn btn-sm btn-light" data-dismiss="modal" aria-label="Close">
-                            Odustani <i class="fa fa-times ml-2"></i>
-                        </a>
-                        <button type="button" class="btn btn-sm btn-danger" onclick="event.preventDefault(); confirmDelete();">
-                            Obriši <i class="fa fa-trash-alt ml-2"></i>
-                        </button>
-                    </div>
+                <div class="modal-footer">
+                    <a class="btn btn-light-secondary float-start" data-bs-dismiss="modal" aria-label="Close">
+                        {{ __('back/app.payments.cancel') }} <i class="fa fa-times m-l-10"></i>
+                    </a>
+                    <button type="button" class="btn btn-primary" onclick="event.preventDefault(); createLanguage();">
+                        {{ __('back/app.payments.save') }} <i class="fa fa-arrow-right m-l-10"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -189,12 +128,9 @@
 @endpush
 
 @push('js_after')
-    <script src="{{ asset('js/plugins/select2/js/select2.full.min.js') }}"></script>
     <script>
         $(() => {
-            $('#language-main-select').select2({
-                minimumResultsForSearch: Infinity
-            });
+
         });
         /**
          *
@@ -203,25 +139,16 @@
          */
         function openModal(item = {}) {
             $('#language-modal').modal('show');
-            editCurrency(item);
-        }
-
-        /**
-         *
-         * @param item
-         * @param type
-         */
-        function openMainModal(item = {}) {
-            $('#main-language-modal').modal('show');
+            editLanguage(item);
         }
 
         /**
          *
          */
-        function createCurrency() {
+        function createLanguage() {
             let values = {};
 
-            {!! $items !!}.forEach(function(item) {
+            {!! ag_lang() !!}.forEach(function(item) {
                 values[item.code] = document.getElementById('language-title-' + item.code).value;
             });
 
@@ -230,57 +157,11 @@
                 title: values,
                 code: $('#language-code').val(),
                 status: $('#language-status')[0].checked,
-                //main: $('#language-main')[0].checked,
             };
 
             axios.post("{{ route('api.languages.store') }}", { data: item })
             .then(response => {
-                if (response.data.success) {
-                    location.reload();
-                } else {
-                    return errorToast.fire(response.data.message);
-                }
-            });
-        }
-
-        /**
-         *
-         */
-        function storeMainCurrency() {
-            let item = { main: $('#language-main-select').val() };
-
-            axios.post("{{ route('api.languages.store.main') }}", { data: item })
-            .then(response => {
-                console.log(response.data)
-                if (response.data.success) {
-                    location.reload();
-                } else {
-                    return errorToast.fire(response.data.message);
-                }
-            });
-        }
-
-        /**
-         *
-         */
-        function deleteCurrency(id) {
-            $('#delete-language-modal').modal('show');
-            $('#delete-language-id').val(id);
-        }
-
-        /**
-         *
-         */
-        function confirmDelete() {
-            let item = { id: $('#delete-language-id').val() };
-
-            axios.post("{{ route('api.languages.destroy') }}", { data: item })
-            .then(response => {
-                if (response.data.success) {
-                    location.reload();
-                } else {
-                    return errorToast.fire(response.data.message);
-                }
+                notificationResponse(response, 'language-modal');
             });
         }
 
@@ -288,12 +169,14 @@
          *
          * @param item
          */
-        function editCurrency(item) {
+        function editLanguage(item) {
             $('#language-id').val(item.id);
             $('#language-code').val(item.code);
 
-            Object.keys(item.title).forEach((key) => {
-                $('#language-title-' + key).val(item.title[key]);
+            {!! ag_lang() !!}.forEach((lang) => {
+                if (typeof item.title[lang.code] !== undefined) {
+                    $('#language-title-' + lang.code).val(item.title[lang.code]);
+                }
             });
 
             if (item.status) {

@@ -1,7 +1,6 @@
 @extends('back.layouts.admin')
 
 @push('css_before')
-    <link rel="stylesheet" href="{{ asset('js/plugins/select2/css/select2.min.css') }}">
 @endpush
 
 @section('content')
@@ -41,7 +40,7 @@
                             @forelse ($items as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td><span class="h6 m-r-15">{{ isset($item->title->{current_locale()}) ? $item->title->{current_locale()} : $item->title }}</span>
+                                    <td><span class="h6 m-r-15">{{ ( ! is_string($item->title)) ? $item->title->{current_locale()} : $item->title }}</span>
                                         @if (isset($item->main) && $item->main)
                                             <i data-feather="check-circle" class="text-success">
                                         @endif
@@ -83,8 +82,6 @@
 @endpush
 
 @push('js_after')
-    <script src="{{ asset('js/plugins/select2/js/select2.full.min.js') }}"></script>
-
     <script>
         /**
          *

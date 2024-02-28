@@ -104,12 +104,14 @@ Route::group(
                 // CURRENCY
                 Route::get('currencies', [CurrencyController::class, 'index'])->name('currencies');
                 // GEO ZONES
-                Route::get('geo-zones', [GeoZoneController::class, 'index'])->name('geozones');
-                Route::get('geo-zone/create', [GeoZoneController::class, 'create'])->name('geozones.create');
-                Route::post('geo-zone', [GeoZoneController::class, 'store'])->name('geozones.store');
-                Route::get('geo-zone/{geozone}/edit', [GeoZoneController::class, 'edit'])->name('geozones.edit');
-                Route::patch('geo-zone/{geozone}', [GeoZoneController::class, 'store'])->name('geozones.update');
-                Route::delete('geo-zone/{geozone}', [GeoZoneController::class, 'destroy'])->name('geozones.destroy');
+                Route::prefix('geo-zones')->group(function () {
+                    Route::get('/', [GeoZoneController::class, 'index'])->name('geozones');
+                    Route::get('/create', [GeoZoneController::class, 'create'])->name('geozones.create');
+                    Route::post('', [GeoZoneController::class, 'store'])->name('geozones.store');
+                    Route::get('/{geozone}/edit', [GeoZoneController::class, 'edit'])->name('geozones.edit');
+                    Route::patch('/{geozone}', [GeoZoneController::class, 'store'])->name('geozones.update');
+                    Route::delete('/{geozone}', [GeoZoneController::class, 'destroy'])->name('geozones.destroy');
+                });
                 // ORDER STATUSES
                 Route::get('order-statuses', [OrderStatusController::class, 'index'])->name('order.statuses');
                 // PAYMENTS

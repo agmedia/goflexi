@@ -27,45 +27,25 @@
                             {{ method_field('PATCH') }}
                         @endif
 
-                        <div class="row justify-content-center mb-3">
-                            <div class="col-md-10 mt-5">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                                @foreach(ag_lang() as $lang)
-                                                    <li class="nav-item">
-                                                        <a class="nav-link @if ($lang->code == current_locale()) active @endif" id="pills-{{ $lang->code }}-tab" data-bs-toggle="pill" href="#pills-{{ $lang->code }}" role="tab" aria-controls="pills-{{ $lang->code }}" aria-selected="true">
-                                                            <img src="{{ asset('assets/flags/' . $lang->code . '.png') }}" />
-                                                        </a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-2 pt-2">
-                                            <div class="form-check form-switch custom-switch-v1 mb-2">
-                                                <input type="checkbox" class="form-check-input input-success" name="status"{{ (isset($faq->status) and $faq->status) ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="customswitchv2-3"> Status</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-content" id="pills-tabContent">
-                                        @foreach(ag_lang() as $lang)
-                                            <div class="tab-pane fade show @if ($lang->code == current_locale()) active @endif" id="pills-{{ $lang->code }}" role="tabpanel" aria-labelledby="pills-{{ $lang->code }}-tab">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <label for="status-price">Question</label>
-                                                        <input type="text" class="form-control" id="title-input-{{ $lang->code }}" name="title[{{ $lang->code }}]" placeholder="{{ $lang->code }}" value="{{ isset($faq) ? $faq->translation($lang->code)->title : old('title.*') }}">
-                                                    </div>
-                                                    <div class="col-md-12 mt-4">
-                                                        <label for="status-price">Answer</label>
-                                                        <textarea id="description-editor-{{ $lang->code }}" name="description[{{ $lang->code }}]" placeholder="{{ $lang->code }}">{!! isset($faq) ? $faq->translation($lang->code)->description : old('description.*') !!}</textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
+                        <div class="row justify-content-center mb-2 mt-5">
+                            <div class="col-md-10 position-relative mb-3">
+                                @include('back.layouts.translations.input', [
+                                            'title' => 'Naslov',
+                                            'tab_title' => 'title-input',
+                                            'input_name' => 'title',
+                                            'value' => isset($faq) ? $faq->translation($lang->code)->title : old('title.*')
+                                            ])
+                            </div>
+                            <div class="col-md-10 position-relative">
+                                @include('back.layouts.translations.textarea', [
+                                                    'title' => 'Answer',
+                                                    'tab_title' => 'input-description',
+                                                    'input_name' => 'description',
+                                                    'rows' => 4,
+                                                    'max_length' => 0,
+                                                    'simple' => 1,
+                                                    'value' => isset($faq) ? $faq->translation($lang->code)->description : old('description.*')
+                                                    ])
                             </div>
                         </div>
 

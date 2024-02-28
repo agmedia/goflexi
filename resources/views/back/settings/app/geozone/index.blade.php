@@ -5,10 +5,15 @@
     <div class="page-header">
         <div class="page-block">
             <div class="row align-items-center">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="page-header-title">
                         <h2 class="mb-0">Geo Zone list</h2>
                     </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="{{ route('geozones.create') }}" class="btn btn-primary">
+                        <i class="ti ti-plus f-18"></i> Add New Geo Zone
+                    </a>
                 </div>
             </div>
         </div>
@@ -21,11 +26,6 @@
         <div class="col-sm-12">
             <div class="card table-card">
                 <div class="card-body">
-                    <div class="text-end p-4">
-                        <a href="{{ route('geozones.create') }}" class="btn btn-primary">
-                            <i class="ti ti-plus f-18"></i> Add New Geo Zone
-                        </a>
-                    </div>
                     <div class="table-responsive">
                         <table class="table table-hover" id="pc-dt-simple">
                             <thead>
@@ -45,6 +45,7 @@
                                             <a href="{{ route('geozones.edit', ['geozone' => $item->id]) }}">
                                                 {{ isset($item->title->{current_locale()}) ? $item->title->{current_locale()} : $item->title }}
                                             </a>
+                                            <p class="text-muted"><small></small></p>
                                         </h6>
                                     </td>
                                     <td class="text-center">@include('back.layouts.partials.status', ['status' => $item->status])</td>
