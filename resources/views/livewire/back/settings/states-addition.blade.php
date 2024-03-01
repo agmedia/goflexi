@@ -1,6 +1,6 @@
 <div>
     <div class="form-group mb-4" wire:ignore>
-        <label for="countries-select">{{ __('back/app.geozone.countries') }}</label>
+        <label class="mb-2" for="countries-select">{{ __('back/app.geozone.countries') }}</label>
         <select class="js-select2 form-select" id="countries-select" style="width: 100%;">
             <option></option>
             @foreach ($countries as $country)
