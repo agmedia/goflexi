@@ -41,11 +41,11 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        <h6>
+                                        <h6 class="mb-0">
                                             <a href="{{ route('geozones.edit', ['geozone' => $item->id]) }}">
                                                 {{ isset($item->title->{current_locale()}) ? $item->title->{current_locale()} : $item->title }}
                                             </a>
-                                            <p class="text-muted"><small></small></p>
+
                                         </h6>
                                     </td>
                                     <td class="text-center">@include('back.layouts.partials.status', ['status' => $item->status])</td>
