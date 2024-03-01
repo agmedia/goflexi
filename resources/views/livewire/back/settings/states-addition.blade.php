@@ -1,7 +1,7 @@
 <div>
     <div class="form-group mb-4" wire:ignore>
         <label for="countries-select">{{ __('back/app.geozone.countries') }}</label>
-        <select class="js-select2 form-control" id="countries-select" style="width: 100%;">
+        <select class="js-select2 form-select" id="countries-select" style="width: 100%;">
             <option></option>
             @foreach ($countries as $country)
                 <option value="{{ $country['name'] }}">{{ $country['name'] }}</option>
@@ -9,12 +9,18 @@
         </select>
     </div>
 
+
+
+
+
     @if ( ! empty($states))
-        <table class="table table-striped table-borderless table-vcenter mt-5">
+        <div class="table-border-style mt-5">
+            <div class="table-responsive">
+        <table class="table ">
             <thead class="thead-light">
             <tr>
                 <th style="width: 80%;">{{ __('back/app.geozone.list_countries') }} </th>
-                <th class="text-right">{{ __('back/app.geozone.delete') }}</th>
+                <th class="text-end">{{ __('back/app.geozone.delete') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -24,15 +30,26 @@
                         {{ $state }}
                         <input type="hidden" name="state[{{ $key + 1 }}]" value="{{ $state }}">
                     </td>
-                    <td class="text-right font-size-sm">
-                        <a class="btn btn-sm btn-alt-danger" wire:click="deleteState('{{ $state }}')">
-                            <i class="fa fa-fw fa-trash-alt"></i>
-                        </a>
+                    <td class="text-end font-size-sm">
+
+                        <ul class="list-inline me-auto mb-0">
+
+                            <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="Delete">
+                                <a wire:click="deleteState('{{ $state }}')" class="avtar avtar-xs btn-link-danger btn-pc-default">
+                                    <i class="ti ti-trash f-18"></i>
+                                </a>
+                            </li>
+                        </ul>
+
+
+
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
+            </div>
+        </div>
     @endif
 
 </div>
