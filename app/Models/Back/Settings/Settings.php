@@ -62,7 +62,7 @@ class Settings extends Model
      *
      * @return false|Collection
      */
-    public static function getList(string $code, string $key = 'list.%', bool $only_active = true)
+    public static function getList(string $code, string $key = 'list.%', bool $only_active = false)
     {
         $styles = Settings::where('code', $code)->where('key', 'like', $key)->get();
 
