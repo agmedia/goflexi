@@ -30,7 +30,7 @@
                         <div class="row justify-content-center mb-2 mt-5">
                             <div class="col-md-10 position-relative mb-3">
                                 @include('back.layouts.translations.input', [
-                                            'title' => 'Naslov',
+                                            'title' => 'Question',
                                             'tab_title' => 'title-input',
                                             'input_name' => 'title',
                                             'value' => isset($faq) ? $faq->translation($lang->code)->title : old('title.*')
