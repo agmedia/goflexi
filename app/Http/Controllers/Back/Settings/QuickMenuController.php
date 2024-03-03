@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Back\Settings;
 
 use App\Http\Controllers\Controller;
+use App\Models\Back\Settings\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 class QuickMenuController extends Controller
@@ -65,6 +67,22 @@ class QuickMenuController extends Controller
         Artisan::call('up');
         
         return redirect()->back()->with('success', 'Application is now live.');
+    }
+
+
+    public function setTemplateMode(Request $request)
+    {
+        if ($request->has('mode')) {
+            $set = Settings::reset('app', 'mode', $request->input('mode'), false);
+
+            if ($set) {
+                Cache::forget('app' . 'mode');
+
+                return response()->json(['success' => 'Tema je uspješno promjenjena...']);
+            }
+        }
+
+        return response()->json(['error' => 'Whoops.!! Pokušajte ponovo ili kontaktirajte administratora!']);
     }
     
 }

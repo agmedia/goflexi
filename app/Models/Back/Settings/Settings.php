@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 class Settings extends Model
@@ -53,6 +54,20 @@ class Settings extends Model
         }
 
         return collect();
+    }
+
+
+    /**
+     * @param string $code
+     * @param string $key
+     *
+     * @return mixed
+     */
+    public static function getCached(string $code, string $key)
+    {
+        return Cache::rememberForever($code . $key, function () use ($code, $key) {
+            return self::get($code, $key);
+        });
     }
 
 

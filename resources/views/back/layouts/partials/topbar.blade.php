@@ -98,11 +98,11 @@
                                     <span><svg class="pc-icon text-muted me-2"><use xlink:href="#custom-story"></use></svg><span>{{ __('Clear Cache') }}</span></span>
                                 </a>
 
-                                <a href="#" class="dropdown-item" onclick="layout_change('dark')">
+                                <a href="#" class="dropdown-item" onclick="layout_change('dark'); setTemplateMode('dark');">
                                     <span><svg class="pc-icon text-muted me-2"><use xlink:href="#custom-moon"></use></svg><span>{{ __('Dark Mode') }}</span></span>
                                 </a>
 
-                                <a href="#" class="dropdown-item" onclick="layout_change('light')">
+                                <a href="#" class="dropdown-item" onclick="layout_change('light'); setTemplateMode('light');">
                                     <span><svg class="pc-icon text-muted me-2"><use xlink:href="#custom-sun-1"></use></svg><span>{{ __('Light Mode') }}</span></span>
                                 </a>
 
@@ -151,5 +151,9 @@
                 axios.post('maintenance/mode', { checked: e.currentTarget.checked }).then(() => { location.reload() });
             });
         });
+
+        function setTemplateMode(mode) {
+            axios.post('maintenance/mode', { mode: mode }).then(() => { showSuccess() });
+        }
     </script>
 @endpush

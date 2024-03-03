@@ -131,6 +131,7 @@ Route::group(
 Route::prefix('api')->group(function () {
     // SETTINGS
     Route::post('maintenance/mode', [QuickMenuController::class, 'maintenanceMode'])->name('maintenance.mode');
+    Route::post('maintenance/mode', [QuickMenuController::class, 'setTemplateMode'])->name('template.mode');
     // PRODUCTS
     Route::post('product/destroy', [ProductController::class, 'destroy'])->name('product.api.destroy');
     // WIDGET

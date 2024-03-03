@@ -41,7 +41,7 @@
 <!-- [Head] end -->
 <!-- [Body] Start -->
 
-<body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme_contrast="" data-pc-theme="light">
+<body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme_contrast="" data-pc-theme="{{ $mode }}">
 <!-- [ Pre-loader ] start -->
 <div class="loader-bg">
     <div class="loader-track">
@@ -183,7 +183,7 @@
 @stack('js_after')
 
 <script>
-    layout_change('light');
+    layout_change('{{ $mode }}');
     layout_theme_contrast_change('false');
     change_box_container('false');
     layout_caption_change('true');
