@@ -29,10 +29,11 @@
                 <div class="card">
                     <h5 class="card-header">Generel Info</h5>
                     <div class="card-body">
-                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <div class="position-relative">
+                        <ul class="nav nav-pills position-absolute langimg me-0 mb-2" id="pills-tab" role="tablist">
                             @foreach(ag_lang() as $lang)
                                 <li class="nav-item">
-                                    <a class="nav-link @if ($lang->code == current_locale()) active @endif" id="pills-{{ $lang->code }}-tab" data-bs-toggle="pill" href="#pills-{{ $lang->code }}" role="tab" aria-controls="pills-{{ $lang->code }}" aria-selected="true">
+                                    <a class="btn btn-icon btn-sm btn-link-primary ms-2 @if ($lang->code == current_locale()) active @endif" id="pills-{{ $lang->code }}-tab" data-bs-toggle="pill" href="#pills-{{ $lang->code }}" role="tab" aria-controls="pills-{{ $lang->code }}" aria-selected="true">
                                         <img src="{{ asset('assets/flags/' . $lang->code . '.png') }}" />
                                     </a>
                                 </li>
@@ -55,7 +56,7 @@
                                 </div>
                             @endforeach
                         </div>
-
+                        </div>
                         <div class="form-check form-switch custom-switch-v1 mt-5 mb-4">
                             <input type="checkbox" class="form-check-input input-success" id="status-swich" name="status" @if (isset($product) and $product->status) checked @endif>
                             <label class="form-check-label" for="status-swich"> Status</label>
