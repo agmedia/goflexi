@@ -114,4 +114,6 @@ return [
     'sync' => 'Sync.',
     'sync_url' => 'Sync. URL Apartmana',
     'copy_ics_link' => 'Kopiraj ICS link Apartmana',
+    'active' => 'Active',
+    'inactive' => 'Inactive',
 ];

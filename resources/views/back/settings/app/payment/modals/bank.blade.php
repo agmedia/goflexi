@@ -10,22 +10,22 @@
                 <div class="row justify-content-center">
                     <div class="col-md-10">
                         <div class="row mb-3">
-                            <div class="col-md-8 position-relative">
+                            <div class="col-md-12 position-relative">
                                 @include('back.layouts.translations.input', ['title' => 'Naslov', 'tab_title' => 'bank-title', 'input_name' => 'title'])
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="bank-min">{{ __('back/app.payments.min_order_amount') }}</label>
                                     <input type="text" class="form-control" id="bank-min" name="min">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="bank-price">{{ __('back/app.payments.fee_amount') }}</label>
                                     <input type="text" class="form-control" id="bank-price" name="data['price']">
                                 </div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <label for="bank-geo-zone">{{ __('back/app.payments.geo_zone') }} <span class="small text-gray">{{ __('back/app.payments.geo_zone_label') }}</span></label>
                                 <select class="js-select2 form-control" id="bank-geo-zone" name="geo_zone" style="width: 100%;" data-placeholder="">
                                     <option></option>

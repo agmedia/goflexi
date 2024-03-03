@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="card-body">
                                      @include('back.layouts.translations.input', [
-                                                'title' => 'Naslov',
+                                                'title' => 'Title',
                                                 'tab_title' => 'input-title',
                                                 'input_name' => 'title',
                                                 'value' => isset($geo_zone->title) ? $geo_zone->title : old('description')
