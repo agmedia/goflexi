@@ -1,7 +1,8 @@
-<ul class="nav nav-pills mb-2" id="{{ $tab_title }}-tab" role="tablist" >
+<div class="position-relative">
+<ul class="nav nav-pills position-absolute langimg me-0 mb-2" id="{{ $tab_title }}-tab" role="tablist" >
     @foreach(ag_lang() as $lang)
         <li class="nav-item">
-            <a class="nav-link @if ($lang->code == current_locale()) active @endif" id="{{ $tab_title }}-{{ $lang->code }}-tab" data-bs-toggle="pill" href="#{{ $tab_title }}-{{ $lang->code }}-view" role="tab" aria-controls="{{ $tab_title }}-{{ $lang->code }}-view" aria-selected="true">
+            <a class="btn btn-icon btn-sm btn-link-primary ms-2 @if ($lang->code == current_locale()) active @endif" id="{{ $tab_title }}-{{ $lang->code }}-tab" data-bs-toggle="pill" href="#{{ $tab_title }}-{{ $lang->code }}-view" role="tab" aria-controls="{{ $tab_title }}-{{ $lang->code }}-view" aria-selected="true">
                 <img src="{{ asset('assets/flags/' . $lang->code . '.png') }}" />
             </a>
         </li>
@@ -43,3 +44,4 @@
         @endforeach
     </div>
 @endif
+</div>
