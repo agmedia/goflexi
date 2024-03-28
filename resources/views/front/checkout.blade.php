@@ -38,9 +38,9 @@
                         <th class="cart-product-thumbnail bg-light">GoFlexi</th>
                         <th class="cart-product-name bg-light">Bus Name</th>
                         <th class="cart-product-schedule bg-light">Schedule</th>
-                        <th class="cart-product-price bg-light">Price</th>
-                        <th class="cart-product-quantity bg-light">Seats Available</th>
-                        <th class="cart-product-subtotal bg-light">Features</th>
+                        <th class="cart-product-name bg-light">Price</th>
+                        <th class="cart-product-name bg-light">Seats Available</th>
+                        <th class="cart-product-name bg-light">Features</th>
                     </tr>
                     </thead>
                     <tbody>
