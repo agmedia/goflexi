@@ -43,7 +43,15 @@
 <body class="stretched">
     <div id="wrapper">
 
+        @if (request()->routeIs(['index']))
+
         @include('front.layouts.partials.header')
+
+        @else
+
+            @include('front.layouts.partials.headerpage')
+
+        @endif
 
         @yield('content')
 

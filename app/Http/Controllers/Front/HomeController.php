@@ -67,6 +67,20 @@ class HomeController extends FrontBaseController
 
 
     /**
+     * @param Faq $checkout
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function checkout()
+    {
+
+
+        return view('front.checkout');
+    }
+
+
+
+    /**
      * @param Request $request
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View

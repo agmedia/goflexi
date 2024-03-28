@@ -209,6 +209,7 @@ Route::group(
      */
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::get('faq', [HomeController::class, 'faq'])->name('faq');
+    Route::get('checkout', [HomeController::class, 'checkout'])->name('checkout');
     Route::get('/kontakt', [HomeController::class, 'contact'])->name('kontakt');
     Route::post('/kontakt/posalji', [HomeController::class, 'sendContactMessage'])->name('poruka');
 
