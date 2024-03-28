@@ -136,7 +136,7 @@
                             </table>
 
                                     <div class="col-lg-auto pe-lg-0 d-flex justify-content-between">
-                                        <a href="shop.html" class="button button-small w-100  ">Proceed to Checkout</a>
+                                        <a href="shop.html" class="btn bg-color text-white fw-semibold w-100 mt-0  ">Proceed to Checkout</a>
                                     </div>
 
                                  </div>
