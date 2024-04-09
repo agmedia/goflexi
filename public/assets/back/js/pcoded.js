@@ -448,7 +448,7 @@ function layout_rtl_change(value) {
   }
 }
 
-function layout_change(layout) {
+function layout_change(layout, change = false) {
   var control = document.querySelector('.pct-offcanvas');
   document.getElementsByTagName('body')[0].setAttribute('data-pc-theme', layout);
 
@@ -495,6 +495,10 @@ function layout_change(layout) {
       document.querySelector('.theme-layout .btn.active').classList.remove('active');
       document.querySelector(".theme-layout .btn[data-value='true']").classList.add('active');
     }
+  }
+
+  if (change) {
+      location.reload();
   }
 }
 

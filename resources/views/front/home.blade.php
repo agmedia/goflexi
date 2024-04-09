@@ -1,7 +1,38 @@
 @extends('front.layouts.app')
 
 @push('css_after')
+    <!-- DatePicker CSS -->
+    <link rel="stylesheet" href="{{ asset('css/components/daterangepicker.css') }}">
+    <!-- SelectPicker CSS -->
+    <link rel="stylesheet" href="{{ asset('css/components/bs-select.css') }}">
+    <style>
 
+        .white-section {
+            background-color: #FFF;
+            padding: 25px 20px;
+            -webkit-box-shadow: 0px 1px 1px 0px #dfdfdf;
+            box-shadow: 0px 1px 1px 0px #dfdfdf;
+            border-radius: 0;
+        }
+
+        .white-section label {
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .white-section pre { margin-top: 15px; }
+
+        .dark .white-section {
+            background-color: #111;
+            -webkit-box-shadow: 0px 1px 1px 0px #444;
+            box-shadow: 0px 1px 1px 0px #444;
+        }
+
+        .bootstrap-select {
+            width: 87% !important;
+        }
+
+    </style>
 @endpush
 
 @push('meta_tags')
@@ -19,6 +50,7 @@
 @endpush
 
 @section('content')
+
     <section id="slider" class="slider-element slider-parallax dark swiper_wrapper min-vh-40 min-vh-lg-60 bg-black include-header">
         <div class="slider-inner" style="background-image: url('{{ asset('media/image/Naslovna.jpg') }}'); background-size: cover; background-position: center center;">
 
@@ -44,7 +76,7 @@
     <!-- Content -->
     <section id="content">
         <div class="content-wrap pb-0">
-
+            <!-- Odabir vožnje -->
             <div class="promo promo-full promo-border pt-3 pt-md-3 pb-4 pb-md-2 promo-dark header-stick mb-md-6 mb-4">
                 <div class="container">
                     <div class="row">
@@ -56,9 +88,10 @@
 
                         <div class="col-12 col-lg">
 
-                            <div class="form-widget" data-alert-type="inline">
+                            <div class="" data-alert-type="inline">
                                 <div class="form-result"></div>
-                                <form id="form-cleaning" name="form-cleaning" action="include/form.php" method="post" class="row form-cleaning mb-0 mb-md-1">
+                                <form id="form-cleaning" name="form-cleaning" action="{{ route('view-reservation') }}" method="post" class="row form-cleaning mb-0 mb-md-1">
+                                    @csrf
                                     <div class="form-process">
                                         <div class="form-cleaning-loader css3-spinner" style="position: absolute;">
                                             <div class="css3-spinner-double-bounce1"></div>
@@ -69,12 +102,11 @@
                                     <div class="col-lg-3 col-md-6">
                                         <div class="input-group form-group">
                                             <span class="input-group-text bg-color text-white"><i class="bi-pin"></i></span>
-                                            <select class="required form-select" name="polazak" id="polazak">
+                                            <select class="required" name="polazak" id="polazak">
                                                 <option value="" disabled selected>Odaberite mjesto polaska</option>
                                                 <option value="Zagreb">Zagreb</option>
                                                 <option value="Split">Split</option>
                                                 <option value="Rijeka">Rijeka</option>
-
                                             </select>
                                         </div>
                                     </div>
@@ -82,24 +114,26 @@
                                     <div class="col-lg-3 col-md-6">
                                         <div class="input-group form-group">
                                             <span class="input-group-text bg-color text-white"><i class="bi-pin"></i></span>
-                                            <select class="required form-select" name="dolazak" id="dolazak">
+                                            <select class="required" name="dolazak" id="dolazak">
                                                 <option value="" disabled selected>Odaberite lokaciju dolaska</option>
                                                 <option value="Zagreb">Zagreb</option>
                                                 <option value="Split">Split</option>
                                                 <option value="Rijeka">Rijeka</option>
-
                                             </select>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-3 col-md-6">
+                                    <div class="col-lg-4 col-md-8">
                                         <div class="input-group form-group">
                                             <span class="input-group-text bg-color text-white"><i class="bi-calendar-week"></i></span>
-                                            <input type="text" class="form-control cleaning-date datetimepicker-input required" name="datum" id="datum" value="Odaberite datum polaskae" readonly>
+                                            {{--<input type="text" class="form-control cleaning-date datetimepicker-input required" name="datum" id="datum" value="Odaberite datum polaskae" readonly>--}}
+                                            <select class="required" name="listing" id="listing" data-size="5">
+                                                <option value="" disabled selected>Odaberite datum polaska</option>
+                                            </select>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-3 col-md-6">
+                                    <div class="col-lg-2 col-md-4">
                                         <button type="submit" name="form-cleaning-submit" class="btn bg-color text-white fw-semibold w-100 mt-0">Rezerviraj</button>
                                     </div>
 
@@ -295,7 +329,7 @@
                 </div>
             </div>
             <!-- faq -->
-            <div class="container-fluid  bg-contrast-200">
+            <div class="container-fluid bg-contrast-200">
                 <div class="mb-0" id="faq">
                     <div class="text-center mb-5 pt-5">
                         <h2 class="h1">FAQ</h2>
@@ -452,7 +486,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- kontakt-->
             <div class="container-fluid" id="contact">
                 <div class="row align-items-stretch mt-0 dark bg-dark">
@@ -517,5 +550,156 @@
 @endsection
 
 @push('js_after')
+    <script src="{{ asset('js/components/bs-select.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            let polazak = $('#polazak').selectpicker();
+            let dolazak = $('#dolazak').selectpicker();
+            let listing = $('#listing').selectpicker();
 
+            polazak.on('changed.bs.select', (e) => {
+                resolveSelection(polazak.val(), dolazak.val());
+            });
+            dolazak.on('changed.bs.select', (e) => {
+                resolveSelection(polazak.val(), dolazak.val());
+            });
+        });
+
+        /**
+         *
+         * @param from
+         * @param to
+         */
+        function resolveSelection(from, to) {
+            axios.post("{{ route('product.api.get') }}", { from: from, to: to })
+            .then(response => {
+                let data = response.data;
+                console.log(data)
+
+                if (data.from instanceof Array) {
+                    clearSelection($('#polazak'), 'from');
+
+                    data.from.forEach((item) => {
+                        $('#polazak').append('<option value="' + item + '">' + item + '</option>');
+                        $('#polazak').selectpicker('refresh');
+                    });
+                }
+
+                if (data.to instanceof Array) {
+                    clearSelection($('#dolazak'), 'to');
+
+                    data.to.forEach((item) => {
+                        $('#dolazak').append('<option value="' + item + '">' + item + '</option>');
+                        $('#dolazak').selectpicker('refresh');
+                    });
+                }
+
+                if (data.items instanceof Array) {
+                    clearSelection($('#listing'));
+
+                    data.items.forEach((item) => {
+                        console.log(item)
+                        $('#listing').append('<option value="' + item.id + '" data-subtext="' + item.subtitle + '">' + item.title + '</option>');
+                        $('#listing').selectpicker('refresh');
+                    });
+                }
+
+            });
+        }
+
+        /**
+         *
+         * @param select
+         * @param target
+         */
+        function clearSelection(select, target = 'items') {
+            select.find('option').remove();
+            select.selectpicker('refresh');
+
+            if (target == 'from') {
+                select.append('<option value="">Odaberite mjesto polaska...</option>');
+            }
+            if (target == 'to') {
+                select.append('<option value="">Odaberite lokaciju dolaska...</option>');
+            }
+            if (target == 'items') {
+                select.append('<option value="">Odaberite datum polaska...</option>');
+            }
+
+            select.selectpicker('refresh');
+        }
+
+        /**
+         *
+         */
+        function clearAllSelections() {
+            [$('#polazak'), $('#dolazak'), $('#listing')].forEach((item) => {
+                clearSelection(item);
+            });
+        }
+    </script>
+
+    {{--<script src="{{ asset('js/components/daterangepicker.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#search-input').on('keyup', (e) => {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+                    $('search-form').submit();
+                }
+            })
+
+            $('.cleaning-date').daterangepicker({
+                "buttonClasses": "button button-rounded button-mini text-transform-none ls-0 fw-semibold",
+                "applyClass": "button-color m-0 ms-1",
+                "cancelClass": "bg-black m-0 text-light",
+                singleDatePicker: true,
+                startDate: moment().startOf('hour'),
+                minDate: moment().startOf('date'),
+                timePicker: false,
+                timePickerSeconds: false,
+                locale: {
+                    format: 'DD/MM/YYYY',
+                    applyLabel: 'Potvrdi',
+                    cancelLabel: 'Odustani',
+                    daysOfWeek: [
+                        "Ne",
+                        "Po",
+                        "Ut",
+                        "Sr",
+                        "Če",
+                        "Pe",
+                        "Su"
+                    ],
+                    monthNames: [
+                        "Siječanj",
+                        "Veljača",
+                        "Ožujak",
+                        "Travanj",
+                        "Svibanj",
+                        "Lipanj",
+                        "Srpanj",
+                        "Kolovoz",
+                        "Rujan",
+                        "Listopad",
+                        "Studeni",
+                        "Prosinac"
+                    ],
+
+
+                },
+                isInvalidDate: function(date) {
+                    console.log(date.date() + '.' + date.month())
+                    return (date.day() == 0 || date.day() == 1 || date.day() == 3 || date.day() == 5 );
+                },
+                timePickerIncrement: 10
+            });
+
+            $('.cleaning-date').val('Odaberite datum polaska');
+
+            $('.form-cleaning').on( 'formSubmitSuccess', function(){
+                $('.cleaning-date').val('Odaberite datum polaska');
+            });
+        });
+    </script>--}}
 @endpush

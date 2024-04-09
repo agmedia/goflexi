@@ -28,9 +28,9 @@ class CreateOrdersTable extends Migration
             $table->string('baggage')->nullable();
             $table->string('payment_fname');
             $table->string('payment_lname');
-            $table->string('payment_address');
-            $table->string('payment_zip');
-            $table->string('payment_city');
+            $table->string('payment_address')->nullable();
+            $table->string('payment_zip')->nullable();
+            $table->string('payment_city')->nullable();
             $table->string('payment_phone')->nullable();
             $table->string('payment_email');
             $table->string('payment_method');
@@ -54,6 +54,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->bigInteger('order_id')->unsigned();
             $table->string('code')->nullable(); // Can be action, coupon, subtotal, discount, tax, total
+            $table->string('title')->nullable();
             $table->decimal('value', 15, 4)->default(0);
             $table->integer('sort_order')->unsigned();
             $table->timestamps();

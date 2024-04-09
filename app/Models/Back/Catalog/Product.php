@@ -109,7 +109,15 @@ class Product extends Model
     public function validateRequest(Request $request)
     {
         $request->validate([
-            'title' => 'required'
+            'title.*' => 'required',
+            'from_city' => 'required',
+            'from_longitude' => 'required',
+            'from_latitude' => 'required',
+            'to_city' => 'required',
+            'to_longitude' => 'required',
+            'to_latitude' => 'required',
+            'price' => 'required',
+            'quantity' => 'required'
         ]);
 
         $this->setRequest($request);
@@ -171,8 +179,15 @@ class Product extends Model
     {
         $from = $this->request->from_longitude . '-' . $this->request->from_latitude;
         $to = $this->request->to_longitude . '-' . $this->request->to_latitude;
-        $start = $this->request->start_date . ' ' . $this->request->start_time;
-        $end = $this->request->end_date . ' ' . $this->request->end_time;
+        $start = now();
+        $end = now();
+
+        if ($this->request->start_date) {
+            $start = Carbon::make($this->request->start_date . ' ' . ($this->request->start_time ?: '12:00:00'));
+        }
+        if ($this->request->start_time) {
+            $end = Carbon::make($this->request->end_date . ' ' . ($this->request->end_time ?: '12:00:00'));
+        }
 
         $response = [
             'hash'             => Str::random(),
@@ -180,11 +195,12 @@ class Product extends Model
             'from_coordinates' => $from,
             'to_city'          => $this->request->to_city,
             'to_coordinates'   => $to,
-            'start_time'       => Carbon::make($start),
-            'end_time'         => Carbon::make($end),
-            'price'            => $this->request->price,
+            'start_time'       => $start,
+            'end_time'         => $end,
+            'price'            => $this->request->price ?: 0,
             'price_child'      => $this->request->price_child,
             'quantity'         => $this->request->quantity,
+            'reserved'         => $this->reserved ?? 0,
             'image'            => 'media/van.jpg',
             'tax_id'           => 2,
             'sort_order'       => 0,

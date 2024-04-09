@@ -71,29 +71,29 @@
                     <div class="card-body">
                         <div class="form-group row">
                             <div class="col-12">
-                                <label for="from-city">From City</label>
+                                <label for="from-city">From City @include('back.layouts.partials.required')</label>
                                 <input type="text" class="form-control" id="from-city" name="from_city" value="{{ isset($product) ? $product->from_city : old('from_city') }}" />
                             </div>
                             <div class="col-6 mt-3">
-                                <label for="from-longitude">From Longitude</label>
+                                <label for="from-longitude">From Longitude @include('back.layouts.partials.required')</label>
                                 <input type="text" class="form-control" id="from-longitude" name="from_longitude" value="{{ isset($product) ? $product->from_longitude : old('from_longitude') }}" />
                             </div>
                             <div class="col-6 mt-3">
-                                <label for="from-latitude">Latitude</label>
+                                <label for="from-latitude">Latitude @include('back.layouts.partials.required')</label>
                                 <input type="text" class="form-control" id="from-latitude" name="from_latitude" value="{{ isset($product) ? $product->from_latitude : old('from_latitude') }}" />
                             </div>
                         </div>
                         <div class="form-group row mt-5">
                             <div class="col-12">
-                                <label for="to-city">To City</label>
+                                <label for="to-city">To City @include('back.layouts.partials.required')</label>
                                 <input type="text" class="form-control" id="to-city" name="to_city" value="{{ isset($product) ? $product->to_city : old('to_city') }}" />
                             </div>
                             <div class="col-6 mt-3">
-                                <label for="to-longitude">To Longitude</label>
+                                <label for="to-longitude">To Longitude @include('back.layouts.partials.required')</label>
                                 <input type="text" class="form-control" id="to-longitude" name="to_longitude" value="{{ isset($product) ? $product->to_longitude : old('to_longitude') }}" />
                             </div>
                             <div class="col-6 mt-3">
-                                <label for="to-latitude">Latitude</label>
+                                <label for="to-latitude">Latitude @include('back.layouts.partials.required')</label>
                                 <input type="text" class="form-control" id="to-latitude" name="to_latitude" value="{{ isset($product) ? $product->to_latitude : old('to_latitude') }}" />
                             </div>
                         </div>
@@ -145,7 +145,7 @@
                     <div class="card-body">
                         <div class="form-group row">
                             <div class="col-6 mb-3">
-                                <label for="price-input">Cijena Odrasli</label>
+                                <label for="price-input">Cijena Odrasli @include('back.layouts.partials.required')</label>
                                 <input type="text" class="form-control" id="price-input" name="price" value="{{ isset($product) ? $product->price : old('price') }}"/>
                             </div>
                             <div class="col-6 mb-3">
@@ -153,7 +153,7 @@
                                 <input type="text" class="form-control" id="price-child-input" name="price_child" value="{{ isset($product) ? $product->price_child : old('price_child') }}" />
                             </div>
                             <div class="col-12 mt-3">
-                                <label for="quantity-input">Količina</label>
+                                <label for="quantity-input">Količina @include('back.layouts.partials.required')</label>
                                 <input type="text" class="form-control" id="quantity-input" name="quantity" value="{{ isset($product) ? $product->quantity : old('quantity') }}" />
                             </div>
                         </div>

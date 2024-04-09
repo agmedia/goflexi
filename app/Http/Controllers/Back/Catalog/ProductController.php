@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Back\Catalog;
 
 use App\Helpers\Helper;
+use App\Helpers\ProductHelper;
 use App\Models\Back\Catalog\Product;
 use App\Models\Back\Catalog\Widget;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
@@ -58,7 +61,7 @@ class ProductController extends Controller
         $stored = $product->validateRequest($request)->store();
 
         if ($stored) {
-            return redirect()->back()->with(['success' => 'Proizvod je uspješno snimljen!']);
+            return redirect()->route('product.edit', ['product' => $stored])->with(['success' => 'Proizvod je uspješno snimljen!']);
         }
 
         return redirect()->back()->with(['error' => 'Whoops..! Desila se greška sa snimanjem proizvoda.']);
@@ -91,7 +94,7 @@ class ProductController extends Controller
         $updated = $product->validateRequest($request)->edit();
 
         if ($updated) {
-            return redirect()->back()->with(['success' => 'Proizvod je uspješno snimljen!']);
+            return redirect()->route('product.edit', ['product' => $updated])->with(['success' => 'Proizvod je uspješno snimljen!']);
         }
 
         return redirect()->back()->with(['error' => 'Whoops..! Desila se greška sa snimanjem proizvoda.']);
@@ -122,7 +125,43 @@ class ProductController extends Controller
 
 
     /**
-     * @param Page $page
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function storeList(Request $request)
+    {
+        $from = now();
+        $to = now()->addDays(7);
+        $existing = Product::query()->orderBy('start_time')->first();
+
+        if ($existing) {
+            $from = Carbon::make($existing->start_time);
+            $to = Carbon::make($existing->start_time)->addDays(7);
+        }
+
+        $days = CarbonPeriod::create($from, $to);
+
+        foreach ($days as $day) {
+            if ($day->isMonday() || $day->isWednesday() || $day->isFriday()) {
+                // import Zagreb-Split
+                ProductHelper::create_ZGSP_listing($day);
+            }
+
+            if ($day->isMonday() || $day->isWednesday() || $day->isFriday()) {
+                // import Zagreb-Rijeka
+                ProductHelper::create_ZGRI_listing($day);
+            }
+        }
+
+        return redirect()->route('products')->with(['success' => 'Lista proizvoda je uspješno snimljena!']);
+    }
+
+
+    /**
+     * @param Product $product
+     *
+     * @return void
      */
     private function flush(Product $product): void
     {

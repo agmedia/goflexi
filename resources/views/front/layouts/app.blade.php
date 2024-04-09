@@ -30,8 +30,6 @@
     <!-- Font Icons -->
     <link rel="stylesheet" href="{{ asset('css/font-icons.css') }}">
     <!-- Plugins/Components CSS -->
-    <link rel="stylesheet" href="{{ asset('css/components/daterangepicker.css') }}"><!-- DatePicker CSS -->
-
     @stack('css_after')
 
     <style>
@@ -41,90 +39,37 @@
 
 <!-- Body-->
 <body class="stretched">
-    <div id="wrapper">
+<div id="wrapper">
 
-        @if (request()->routeIs(['index']))
+    @if (request()->routeIs(['index']))
 
         @include('front.layouts.partials.header')
 
-        @else
+    @else
 
-            @include('front.layouts.partials.headerpage')
+        @include('front.layouts.partials.headerpage')
 
-        @endif
+    @endif
 
-        @yield('content')
+    @yield('content')
 
-        @include('front.layouts.partials.footer')
+    @include('front.layouts.partials.footer')
 
-        <div id="gotoTop" class="uil uil-angle-up bg-primary"></div>
-    </div>
+    <div id="gotoTop" class="uil uil-angle-up bg-primary"></div>
+</div>
 
-    <!-- Javascript Files -->
-    <script src="{{ asset('js/plugins.min.js') }}"></script>
-    <script src="{{ asset('js/functions.bundle.js') }}"></script>
-    <script src="{{ asset('js/components/daterangepicker.js') }}"></script>
-    <script>
-        jQuery(document).ready(function() {
-            jQuery('#search-input').on('keyup', (e) => {
-                if (e.keyCode == 13) {
-                    e.preventDefault();
-                    jQuery('search-form').submit();
-                }
-            })
-
-            jQuery('.cleaning-date').daterangepicker({
-                "buttonClasses": "button button-rounded button-mini text-transform-none ls-0 fw-semibold",
-                "applyClass": "button-color m-0 ms-1",
-                "cancelClass": "bg-black m-0 text-light",
-                singleDatePicker: true,
-                startDate: moment().startOf('hour'),
-                minDate: moment().startOf('date'),
-                timePicker: false,
-                timePickerSeconds: false,
-                locale: {
-                    format: 'DD/MM/YYYY',
-                    applyLabel: 'Potvrdi',
-                    cancelLabel: 'Odustani',
-                    daysOfWeek: [
-                        "Ne",
-                        "Po",
-                        "Ut",
-                        "Sr",
-                        "Če",
-                        "Pe",
-                        "Su"
-                    ],
-                    monthNames: [
-                        "Siječanj",
-                        "Veljača",
-                        "Ožujak",
-                        "Travanj",
-                        "Svibanj",
-                        "Lipanj",
-                        "Srpanj",
-                        "Kolovoz",
-                        "Rujan",
-                        "Listopad",
-                        "Studeni",
-                        "Prosinac"
-                    ],
-
-
-                },
-                isInvalidDate: function(date) {
-                    return (date.day() == 0 || date.day() == 1 || date.day() == 3 || date.day() == 5 );
-                },
-                timePickerIncrement: 10
-            });
-
-            jQuery('.cleaning-date').val('Odaberite datum polaska');
-
-            jQuery('.form-cleaning').on( 'formSubmitSuccess', function(){
-                jQuery('.cleaning-date').val('Odaberite datum polaska');
-            });
-        });
-    </script>
+<!-- Javascript Files -->
+<script src="{{ asset('js/plugins.min.js') }}"></script>
+<script src="{{ asset('js/functions.bundle.js') }}"></script>
+<script src="{{ asset('js/axios.min.js') }}"></script>
+<script>
+    /* jQuery */
+    const $ = jQuery;
+    /* Axios */
+    const API_PATH = window.location.origin + '/api/';
+    window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    window.axios.defaults.baseURL = API_PATH;
+</script>
 
 @stack('js_after')
 

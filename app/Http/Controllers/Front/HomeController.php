@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Helpers\BookingHelper;
 use App\Helpers\Helper;
 use App\Helpers\LanguageHelper;
 use App\Helpers\Recaptcha;
@@ -13,6 +14,9 @@ use App\Mail\ContactFormMessage;
 use App\Models\Back\Settings\Settings;
 use App\Models\Front\Apartment\Apartment;
 use App\Models\Front\Catalog\Page;
+use App\Models\Front\Checkout\Checkout;
+use App\Models\Front\Checkout\Order;
+use App\Models\Front\Checkout\Reservation;
 use App\Models\Front\Faq;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -32,24 +36,53 @@ class HomeController extends FrontBaseController
     }
 
 
-    /**
-     * @param Apartment $apartment
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function product(Apartment $apartment)
+    public function viewReservation(Request $request)
     {
-        $dates = $apartment->dates();
-        $langs = LanguageHelper::resolveSelector($apartment);
-        $meta  = $apartment->meta();
+        $reservation = new Reservation($request);
 
-        $reservation_session = null;
+        return view('front.view-reservation', compact('reservation'));
+    }
 
-        if (CheckoutSession::hasReservationData()) {
-            $reservation_session = CheckoutSession::getReservationData();
-        }
 
-        return view('front.apartment', compact('apartment', 'dates', 'langs', 'meta', 'reservation_session'));
+    public function checkout(Request $request)
+    {
+        $checkout = new Checkout($request);
+        $customer = $checkout->resolveCustomer();
+
+        return view('front.checkout', compact('checkout', 'customer'));
+    }
+
+
+    public function payReservation(Request $request)
+    {
+        dd($request->toArray());
+
+        $order = (new Order())->setRequest($request);
+
+        //dd($request->toArray(), $order);
+
+        return view('front.pay-reservation', compact('order'));
+    }
+
+
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getApiAvailableProducts(Request $request)
+    {
+        $from = BookingHelper::resolveCities('from', $request);
+        $to = BookingHelper::resolveCities('to', $request);
+        $items = BookingHelper::resolveDatesList($request);
+
+        $response = [
+            'from' => $from,
+            'to' => $to,
+            'items' => $items
+        ];
+
+        return response()->json($response);
     }
 
 
@@ -64,20 +97,6 @@ class HomeController extends FrontBaseController
 
         return view('front.faq', compact('faqs'));
     }
-
-
-    /**
-     * @param Faq $checkout
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function checkout()
-    {
-
-
-        return view('front.checkout');
-    }
-
 
 
     /**

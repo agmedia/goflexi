@@ -11,7 +11,10 @@
                     </div>
                 </div>
                 <div class="col-md-6 text-end">
-                    <a href="{{ route('product.create') }}" class="btn btn-primary">
+                    <a href="{{ route('product.create.list') }}" class="btn btn-light-warning m-l-20">
+                        <i class="ti ti-plus f-18"></i> Add New Products List
+                    </a>
+                    <a href="{{ route('product.create') }}" class="btn btn-primary m-l-20">
                         <i class="ti ti-plus f-18"></i> Add New Product
                     </a>
                 </div>
@@ -83,6 +86,7 @@
                     @endforelse
                     </tbody>
                 </table>
+                {{ $products->links() }}
             </div>
             <!-- [ sample-page ] end -->
         </div>

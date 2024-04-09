@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Back\Catalog\ProductController;
+use App\Http\Controllers\Back\Catalog\OptionController;
 use App\Http\Controllers\Back\Catalog\PageController;
 use App\Http\Controllers\Back\Catalog\WidgetController;
 use App\Http\Controllers\Back\DashboardController;
@@ -13,7 +14,6 @@ use App\Http\Controllers\Back\Settings\App\OrderStatusController;
 use App\Http\Controllers\Back\Settings\App\PaymentController;
 use App\Http\Controllers\Back\Settings\App\TaxController;
 use App\Http\Controllers\Back\Settings\HistoryController;
-use App\Http\Controllers\Back\Settings\OptionController;
 use App\Http\Controllers\Back\Settings\QuickMenuController;
 use App\Http\Controllers\Back\Settings\System\ApplicationController;
 use App\Http\Controllers\Back\UserController;
@@ -42,7 +42,15 @@ Route::group(
                 Route::post('/', [ProductController::class, 'store'])->name('product.store');
                 Route::get('{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
                 Route::patch('{product}', [ProductController::class, 'update'])->name('product.update');
+                Route::get('store-predefined-list', [ProductController::class, 'storeList'])->name('product.create.list');
             });
+            // OPTIONS: PRODUCT ADDITIONAL PAYMENTS
+            Route::get('options', [OptionController::class, 'index'])->name('options');
+            Route::get('option/create', [OptionController::class, 'create'])->name('options.create');
+            Route::post('option', [OptionController::class, 'store'])->name('options.store');
+            Route::get('option/{option}/edit', [OptionController::class, 'edit'])->name('options.edit');
+            Route::patch('option/{option}', [OptionController::class, 'update'])->name('options.update');
+            Route::delete('option/{option}', [OptionController::class, 'destroy'])->name('options.destroy');
             // WIDGETS
             Route::prefix('widgets')->group(function () {
                 Route::get('/', [WidgetController::class, 'index'])->name('widgets');
@@ -133,7 +141,10 @@ Route::prefix('api')->group(function () {
     Route::post('maintenance/mode', [QuickMenuController::class, 'maintenanceMode'])->name('maintenance.mode');
     Route::post('maintenance/mode', [QuickMenuController::class, 'setTemplateMode'])->name('template.mode');
     // PRODUCTS
+    Route::post('product/available/get', [HomeController::class, 'getApiAvailableProducts'])->name('product.api.get');
     Route::post('product/destroy', [ProductController::class, 'destroy'])->name('product.api.destroy');
+    // OPTIONS
+    Route::post('/options/destroy/api', [OptionController::class, 'destroyApi'])->name('options.destroy.api');
     // WIDGET
     Route::prefix('widget')->group(function () {
         Route::post('destroy', [WidgetController::class, 'destroy'])->name('widget.destroy');
@@ -209,7 +220,10 @@ Route::group(
      */
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::get('faq', [HomeController::class, 'faq'])->name('faq');
-    Route::get('checkout', [HomeController::class, 'checkout'])->name('checkout');
+    Route::post('view/reservation', [HomeController::class, 'viewReservation'])->name('view-reservation');
+    Route::post('checkout', [HomeController::class, 'checkout'])->name('checkout');
+    Route::post('pay/reservation', [HomeController::class, 'payReservation'])->name('pay-reservation');
+    Route::get('/success', [HomeController::class, 'success'])->name('checkout.success');
     Route::get('/kontakt', [HomeController::class, 'contact'])->name('kontakt');
     Route::post('/kontakt/posalji', [HomeController::class, 'sendContactMessage'])->name('poruka');
 

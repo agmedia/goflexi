@@ -16,7 +16,7 @@ return [
 
     'pagination' => [
         'front' => 40,
-        'back' => 30
+        'back' => 10
     ],
 
     'search_keyword' => 'pojam',
@@ -58,16 +58,53 @@ return [
     ],
 
     'payment' => [
-        'default' => 'corvus',
+        'default' => 'stripe',
         'providers' => [
             'bank' => \App\Models\Front\Checkout\Payment\Bank::class,
-            'pickup' => \App\Models\Front\Checkout\Payment\Pickup::class,
+            //'pickup' => \App\Models\Front\Checkout\Payment\Pickup::class,
             //'wspay' => \App\Models\Front\Checkout\Payment\Wspay::class,
             //'payway' => \App\Models\Front\Checkout\Payment\Payway::class,
-            //'corvus' => \App\Models\Front\Checkout\Payment\Corvus::class,
+            'stripe' => \App\Models\Front\Checkout\Payment\Stripe::class,
             //'keks' => \App\Models\Front\Checkout\Payment\Keks::class,
-            'cod' => \App\Models\Front\Checkout\Payment\Cod::class
+            //'cod' => \App\Models\Front\Checkout\Payment\Cod::class
         ]
-    ]
+    ],
+
+    'option_references' => [
+        1 => [
+            'title' => [
+                'en' => 'Additional Person',
+                'hr' => 'Dodatna Osoba',
+            ],
+            'id' => 1,
+            'reference' => 'person'
+        ],
+        2 => [
+            'title' => [
+                'en' => 'Transport',
+                'hr' => 'Transport',
+            ],
+            'id' => 2,
+            'reference' => 'transport'
+        ],
+        3 => [
+            'title' => [
+                'en' => 'Comfort & Luxury',
+                'hr' => 'Konfort i Luksuz',
+            ],
+            'id' => 3,
+            'reference' => 'comfort'
+        ],
+        4 => [
+            'title' => [
+                'en' => 'Other',
+                'hr' => 'Ostalo',
+            ],
+            'id' => 4,
+            'reference' => 'other'
+        ]
+    ],
+
+    'days_of_week' => ['Ponedeljak', 'Utorak', 'Srijeda', 'Četvrtak', 'Petak', 'Subota', 'Neddelja']
 
 ];

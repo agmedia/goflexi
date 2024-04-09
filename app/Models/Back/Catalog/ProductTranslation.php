@@ -32,7 +32,7 @@ class ProductTranslation extends Model
         self::query()->where('product_id', $product->id)->delete();
 
         foreach (ag_lang() as $lang) {
-            $slug = Str::slug($request['title'][$lang->code]);
+            $slug = Str::slug($request['title'][$lang->code] ?? '');
             $url  = '/' . $slug;
 
             $id = self::query()->insertGetId([

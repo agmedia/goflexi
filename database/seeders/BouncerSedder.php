@@ -145,7 +145,7 @@ class BouncerSedder extends Seeder
         foreach ([1, 2] as $id) {
             $user = User::find($id);
 
-            $user->assign('master');
+            $user->assign($master);
         }
 
 

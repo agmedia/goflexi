@@ -15,7 +15,6 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('hash')->nullable();
             $table->string('from_city')->nullable();
             $table->string('from_coordinates')->nullable();
             $table->string('to_city')->nullable();
@@ -25,7 +24,9 @@ class CreateProductsTable extends Migration
             $table->decimal('price', 15, 4)->default(0);
             $table->decimal('price_child', 15, 4)->default(0);
             $table->integer('quantity')->unsigned()->default(0);
+            $table->integer('reserved')->unsigned()->default(0);
             $table->string('image')->nullable();
+            $table->string('hash')->nullable();
             $table->integer('tax_id')->unsigned()->default(0);
             $table->integer('viewed')->unsigned()->default(0);
             $table->integer('sort_order')->unsigned()->default(0);

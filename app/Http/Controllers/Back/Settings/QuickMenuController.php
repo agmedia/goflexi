@@ -42,34 +42,13 @@ class QuickMenuController extends Controller
 
         return response()->json(['success' => 'Application is now in maintenance mode.']);
     }
-    
-    
-    /**
-     * Maintenance Mode ON.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function maintenanceModeON()
-    {
-        Artisan::call('down');
-        
-        return redirect()->back()->with('success', 'Application is now in maintenance mode.');
-    }
-    
-    
-    /**
-     * Maintenance Mode OFF.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function maintenanceModeOFF()
-    {
-        Artisan::call('up');
-        
-        return redirect()->back()->with('success', 'Application is now live.');
-    }
 
 
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function setTemplateMode(Request $request)
     {
         if ($request->has('mode')) {
