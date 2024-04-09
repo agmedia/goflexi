@@ -64,7 +64,7 @@
 <script src="{{ asset('js/axios.min.js') }}"></script>
 <script>
     /* jQuery */
-    const $ = jQuery;
+    //const $ = jQuery;
     /* Axios */
     const API_PATH = window.location.origin + '/api/';
     window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

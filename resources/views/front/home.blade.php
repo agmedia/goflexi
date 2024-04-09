@@ -552,10 +552,10 @@
 @push('js_after')
     <script src="{{ asset('js/components/bs-select.js') }}"></script>
     <script>
-        $(document).ready(function() {
-            let polazak = $('#polazak').selectpicker();
-            let dolazak = $('#dolazak').selectpicker();
-            let listing = $('#listing').selectpicker();
+        jQuery(document).ready(function() {
+            let polazak = jQuery('#polazak').selectpicker();
+            let dolazak = jQuery('#dolazak').selectpicker();
+            let listing = jQuery('#listing').selectpicker();
 
             polazak.on('changed.bs.select', (e) => {
                 resolveSelection(polazak.val(), dolazak.val());
@@ -577,30 +577,30 @@
                 console.log(data)
 
                 if (data.from instanceof Array) {
-                    clearSelection($('#polazak'), 'from');
+                    clearSelection(jQuery('#polazak'), 'from');
 
                     data.from.forEach((item) => {
-                        $('#polazak').append('<option value="' + item + '">' + item + '</option>');
-                        $('#polazak').selectpicker('refresh');
+                        jQuery('#polazak').append('<option value="' + item + '">' + item + '</option>');
+                        jQuery('#polazak').selectpicker('refresh');
                     });
                 }
 
                 if (data.to instanceof Array) {
-                    clearSelection($('#dolazak'), 'to');
+                    clearSelection(jQuery('#dolazak'), 'to');
 
                     data.to.forEach((item) => {
-                        $('#dolazak').append('<option value="' + item + '">' + item + '</option>');
-                        $('#dolazak').selectpicker('refresh');
+                        jQuery('#dolazak').append('<option value="' + item + '">' + item + '</option>');
+                        jQuery('#dolazak').selectpicker('refresh');
                     });
                 }
 
                 if (data.items instanceof Array) {
-                    clearSelection($('#listing'));
+                    clearSelection(jQuery('#listing'));
 
                     data.items.forEach((item) => {
                         console.log(item)
-                        $('#listing').append('<option value="' + item.id + '" data-subtext="' + item.subtitle + '">' + item.title + '</option>');
-                        $('#listing').selectpicker('refresh');
+                        jQuery('#listing').append('<option value="' + item.id + '" data-subtext="' + item.subtitle + '">' + item.title + '</option>');
+                        jQuery('#listing').selectpicker('refresh');
                     });
                 }
 
@@ -633,7 +633,7 @@
          *
          */
         function clearAllSelections() {
-            [$('#polazak'), $('#dolazak'), $('#listing')].forEach((item) => {
+            [jQuery('#polazak'), jQuery('#dolazak'), jQuery('#listing')].forEach((item) => {
                 clearSelection(item);
             });
         }

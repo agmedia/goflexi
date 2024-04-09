@@ -188,18 +188,18 @@
 
 @push('js_after')
     <script>
-        const price_adult = {{ $reservation->listing->price }};
-        const price_child = {{ $reservation->listing->price_child }};
+        const price_adult = {{ jQueryreservation->listing->price }};
+        const price_child = {{ jQueryreservation->listing->price_child }};
         const time_modal = new bootstrap.Modal(document.getElementById('time-short'));
 
-        $(document).ready(function() {
+        jQuery(document).ready(function() {
             document.getElementById('adult-price').innerText = price_adult.toFixed(2) + ' €';
             document.getElementById('child-price').innerText = price_child.toFixed(2) + ' €';
             document.getElementById('total-price').innerText = price_adult.toFixed(2) + ' €';
 
             console.log(price_adult, price_child)
 
-            $('#qty-adult').on('change', (ev) => {
+            jQuery('#qty-adult').on('change', (ev) => {
                 let qty = ev.currentTarget.value;
 
                 document.getElementById('adult-price').innerText = (price_adult * qty).toFixed(2) + ' €';
