@@ -188,8 +188,8 @@
 
 @push('js_after')
     <script>
-        const price_adult = {{ jQueryreservation->listing->price }};
-        const price_child = {{ jQueryreservation->listing->price_child }};
+        const price_adult = {{ $reservation->listing->price }};
+        const price_child = {{ $reservation->listing->price_child }};
         const time_modal = new bootstrap.Modal(document.getElementById('time-short'));
 
         jQuery(document).ready(function() {
