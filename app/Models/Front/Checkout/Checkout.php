@@ -17,6 +17,8 @@ class Checkout
 
     public $options;
 
+    public $available_options;
+
     public $additional_person = 0;
 
     public $additional_child = 0;
@@ -39,6 +41,7 @@ class Checkout
         $this->request = $request;
 
         $this->getTrip($this->request->input('listing'))
+             ->getAvailableOptions()
              ->hasSelectableOptions()
              ->hasAdditionalPerson()
              ->hasAdditionalChild()
@@ -137,6 +140,14 @@ class Checkout
             }
         }
 
+
+        return $this;
+    }
+
+
+    public function getAvailableOptions()
+    {
+        $this->available_options = Option::query()->where('status', 1)->orderBy('sort_order')->get();
 
         return $this;
     }
