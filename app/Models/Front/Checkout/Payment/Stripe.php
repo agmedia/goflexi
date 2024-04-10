@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
+use Stripe\Checkout\Session;
+use Stripe\StripeClient;
 
 /**
  * Class Payway
@@ -54,54 +56,43 @@ class Stripe
 
         $payment_method = $payment_method->first();
 
-        $action = $this->url['live'];
+        $secret = $payment_method->data->secret_key;
+        $key = $payment_method->data->public_key;
 
-        if ($payment_method->data->test) {
-            $action = $this->url['test'];
+        if ( ! $payment_method->data->test) {
+            $secret = $payment_method->data->secret_key;
+            $key = $payment_method->data->public_key;
         }
 
         $total = number_format($this->order->total,2, ',', '');
-        $_total = str_replace( ',', '', $total);
+        $total = str_replace( ',', '', $total);
 
-        $shoppingcartid = $this->order->id;
+        $stripe = new StripeClient($secret);
 
-        // $stringhash = $payment_method->data->shop_id.$payment_method->data->secret_key.$shoppingcartid.$payment_method->data->secret_key.$_total.$payment_method->data->secret_key;
+        $session = $stripe->checkout->sessions->create([
+            'cancel_url' => route('pay-reservation'),
+            'success_url' => route('checkout.success'),
+            'line_items' => [
+                [
+                    'price_data' => [
+                        'currency' => 'eur',
+                        'product_data' => [
+                            'name' => $this->order->product->title ?? $this->order->product->translation()->title,
+                        ],
+                        'unit_amount' => $total
+                    ],
+                    'quantity' => 1,
+                ],
+            ],
+            'mode' => 'payment',
+        ]);
 
+        $data['url'] = $session->url;
 
+        Log::info($session->toArray());
+        Log::info($data);
 
-        // $hash = hash('sha512', $stringhash);
-
-        $hash = md5($payment_method->data->shop_id .
-            $payment_method->data->secret_key .
-            $this->order->id.'-'.date("Y") .
-            $payment_method->data->secret_key .
-            $_total.
-            $payment_method->data->secret_key
-        );
-
-        $data['action'] = $action;
-        $data['shop_id'] = $payment_method->data->shop_id;
-        $data['order_id'] = $this->order->id.'-'.date("Y");
-        $data['total'] = $total;
-        $data['md5'] = $hash;
-        $data['firstname'] = $this->order->payment_fname;
-        $data['lastname'] = $this->order->payment_lname;
-        $data['address'] = $this->order->payment_address;
-        $data['city'] = $this->order->payment_city;
-        $data['country'] = $this->order->payment_state;
-        $data['postcode'] = $this->order->payment_zip;
-        $data['phone'] = $this->order->payment_phone;
-        $data['email'] = $this->order->payment_email;
-        $data['lang'] = 'HR';
-        $data['plan'] = '';
-        $data['cc_name'] = '';//...??
-        $data['currency'] = 'EUR';
-        $data['rate'] = 1;
-        $data['return'] = $payment_method->data->callback;
-        $data['cancel'] = route('kosarica');
-        $data['method'] = 'POST';
-
-        return view('front.checkout.payment.wspay', compact('data'));
+        return view('front.checkout.payment.stripe', compact('data'));
     }
 
 

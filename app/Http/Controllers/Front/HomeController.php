@@ -55,13 +55,26 @@ class HomeController extends FrontBaseController
 
     public function payReservation(Request $request)
     {
-        dd($request->toArray());
+        //dd($request->toArray());
 
-        $order = (new Order())->setRequest($request);
+        $order = new Order($request);
+
+        $order->create(config('settings.order.status.unfinished'));
+
+        $payment_form = $order->resolvePaymentForm();
 
         //dd($request->toArray(), $order);
 
-        return view('front.pay-reservation', compact('order'));
+        return view('front.pay-reservation', compact('order', 'payment_form'));
+    }
+
+
+    public function success(Request $request)
+    {
+        Log::info('public function success(Request $request) ::::: $request->toArray()');
+        Log::info($request->toArray());
+
+        return view('front.checkout.success');
     }
 
 

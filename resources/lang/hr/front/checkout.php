@@ -34,6 +34,8 @@ return [
     'agree' => ' Slažem se s <a href="en/info/terms-and-conditions" class="alert-link">Uvjetima pružanja usluge, Uvjetima pružanja usluge plaćanja i prihvaćam Pravila o privatnosti.</a>',
     'confirm_and_pay' => 'Nastavi na plaćanje',
     'subtotal' => 'Ukupno',
+    'option_additional_person' => 'Dodatna osoba',
+    'option_additional_child' => 'Dodatno dijete',
     'tax' => 'Porez <small class="text-muted">(PDV 25%)</small>',
     'total' => 'Sveukupno',
     'regulardays' => 'Dani u tjednu',

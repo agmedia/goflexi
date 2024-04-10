@@ -63,6 +63,17 @@ class CreateOrdersTable extends Migration
                   ->references('id')->on('orders');
         });
 
+        Schema::create('order_options', function (Blueprint $table) {
+            $table->unsignedBigInteger('order_id')->index();
+            $table->unsignedBigInteger('option_id')->index();
+
+            $table->foreign('order_id')
+                  ->references('id')->on('orders');
+
+            $table->foreign('option_id')
+                  ->references('id')->on('options');
+        });
+
 
         Schema::create('order_transactions', function (Blueprint $table) {
             $table->id();

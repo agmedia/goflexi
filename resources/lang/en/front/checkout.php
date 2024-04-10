@@ -34,6 +34,8 @@ return [
     'agree' => ' I agree to the <a href="en/info/terms-and-conditions" class="alert-link">updated Terms of Service, Payments Terms of Service, and I acknowledge the Privacy Policy.</a>',
     'confirm_and_pay' => 'Confirm and Pay',
     'subtotal' => 'Subtotal',
+    'option_additional_person' => 'Additional person',
+    'option_additional_child' => 'Additional child',
     'tax' => 'Tax <small class="text-muted">(PDV 25%)</small>',
     'total' => 'Total',
     'regulardays' => 'Regular days',

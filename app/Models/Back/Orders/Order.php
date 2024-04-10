@@ -4,6 +4,7 @@ namespace App\Models\Back\Orders;
 
 use App\Helpers\Helper;
 use App\Models\Back\Apartment\Apartment;
+use App\Models\Back\Catalog\Product;
 use App\Models\Back\Settings\Settings;
 use App\Models\Back\Users\Client;
 use App\Models\Front\Checkout\Checkout;
@@ -58,9 +59,9 @@ class Order extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function apartment()
+    public function product()
     {
-        return $this->hasOne(Apartment::class, 'id', 'apartment_id');
+        return $this->hasOne(Product::class, 'id', 'product_id');
     }
 
 

@@ -105,6 +105,12 @@ return [
         ]
     ],
 
-    'days_of_week' => ['Ponedeljak', 'Utorak', 'Srijeda', 'Četvrtak', 'Petak', 'Subota', 'Neddelja']
+    'days_of_week' => ['Ponedeljak', 'Utorak', 'Srijeda', 'Četvrtak', 'Petak', 'Subota', 'Neddelja'],
+
+    // listing options ID mapping
+    'options' => [
+        'child_seat' => 1,
+        'baggage' => 2
+    ]
 
 ];

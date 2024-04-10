@@ -42,7 +42,8 @@ class Checkout
              ->hasSelectableOptions()
              ->hasAdditionalPerson()
              ->hasAdditionalChild()
-             ->getPaymentMethodsList();
+             ->getPaymentMethodsList()
+             ->setTotal();
 
         // get payments methods
     }
@@ -141,10 +142,32 @@ class Checkout
     }
 
 
+    private function setTotal()
+    {
+        $this->total = $this->listing->price;
+
+        if ($this->additional_person) {
+            $this->total += ($this->listing->price * $this->additional_person);
+        }
+
+        if ($this->additional_child) {
+            $this->total += ($this->listing->price_child * $this->additional_child);
+        }
+
+        if ( ! empty($this->options)) {
+            foreach ($this->options as $option) {
+                $this->total += $option->price;
+            }
+        }
+
+        return $this;
+    }
+
+
     /**
      * @param string $state
      *
-     * @return Collection
+     * @return $this
      */
     private function getPaymentMethodsList(string $state = 'Croatia')
     {
@@ -159,10 +182,5 @@ class Checkout
         return $this;
     }
 
-
-    private function getTotal()
-    {
-
-    }
 
 }

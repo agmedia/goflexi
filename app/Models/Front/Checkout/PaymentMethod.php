@@ -127,67 +127,6 @@ class PaymentMethod
     }
 
 
-    public function checkCart(array $cart)
-    {
-        $pass = true;
-
-       /* if (isset($cart['items'])) {
-            foreach ($cart['items'] as $item) {
-                if ($item['associatedModel']['origin'] != 'Hrvatski') {
-                    $pass = false;
-                }
-            }
-        }*/
-
-        if ( ! $pass) {
-            $methods = $this->response_methods;
-            $this->response_methods = collect();
-
-            foreach ($methods as $method) {
-                if ($method->code != 'cod') {
-                    $this->response_methods->push($method);
-                }
-            }
-        }
-
-        return $this;
-    }
-
-
-    /**
-     * @param string $shipping
-     *
-     * @return $this
-     */
-    public function checkShipping(string $shipping)
-    {
-        foreach ($this->methods as $method) {
-            if ($method->code == 'pickup') {
-                if ($shipping == 'pickup') {
-                    $this->response_methods = collect();
-                    $this->response_methods->put($method->code, $method);
-                } else {
-                    $this->response_methods->forget($method->code);
-                }
-            }
-        }
-
-        foreach ($this->methods as $method) {
-            if ($method->code == 'wspay' && $shipping == 'pickup') {
-                $this->response_methods->put($method->code, $method);
-            }
-        }
-
-        foreach ($this->methods as $method) {
-            if ($shipping == 'gls_eu' && $method->code == 'cod') {
-                $this->response_methods->forget($method->code);
-            }
-        }
-
-        return $this;
-    }
-
-
     /**
      * @return Collection
      */
@@ -254,45 +193,4 @@ class PaymentMethod
         return $providers;
     }
 
-
-    /*******************************************************************************
-    *                                Copyright : AGmedia                           *
-    *                              email: filip@agmedia.hr                         *
-    *******************************************************************************/
-
-
-    /**
-     * @return \Darryldecode\Cart\CartCondition|false
-     * @throws \Darryldecode\Cart\Exceptions\InvalidConditionException
-     */
-    public static function condition($cart = null)
-    {
-        $payment = false;
-        $condition = false;
-
-        if (CheckoutSession::hasPayment()) {
-            $payment = (new PaymentMethod())->find(CheckoutSession::getPayment());
-        }
-
-        if ($payment) {
-            $value = $payment->data->price;
-
-            if ($cart->getSubTotal() > config('settings.free_shipping') and $payment->geo_zone == 1) {
-                $value = 0;
-            }
-
-            $condition = new \Darryldecode\Cart\CartCondition(array(
-                'name' => 'Naknada za pouzeće',
-                'type' => 'payment',
-                'target' => 'total', // this condition will be applied to cart's subtotal when getSubTotal() is called.
-                'value' => '+' . $value ?: 0,
-                'attributes' => [
-                    'description' => $payment->data->short_description ?: '',
-                    'geo_zone' => $payment->geo_zone ?: 0
-                ]
-            ));
-        }
-
-        return $condition;
-    }
 }

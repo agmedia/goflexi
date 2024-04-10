@@ -4,27 +4,21 @@ namespace App\Models\Front\Checkout;
 
 use App\Helpers\Helper;
 use App\Models\Back\Orders\OrderHistory;
-use App\Models\Back\Orders\OrderProduct;
 use App\Models\Back\Orders\OrderTotal;
-use App\Models\Back\Settings\Settings;
+use App\Models\Front\Catalog\Option;
 use App\Models\Front\Catalog\Product;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class Order extends Model
+class Order
 {
 
     /**
-     * @var string[]
+     * @var \App\Models\Back\Orders\Order
      */
-    protected $fillable = ['order_status_id'];
-
-    /**
-     * @var array
-     */
-    public $order = [];
+    public $order;
 
     public $listing;
 
@@ -35,6 +29,10 @@ class Order extends Model
     public $additional_person = 0;
 
     public $additional_child = 0;
+
+    public $child_seat = 0;
+
+    public $baggage = 0;
 
     public $customer_message;
 
@@ -47,41 +45,43 @@ class Order extends Model
     public $request;
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function product()
+    public function __construct(Request $request = null)
     {
-        return $this->hasOne(Product::class, 'id', 'product_id');
-    }
-
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function totals()
-    {
-        return $this->hasMany(OrderTotal::class, 'order_id')->orderBy('sort_order');
+        if ($request) {
+            $this->setRequest($request);
+        }
     }
 
 
     public function setRequest(Request $request)
     {
         $this->request = $request;
-        $this->additional_person = $request->input('additional_person');
-        $this->additional_child = $request->input('additional_child');
-        $this->customer_message = $request->input('message');
 
-        $this->setPayment($request->input('payment'));
+        $this->additional_person = $this->request->input('additional_person');
+        $this->additional_child = $this->request->input('additional_child');
+        $this->customer_message = $this->request->input('message');
+
+        $this->setListing()
+             ->setPayment($this->request->input('payment'))
+             ->setCustomer()
+             ->setOptions()
+             ->setTotal();
     }
 
 
-    /**
-     * @param string $state
-     *
-     * @return Collection
-     */
-    private function setPayment(string $payment, string $state = 'Croatia')
+    private function setListing(int $id = null)
+    {
+        if ( ! $id) {
+            $id = $this->request->listing;
+        }
+
+        $this->listing = Product::query()->where('id', $id)->first();
+
+        return $this;
+    }
+
+
+    private function setPayment(string $payment = 'stripe', string $state = 'Croatia')
     {
         $geo = (new GeoZone())->findState($state);
 
@@ -105,68 +105,41 @@ class Order extends Model
     }
 
 
-    /**
-     * @param array $data
-     *
-     * @return bool
-     */
-    public function create(array $data = [])
+    private function setOptions()
     {
-        if ( ! empty($data)) {
-            $this->order = $data;
+        if ($this->request->has('option')) {
+            foreach ($this->request->input('option') as $option_id) {
+                $this->options[] = Option::query()->where('status', 1)->where('id', $option_id)->first();
+
+                if ($option_id == config('settings.options.child_seat')) {
+                    $this->child_seat = 1;
+                }
+
+                if ($option_id == config('settings.options.baggage')) {
+                    $this->baggage = 1;
+                }
+            }
         }
 
-        if ( ! empty($this->order) && isset($this->order['cart'])) {
-            $user_id = auth()->user() ? auth()->user()->id : 0;
+        return $this;
+    }
 
 
+    private function setTotal()
+    {
+        $this->total = $this->listing->price;
 
-            $order_id = \App\Models\Back\Orders\Order::insertGetId([
-                'product_id' => 0,
-                'user_id'          => $user_id,
-                'affiliate_id'     => 0,
-                'order_status_id'  => 1,
-                'invoice'          => '',
-                'total'            => $this->order['cart']['total'],
-                'invoice'          => '',
-                'invoice'          => '',
-                'invoice'          => '',
-                'invoice'          => '',
-                'invoice'          => '',
-                'payment_fname'    => $this->order['address']['fname'],
-                'payment_lname'    => $this->order['address']['lname'],
-                'payment_address'  => $this->order['address']['address'],
-                'payment_zip'      => $this->order['address']['zip'],
-                'payment_city'     => $this->order['address']['city'],
-                'payment_phone'    => $this->order['address']['phone'] ?: null,
-                'payment_email'    => $this->order['address']['email'],
-                'payment_method'   => $this->order['payment']->title->{current_locale()},
-                'payment_code'     => $this->order['payment']->code,
-                'payment_card'     => '',
-                'payment_installment' => '',
-                'hash' => 0,
-                'company'          => $this->order['address']['company'],
-                'oib'              => $this->order['address']['oib'],
-                'approved' => 0,
-                'approved_user_id' => 0,
-                'created_at'       => Carbon::now(),
-                'updated_at'       => Carbon::now()
-            ]);
+        if ($this->additional_person) {
+            $this->total += ($this->listing->price * $this->additional_person);
+        }
 
-            if ($order_id) {
-                // HISTORY
-                OrderHistory::insert([
-                    'order_id'   => $order_id,
-                    'user_id'    => $user_id,
-                    'comment'    => config('settings.order.made_text'),
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ]);
+        if ($this->additional_child) {
+            $this->total += ($this->listing->price_child * $this->additional_child);
+        }
 
-                $this->updateProducts($order_id);
-                $this->updateTotal($order_id);
-
-                $this->oc_data = \App\Models\Back\Orders\Order::where('id', $order_id)->first();
+        if ( ! empty($this->options)) {
+            foreach ($this->options as $option) {
+                $this->total += $option->price;
             }
         }
 
@@ -177,49 +150,64 @@ class Order extends Model
     /**
      * @param array $data
      *
-     * @return $this|null
+     * @return bool
      */
-    public function updateData(array $data)
+    public function create(int $status = null)
     {
-        if ( ! empty($data)) {
-            $this->order = $data;
+        if ( ! $status) {
+            $status = config('settings.order.status.unfinished');
         }
 
-        $updated = \App\Models\Back\Orders\Order::where('id', $data['id'])->update([
-            'payment_fname'    => $this->order['address']['fname'],
-            'payment_lname'    => $this->order['address']['lname'],
-            'payment_address'  => $this->order['address']['address'],
-            'payment_zip'      => $this->order['address']['zip'],
-            'payment_city'     => $this->order['address']['city'],
-            'payment_state'    => $this->order['address']['state'],
-            'payment_phone'    => $this->order['address']['phone'] ?: null,
-            'payment_email'    => $this->order['address']['email'],
-            'payment_method'   => $this->order['payment']->title->{current_locale()},
-            'payment_code'     => $this->order['payment']->code,
-            'payment_card'     => '',
-            'payment_installment' => '',
-            'shipping_fname'   => $this->order['address']['fname'],
-            'shipping_lname'   => $this->order['address']['lname'],
-            'shipping_address' => $this->order['address']['address'],
-            'shipping_zip'     => $this->order['address']['zip'],
-            'shipping_city'    => $this->order['address']['city'],
-            'shipping_state'   => $this->order['address']['state'],
-            'shipping_phone'   => $this->order['address']['phone'] ?: null,
-            'shipping_email'   => $this->order['address']['email'],
-            'shipping_method'  => $this->order['shipping']->title->{current_locale()},
-            'shipping_code'    => $this->order['shipping']->code,
-            'company'          => $this->order['address']['company'],
-            'oib'              => $this->order['address']['oib'],
-            'updated_at'       => Carbon::now()
+        $user_id = auth()->user() ? auth()->user()->id : 0;
+
+        $order_id = \App\Models\Back\Orders\Order::insertGetId([
+            'product_id'          => $this->listing->id,
+            'user_id'             => $user_id,
+            'affiliate_id'        => 0,
+            'order_status_id'     => $status,
+            'invoice'             => '',
+            'total'               => $this->total,
+            'adults'              => 1 + $this->additional_person,
+            'children'            => $this->additional_child,
+            'type'                => 'oneway',
+            'child_seat'          => $this->child_seat,
+            'baggage'             => $this->baggage,
+            'payment_fname'       => $this->customer['firstname'],
+            'payment_lname'       => $this->customer['lastname'],
+            'payment_address'     => '',
+            'payment_zip'         => '',
+            'payment_city'        => '',
+            'payment_phone'       => $this->customer['phone'],
+            'payment_email'       => $this->customer['email'],
+            'payment_method'      => $this->payment->title->{current_locale()},
+            'payment_code'        => $this->payment->code,
+            'payment_card'        => '',
+            'payment_installment' => 0,
+            'hash'                => 0,
+            'company'             => '',
+            'oib'                 => '',
+            'approved'            => 0,
+            'approved_user_id'    => 0,
+            'created_at'          => Carbon::now(),
+            'updated_at'          => Carbon::now()
         ]);
 
-        if ($updated) {
-            $this->updateTotal($data['id']);
+        if ($order_id) {
+            // HISTORY
+            OrderHistory::insert([
+                'order_id'   => $order_id,
+                'user_id'    => $user_id,
+                'comment'    => config('settings.order.made_text'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
 
-            return $this->setData($data['id']);
+            $this->updateTotal($order_id);
+
+            $this->order = \App\Models\Back\Orders\Order::where('id', $order_id)->first();
         }
 
-        return null;
+        return $this;
     }
 
 
@@ -234,25 +222,57 @@ class Order extends Model
         OrderTotal::insert([
             'order_id'   => $order_id,
             'code'       => 'subtotal',
-            'title'      => __('front/cart.ukupno'),
-            'value'      => $this->order['cart']['subtotal'],
+            'title'      => __('front/checkout.subtotal'),
+            'value'      => $this->listing->price,
             'sort_order' => 0,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
 
+        $sort_order = 1;
+
         // CONDITIONS on Total
-        foreach ($this->order['cart']['conditions'] as $name => $condition) {
-            if ($condition->getType() == 'payment') {
+        if ($this->additional_person) {
+            OrderTotal::insert([
+                'order_id'   => $order_id,
+                'code'       => 'option',
+                'title'      => __('front/checkout.option_additional_person'),
+                'value'      => ($this->additional_person * $this->listing->price),
+                'sort_order' => $sort_order,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+
+            $sort_order++;
+        }
+
+        if ($this->additional_child) {
+            OrderTotal::insert([
+                'order_id'   => $order_id,
+                'code'       => 'option',
+                'title'      => __('front/checkout.option_additional_child'),
+                'value'      => ($this->additional_child * $this->listing->price_child),
+                'sort_order' => $sort_order,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+
+            $sort_order++;
+        }
+
+        if ( ! empty($this->options)) {
+            foreach ($this->options as $option) {
                 OrderTotal::insert([
                     'order_id'   => $order_id,
-                    'code'       => 'payment',
-                    'title'      => $name,
-                    'value'      => $condition->parsedRawValue,
-                    'sort_order' => $condition->getOrder(),
+                    'code'       => 'option',
+                    'title'      => $option->title,
+                    'value'      => $option->price,
+                    'sort_order' => $sort_order,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ]);
+
+                $sort_order++;
             }
         }
 
@@ -260,15 +280,11 @@ class Order extends Model
         OrderTotal::insert([
             'order_id'   => $order_id,
             'code'       => 'total',
-            'title'      =>  __('front/cart.sveukupno'),
-            'value'      => $this->order['cart']['total'],
-            'sort_order' => 5,
+            'title'      =>  __('front/checkout.total'),
+            'value'      => $this->total,
+            'sort_order' => $sort_order,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
-        ]);
-
-        \App\Models\Back\Orders\Order::where('id', $order_id)->update([
-            'total' => $this->order['cart']['total']
         ]);
     }
 
@@ -279,9 +295,9 @@ class Order extends Model
     public function resolvePaymentForm()
     {
         if ($this->isCreated()) {
-            $method = new PaymentMethod($this->oc_data['payment_code']);
+            $method = new PaymentMethod($this->order->payment_code);
 
-            return $method->resolveForm($this->oc_data);
+            return $method->resolveForm($this->order);
         }
 
         return null;
@@ -310,7 +326,11 @@ class Order extends Model
      */
     public function isCreated(): bool
     {
-        return true;
+        if (isset($this->order->id)) {
+            return true;
+        }
+
+        return false;
     }
 
 
@@ -319,8 +339,10 @@ class Order extends Model
      */
     public function paymentNotRequired(): bool
     {
-        if (in_array($this->oc_data->payment_code, ['cod', 'bank'])) {
-            return true;
+        if (isset($this->order->id)) {
+            if (in_array($this->order->payment_code, ['cod', 'bank'])) {
+                return true;
+            }
         }
 
         return false;
