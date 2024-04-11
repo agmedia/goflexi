@@ -205,6 +205,8 @@
         jQuery(document).ready(function() {
             var adult_qty = 1;
             var child_qty = 0;
+            document.getElementById('qty-adult').value = adult_qty;
+            document.getElementById('qty-child').value = child_qty;
             document.getElementById('adult-price').innerText = price_adult.toFixed(2) + ' €';
             document.getElementById('child-price').innerText = price_child.toFixed(2) + ' €';
             document.getElementById('total-price').innerText = price_adult.toFixed(2) + ' €';
