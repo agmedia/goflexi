@@ -75,6 +75,7 @@
     <!-- Content -->
     <section id="content">
         <div class="content-wrap pb-0">
+            @include('front.layouts.partials.session')
             <!-- Odabir vožnje -->
             <div class="promo promo-full promo-border pt-3 pt-md-3 pb-4 pb-md-2 promo-dark header-stick mb-md-6 mb-4">
                 <div class="container">

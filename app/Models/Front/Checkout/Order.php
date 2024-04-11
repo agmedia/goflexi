@@ -189,7 +189,7 @@ class Order
             'adults'              => 1 + $this->additional_person,
             'children'            => $this->additional_child,
             'type'                => 'oneway',
-            'child_seat'          => $this->child_seat,
+            'child_seat'          => $this->child_seat_type,
             'baggage'             => $this->baggage,
             'payment_fname'       => $this->customer['firstname'],
             'payment_lname'       => $this->customer['lastname'],

@@ -200,11 +200,11 @@ class Checkout
 
     private function isAvailableDrive()
     {
+        $this->is_available_drive = true;
+
         if ($this->listing->quantity < (1 + $this->additional_person + $this->additional_child)) {
             $this->is_available_drive = false;
         }
-
-        $this->is_available_drive = true;
 
         return $this;
     }

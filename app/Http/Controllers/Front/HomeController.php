@@ -13,10 +13,10 @@ use App\Imports\ProductImport;
 use App\Mail\AdminOrderMade;
 use App\Mail\ContactFormMessage;
 use App\Mail\CustomerOrderMade;
-use App\Models\Back\Catalog\Product;
 use App\Models\Back\Settings\Settings;
 use App\Models\Front\Apartment\Apartment;
 use App\Models\Front\Catalog\Page;
+use App\Models\Front\Catalog\Product;
 use App\Models\Front\Checkout\Checkout;
 use App\Models\Front\Checkout\Order;
 use App\Models\Front\Checkout\Reservation;
@@ -58,8 +58,10 @@ class HomeController extends FrontBaseController
         $checkout = new Checkout($request);
         $customer = $checkout->resolveCustomer();
 
+        //dd($checkout);
+
         if ( ! $checkout->is_available_drive) {
-            return route('index')->with(['message' => 'Nažalost, Vaša vožnja više nema slobodnih mjesta..']);
+            return redirect()->route('index')->with(['message' => 'Nažalost, Vaša vožnja više nema slobodnih mjesta..']);
         }
         //dd($checkout);
 
@@ -70,6 +72,7 @@ class HomeController extends FrontBaseController
     public function payReservation(Request $request)
     {
         //dd($request->toArray());
+        //session()->forget('order_request');
 
         if (session()->has('order_request')) {
             $request = new Request(session()->get('order_request'));
@@ -78,7 +81,7 @@ class HomeController extends FrontBaseController
         $order = new Order($request);
 
         if ( ! $order->is_available_drive) {
-            return route('index')->with(['message' => 'Nažalost, Vaša vožnja više nema slobodnih mjesta..']);
+            return redirect()->route('index')->with(['message' => 'Nažalost, Vaša vožnja više nema slobodnih mjesta..']);
         }
 
         $order->create(config('settings.order.status.unfinished'));
@@ -97,13 +100,13 @@ class HomeController extends FrontBaseController
         Log::info($request->toArray());
 
         if ($request->has('order_id') && $request->input('order_id')) {
-            $order = \App\Models\Back\Orders\Order::query()->where('id', $request->input('order_id'))->first();
+            $order = Order::query()->where('id', $request->input('order_id'))->first();
 
             $order->update(['order_status_id' => config('settings.order.status.paid')]);
 
             $product = Product::query()->where('id', $order->product_id)->first();
 
-            $qty = $product->quantity - $order->adults - $order->children;
+            $qty = $product->quantity - ($order->adults + $order->children);
 
             $product->update(['quantity' => $qty]);
 

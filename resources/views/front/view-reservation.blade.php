@@ -195,6 +195,7 @@
 
 @push('js_after')
     <script>
+        const available_qty = {{ $reservation->listing->quantity }};
         const price_adult = {{ $reservation->listing->price }};
         const price_child = {{ $reservation->listing->price_child }};
         const time_modal = new bootstrap.Modal(document.getElementById('time-short'));
@@ -208,18 +209,32 @@
             document.getElementById('child-price').innerText = price_child.toFixed(2) + ' €';
             document.getElementById('total-price').innerText = price_adult.toFixed(2) + ' €';
 
-            console.log(price_adult, price_child)
+            console.log(available_qty)
 
             jQuery('#qty-adult').on('change', (ev) => {
-                adult_qty = ev.currentTarget.value;
+                adult_qty = checkAvailability(+ev.currentTarget.value + child_qty);
 
+                console.log(ev.currentTarget.value, child_qty, adult_qty)
+
+                if (available_qty < (adult_qty + child_qty)) {
+                    adult_qty = available_qty - child_qty;
+                }
+
+                document.getElementById('qty-adult').value = adult_qty;
                 document.getElementById('adult-price').innerText = (price_adult * adult_qty).toFixed(2) + ' €';
                 document.getElementById('total-price').innerText = ((price_adult * adult_qty) + (price_child * child_qty)).toFixed(2) + ' €';
             });
 
-            jQuery('#qty-child').on('change', (eve) => {
-                child_qty = eve.currentTarget.value;
+            jQuery('#qty-child').on('change', (ev) => {
+                child_qty = checkAvailability(+ev.currentTarget.value + adult_qty);
 
+                console.log(ev.currentTarget.value, adult_qty, child_qty)
+
+                if (available_qty < (adult_qty + child_qty)) {
+                    child_qty = available_qty - adult_qty;
+                }
+
+                document.getElementById('qty-child').value = child_qty;
                 document.getElementById('child-price').innerText = (price_child * child_qty).toFixed(2) + ' €';
                 document.getElementById('total-price').innerText = ((price_adult * adult_qty) + (price_child * child_qty)).toFixed(2) + ' €';
             });
@@ -228,5 +243,13 @@
                 time_modal.show();
             }, 10000);*/
         });
+
+        function checkAvailability(qty) {
+            if (available_qty < qty) {
+                return qty - 1;
+            }
+
+            return qty;
+        }
     </script>
 @endpush

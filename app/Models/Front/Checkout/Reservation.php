@@ -50,7 +50,7 @@ class Reservation
 
     public function getAvailableSeats()
     {
-        $this->seats = 8;
+        $this->seats = $this->listing->quantity;
 
         return $this;
     }
