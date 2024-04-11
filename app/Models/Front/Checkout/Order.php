@@ -99,6 +99,7 @@ class Order
             'lastname'  => $this->request->input('lastname'),
             'phone'     => $this->request->input('phone'),
             'email'     => $this->request->input('email'),
+            'comment'     => $this->request->input('message'),
         ];
 
         return $this;

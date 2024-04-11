@@ -26,10 +26,10 @@
             <form id="form-cleaning" name="form-cleaning" action="{{ route('checkout') }}" method="post" class="row form-cleaning mb-0 mb-md-1">
                 @csrf
 
-                <div class="container">
-                    <div class="row">
+                <div class="container mx-3">
+                    <div class="row ">
                         <div class="col-12 col-lg mt-3">
-                            <h3 class="mb-3 color">Your Reservation</h3>
+                            <h3 class="mb-3 color">{{ __('front/checkout.your_reservation') }}</h3>
                         </div>
                     </div>
                     <table class="table bg-light cart mb-4">
@@ -146,23 +146,33 @@
                     </div>
 
 
+                    {{--    @if(!$reservation->options->isEmpty())
                     <div class="card bg-light border-0 p-3">
                         <div class="card-body">
                             <div class="row col-mb-30">
                                 <div class="col-lg-6">
                                     OPTIONS:<br><br>
                                     @foreach ($reservation->options as $option)
-                                        <label for="option">{{ $option->title }}</label>
-                                        <input type="checkbox" value="{{ $option->id }}" name="option[{{ $option->id }}]">
-                                        <p>{{ $option->toJson() }}</p>
+                                        <div class="form-group">
+                                            <input type="checkbox" value="{{ $option->id }}" name="option[{{ $option->id }}]">
+                                        <label for="option">{{ $option->title }} - {{  number_format($option->price, 2)}}€ </label>
+
+                                            @if($option->description)
+                                            <br><small id="option[{{ $option->id }}]" class="form-text text-muted">{{ $option->description}}</small>
+                                            @endif
+                                        </div>
+
+
+                              {{  <p>{{ $option->toJson() }}</p>}}
                                     @endforeach
-                                </div>
+
                                 <div class="col-lg-6">
 
                                 </div>
                             </div>
                         </div>
                     </div>
+                        @endif --}}
 
                 </div>
 
@@ -193,6 +203,10 @@
         const time_modal = new bootstrap.Modal(document.getElementById('time-short'));
 
         jQuery(document).ready(function() {
+
+
+
+
             document.getElementById('adult-price').innerText = price_adult.toFixed(2) + ' €';
             document.getElementById('child-price').innerText = price_child.toFixed(2) + ' €';
             document.getElementById('total-price').innerText = price_adult.toFixed(2) + ' €';

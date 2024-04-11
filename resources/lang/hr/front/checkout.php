@@ -72,5 +72,6 @@ return [
         'btn_next' => 'Dalje'
     ],
     'day' => 'Plaćanje po danu',
-    'onetime' => 'Jednokratno plaćanje'
+    'onetime' => 'Jednokratno plaćanje',
+    ''
 ];
