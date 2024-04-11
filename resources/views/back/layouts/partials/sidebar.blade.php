@@ -39,7 +39,7 @@
                     </a>
                     <ul class="pc-submenu">
                         {{--<li class="pc-item"><a class="pc-link" href="#">{{ __('Payments') }}</a></li>--}}
-                        <li class="pc-item{{ request()->routeIs(['orders', 'orders.*']) ? ' active' : '' }}"><a class="pc-link" href="{{ route('orders') }}">{{ __('Orders') }}</a></li>
+{{--                        <li class="pc-item{{ request()->routeIs(['orders', 'orders.*']) ? ' active' : '' }}"><a class="pc-link" href="{{ route('orders') }}">{{ __('Orders') }}</a></li>--}}
                         <li class="pc-item{{ request()->routeIs(['calendar', 'calendar.*']) ? ' active' : '' }}"><a class="pc-link" href="{{ route('calendar') }}">{{ __('Drives') }}</a></li>
                     </ul>
                 </li>
