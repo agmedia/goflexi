@@ -12,10 +12,22 @@
                 </div>
 
                 <div class="header-misc">
-                    <div class="header-misc-icon ms-5">
+                    <div class="header-misc-icon ms-1">
                         <a rel="alternate" hreflang="en"
-                           href="#">
+                           href="/en">
                             <img src="https://www.optimatransfer.com/media/flags/en.png" />
+                        </a>
+
+
+                    </div>
+                </div>
+
+                <div class="header-misc">
+                    <div class="header-misc-icon ms-1">
+
+                        <a rel="alternate" hreflang="hr"
+                           href="/hr">
+                            <img src="https://www.optimatransfer.com/media/flags/hr.png" />
                         </a>
                     </div>
                 </div>
