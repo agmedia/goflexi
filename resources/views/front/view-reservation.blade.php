@@ -101,7 +101,7 @@
                                             <td class="cart-product-quantity bg-light">
                                                 <div class="quantity">
                                                     <input type="button" value="-" class="minus">
-                                                    <input type="text" name="quantity_adult" value="1" class="qty" id="qty-adult">
+                                                    <input type="text" name="quantity_adult" value="1" class="qty" id="qty-adult" max="{{ $reservation->seats }}">
                                                     <input type="button" value="+" class="plus">
                                                 </div>
                                             </td>
@@ -116,7 +116,7 @@
                                             <td class="cart-product-quantity bg-light">
                                                 <div class="quantity">
                                                     <input type="button" value="-" class="minus">
-                                                    <input type="text" name="quantity_child" value="0" class="qty" id="qty-child">
+                                                    <input type="text" name="quantity_child" value="0" class="qty" id="qty-child" max="2">
                                                     <input type="button" value="+" class="plus">
                                                 </div>
                                             </td>

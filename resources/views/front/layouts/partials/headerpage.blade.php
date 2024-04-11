@@ -28,22 +28,22 @@
 
                 <!-- Primary Navigation -->
                 <nav class="primary-menu">
-                    <ul class="one-page-menu menu-container" data-easing="easeInOutExpo" data-speed="1250" data-offset="60">
+                    <ul class=" menu-container" data-easing="easeInOutExpo" data-speed="1250" data-offset="60">
                         <li class="menu-item">
-                            <a href="#" class="menu-link" data-href="#wrapper"><div>Naslovnica</div></a>
+                            <a href="{{ route('index') }}" class="menu-link" data-href="#wrapper"><div>{{ __('front/apartment.home') }}</div></a>
                         </li>
                         <li class="menu-item">
-                            <a href="#" class="menu-link" data-href="#vozni-red" data-offset="100"><div>Vozni red</div></a>
+                            <a href="{{ route('index') }}" class="menu-link" data-href="#vozni-red" data-offset="100"><div>{{ __('front/apartment.vozni_red') }}</div></a>
                         </li>
                         <li class="menu-item">
-                            <a href="#" class="menu-link" data-href="#onama"><div>O nama</div></a>
+                            <a href="{{ route('index') }}" class="menu-link" data-href="#onama"><div>{{ __('front/apartment.o_nama') }}</div></a>
                         </li>
                         <li class="menu-item">
-                            <a href="#" class="menu-link" data-href="#faq"><div>FAQ</div></a>
+                            <a href="{{ route('index') }}" class="menu-link" data-href="#faq"><div>{{ __('front/apartment.faq') }}</div></a>
                         </li>
 
                         <li class="menu-item">
-                            <a href="#" class="menu-link" data-href="#contact"><div>Kontakt</div></a>
+                            <a href="{{ route('index') }}" class="menu-link" data-href="#contact"><div>{{ __('front/apartment.kontakt') }}</div></a>
                         </li>
                     </ul>
                 </nav>
