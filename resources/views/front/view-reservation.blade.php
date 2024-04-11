@@ -22,7 +22,7 @@
 
     <!-- Content -->
     <section id="content">
-        <div class="content-wrap pt-3 pt-md-6">
+        <div class="container content-wrap pt-3 pt-md-6">
             <form id="form-cleaning" name="form-cleaning" action="{{ route('checkout') }}" method="post" class="row form-cleaning mb-0 mb-md-1">
                 @csrf
 
