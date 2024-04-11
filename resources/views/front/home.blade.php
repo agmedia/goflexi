@@ -59,7 +59,6 @@
                 <div class="container py-5">
                     <div class="emphasis-title">
                         <p class="lead d-block fs-3 mb-2" data-animate="fadeInUp">{{ __('front/apartment.main_title_1') }}</p>
-
                         <h3 class="fs-1" data-animate="fadeInUp" data-delay="200">{{ __('front/apartment.main_title_2') }}</h3>
                     </div>
                 </div>
@@ -81,7 +80,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12 col-lg">
-                            <h3 class="mb-3">Rezervirajte kartu online</h3>
+                            <h3 class="mb-3">{{ __('front/apartment.rezerviraj_kartu') }}</h3>
                         </div>
                     </div>
                     <div class="row align-items-center">
@@ -103,7 +102,7 @@
                                         <div class="input-group form-group">
                                             <span class="input-group-text bg-color text-white"><i class="bi-pin"></i></span>
                                             <select class="required" name="polazak" id="polazak">
-                                                <option value="" disabled selected>Odaberite mjesto polaska</option>
+                                                <option value="" disabled selected>{{ __('front/apartment.odaberite_mjesto_polaska') }}</option>
                                                 <option value="Zagreb">Zagreb</option>
                                                 <option value="Split">Split</option>
                                                 <option value="Rijeka">Rijeka</option>
@@ -115,7 +114,7 @@
                                         <div class="input-group form-group">
                                             <span class="input-group-text bg-color text-white"><i class="bi-pin"></i></span>
                                             <select class="required" name="dolazak" id="dolazak">
-                                                <option value="" disabled selected>Odaberite lokaciju dolaska</option>
+                                                <option value="" disabled selected>{{ __('front/apartment.odaberite_mjesto_dolaska') }}</option>
                                                 <option value="Zagreb">Zagreb</option>
                                                 <option value="Split">Split</option>
                                                 <option value="Rijeka">Rijeka</option>
@@ -128,13 +127,13 @@
                                             <span class="input-group-text bg-color text-white"><i class="bi-calendar-week"></i></span>
                                             {{--<input type="text" class="form-control cleaning-date datetimepicker-input required" name="datum" id="datum" value="Odaberite datum polaskae" readonly>--}}
                                             <select class="required" name="listing" id="listing" data-size="5">
-                                                <option value="" disabled selected>Odaberite datum polaska</option>
+                                                <option value="" disabled selected>{{ __('front/apartment.odaberite_datum_polaska') }}</option>
                                             </select>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-2 col-md-4">
-                                        <button type="submit" name="form-cleaning-submit" class="btn bg-color text-white fw-semibold w-100 mt-0">Rezerviraj</button>
+                                        <button type="submit" name="form-cleaning-submit" class="btn bg-color text-white fw-semibold w-100 mt-0">{{ __('front/apartment.rezerviraj') }}</button>
                                     </div>
 
                                 </form>
@@ -148,7 +147,7 @@
             <!-- vozni red -->
             <div class="container-fluid" id="vozni-red">
                 <div class="text-center mb-md-5 mb-3">
-                    <h2 class="h1">Vozni red</h2>
+                    <h2 class="h1">{{ __('front/apartment.vozni_red') }}</h2>
                 </div>
                 <div class="row col-mb-50">
 
@@ -159,9 +158,9 @@
                                 <div class="flip-card-inner">
                                     <div class="card-header text-primary fs-3">Zagreb - Rijeka - Zagreb</div>
                                     <div class="card-body">
-                                        <p class="card-text mb-3 text-contrast-500">Utorkom, četvrtkom i subotom.</p>
+                                        <p class="card-text mb-3 text-contrast-500">{{ __('front/apartment.usc') }}</p>
                                         <ul class="iconlist mb-0">
-                                            <li><i class="bi-clock-fill"></i> Polasci iz Zagreba preme Rijeci u 10:00, a iz Rijeke prema Zagrebu u 12:00 sati.</li>
+                                            <li><i class="bi-clock-fill"></i> {{ __('front/apartment.usct') }}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -170,9 +169,9 @@
                                 <div class="flip-card-inner">
                                     <div class="card-header text-white fs-3">Zagreb - Rijeka - Zagreb</div>
                                     <div class="card-body">
-                                        <p class="card-text mb-3 text-white">Utorkom, četvrtkom i subotom.</p>
+                                        <p class="card-text mb-3 text-white">{{ __('front/apartment.usc') }}</p>
                                         <ul class="iconlist mb-0">
-                                            <li><i class="bi-clock-fill text-white"></i> Polasci iz Zagreba preme Rijeci u 10:00, a iz Rijeke prema Zagrebu u 12:00 sati.</li>
+                                            <li><i class="bi-clock-fill text-white"></i>{{ __('front/apartment.usct') }}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -185,9 +184,9 @@
                                 <div class="flip-card-inner">
                                     <div class="card-header text-primary fs-3">Zagreb - Split - Zagreb</div>
                                     <div class="card-body">
-                                        <p class="card-text mb-3 text-contrast-500">Ponedjeljkom, srijedom i petkom.</p>
+                                        <p class="card-text mb-3 text-contrast-500">{{ __('front/apartment.psp') }}</p>
                                         <ul class="iconlist mb-0">
-                                            <li><i class="bi-clock-fill"></i> Polasci iz Zagreba preme Splituy u 10:00, a iz Splita prema Zagrebu u 16:00 sati.</li>
+                                            <li><i class="bi-clock-fill"></i>{{ __('front/apartment.pspt') }}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -196,9 +195,9 @@
                                 <div class="flip-card-inner">
                                     <div class="card-header text-white fs-3">Zagreb - Split - Zagreb</div>
                                     <div class="card-body">
-                                        <p class="card-text mb-3 text-white">Ponedjeljkom, srijedom i petkom.</p>
+                                        <p class="card-text mb-3 text-white">{{ __('front/apartment.psp') }}</p>
                                         <ul class="iconlist mb-0">
-                                            <li><i class="bi-clock-fill text-white"></i> Polasci iz Zagreba preme Splituy u 10:00, a iz Splita prema Zagrebu u 16:00 sati.</li>
+                                            <li><i class="bi-clock-fill text-white"></i> {{ __('front/apartment.pspt') }}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -221,14 +220,12 @@
                                 </div>
 
                                 <div class="accordion-title">
-                                    POLAZIŠTE ZAGREB   <a data-href="https://www.google.com/maps/place/GoFlexi+Point+Zagreb/@45.8010156,15.9769545,17z/data=!3m1!4b1!4m6!3m5!1s0x4765d7f47432c9e7:0xdc58e09f8ea85ddc!8m2!3d45.8010156!4d15.9795294!16s%2Fg%2F11v3m9w8dc?authuser=0&entry=ttu" onclick="window.open(this.getAttribute('data-href')); return false;" class="fw-medium float-end"><i class="uil uil-map-marker"></i> Prikaži na karti</a>
+                                    {{ __('front/apartment.polaziste') }} ZAGREB   <a data-href="https://www.google.com/maps/place/GoFlexi+Point+Zagreb/@45.8010156,15.9769545,17z/data=!3m1!4b1!4m6!3m5!1s0x4765d7f47432c9e7:0xdc58e09f8ea85ddc!8m2!3d45.8010156!4d15.9795294!16s%2Fg%2F11v3m9w8dc?authuser=0&entry=ttu" onclick="window.open(this.getAttribute('data-href')); return false;" class="fw-medium float-end"><i class="uil uil-map-marker"></i> {{ __('front/apartment.show_on_map') }}</a>
                                 </div>
                             </div>
                             <div class="accordion-content p-4">
-                                Koncertna dvorana Vatroslav Lisinski <br>
-                                Trg Stjepana Radića<br>
-                                Ugibalište ispred glavnog ulaza<br>
-                                <a href="https://www.google.com/maps/place/GoFlexi+Point+Zagreb/@45.8010156,15.9769545,17z/data=!3m1!4b1!4m6!3m5!1s0x4765d7f47432c9e7:0xdc58e09f8ea85ddc!8m2!3d45.8010156!4d15.9795294!16s%2Fg%2F11v3m9w8dc?authuser=0&entry=ttu" target="_blank" class="fw-medium ">Prikaži na karti</a>
+                                {!!  __('front/apartment.ppz') !!}
+                                <a href="https://www.google.com/maps/place/GoFlexi+Point+Zagreb/@45.8010156,15.9769545,17z/data=!3m1!4b1!4m6!3m5!1s0x4765d7f47432c9e7:0xdc58e09f8ea85ddc!8m2!3d45.8010156!4d15.9795294!16s%2Fg%2F11v3m9w8dc?authuser=0&entry=ttu" target="_blank" class="fw-medium ">{{ __('front/apartment.show_on_map') }}</a>
                             </div>
 
 
@@ -239,14 +236,12 @@
                                     <i class="accordion-open bi-caret-up-fill"></i>
                                 </div>
                                 <div class="accordion-title">
-                                    POLAZIŠTE RIJEKA   <a data-href="https://www.google.com/maps/place/GoFlexi+Point+Rijeka/@45.3249641,14.4412363,17z/data=!3m1!4b1!4m6!3m5!1s0x4764a1006c377e15:0x662a9a7ea40f59fe!8m2!3d45.3249641!4d14.4438112!16s%2Fg%2F11vrclf0g9?authuser=0&entry=ttu"  class="fw-medium float-end" onclick="window.open(this.getAttribute('data-href')); return false;"><i class="uil uil-map-marker"></i> Prikaži na karti</a>
+                                    {{ __('front/apartment.polaziste') }} RIJEKA   <a data-href="https://www.google.com/maps/place/GoFlexi+Point+Rijeka/@45.3249641,14.4412363,17z/data=!3m1!4b1!4m6!3m5!1s0x4764a1006c377e15:0x662a9a7ea40f59fe!8m2!3d45.3249641!4d14.4438112!16s%2Fg%2F11vrclf0g9?authuser=0&entry=ttu"  class="fw-medium float-end" onclick="window.open(this.getAttribute('data-href')); return false;"><i class="uil uil-map-marker"></i> {{ __('front/apartment.show_on_map') }}</a>
                                 </div>
                             </div>
                             <div class="accordion-content p-4">
-                                Autobusna postaja Tržnica <br>
-                                Ulica Ivana Zajca<br>
-                                Kod Kazališnog parka<br>
-                                <a href="https://www.google.com/maps/place/GoFlexi+Point+Rijeka/@45.3249641,14.4412363,17z/data=!3m1!4b1!4m6!3m5!1s0x4764a1006c377e15:0x662a9a7ea40f59fe!8m2!3d45.3249641!4d14.4438112!16s%2Fg%2F11vrclf0g9?authuser=0&entry=ttu" target="_blank" class="fw-medium ">Prikaži na karti</a>
+                                {!!  __('front/apartment.ppr') !!}
+                                <a href="https://www.google.com/maps/place/GoFlexi+Point+Rijeka/@45.3249641,14.4412363,17z/data=!3m1!4b1!4m6!3m5!1s0x4764a1006c377e15:0x662a9a7ea40f59fe!8m2!3d45.3249641!4d14.4438112!16s%2Fg%2F11vrclf0g9?authuser=0&entry=ttu" target="_blank" class="fw-medium ">{{ __('front/apartment.show_on_map') }}</a>
                             </div>
 
 
@@ -257,14 +252,12 @@
                                     <i class="accordion-open bi-caret-up-fill"></i>
                                 </div>
                                 <div class="accordion-title">
-                                    POLAZIŠTE SPLIT   <a data-href="https://www.google.com/maps/place/GoFlexi+Point+Split/@43.5206858,16.4453669,17z/data=!3m1!4b1!4m6!3m5!1s0x13355f0bbf2c367f:0x53f2f4e887260500!8m2!3d43.5206858!4d16.4479418!16s%2Fg%2F11v3ynn5l6?authuser=0&entry=ttu" onclick="window.open(this.getAttribute('data-href')); return false;" class="fw-medium float-end"><i class="uil uil-map-marker"></i> Prikaži na karti</a>
+                                    {{ __('front/apartment.polaziste') }} SPLIT   <a data-href="https://www.google.com/maps/place/GoFlexi+Point+Split/@43.5206858,16.4453669,17z/data=!3m1!4b1!4m6!3m5!1s0x13355f0bbf2c367f:0x53f2f4e887260500!8m2!3d43.5206858!4d16.4479418!16s%2Fg%2F11v3ynn5l6?authuser=0&entry=ttu" onclick="window.open(this.getAttribute('data-href')); return false;" class="fw-medium float-end"><i class="uil uil-map-marker"></i> {{ __('front/apartment.show_on_map') }}</a>
                                 </div>
                             </div>
                             <div class="accordion-content p-4">
-                                Autobusna stanica<br>
-                                Put Supavla – Brodarica<br>
-                                Preko puta trgovačkog centra Joker<br>
-                                <a href="https://www.google.com/maps/place/GoFlexi+Point+Split/@43.5206858,16.4453669,17z/data=!3m1!4b1!4m6!3m5!1s0x13355f0bbf2c367f:0x53f2f4e887260500!8m2!3d43.5206858!4d16.4479418!16s%2Fg%2F11v3ynn5l6?authuser=0&entry=ttu" target="_blank" class="fw-medium ">Prikaži na karti</a>
+                                {!!  __('front/apartment.pps') !!}
+                                <a href="https://www.google.com/maps/place/GoFlexi+Point+Split/@43.5206858,16.4453669,17z/data=!3m1!4b1!4m6!3m5!1s0x13355f0bbf2c367f:0x53f2f4e887260500!8m2!3d43.5206858!4d16.4479418!16s%2Fg%2F11v3ynn5l6?authuser=0&entry=ttu" target="_blank" class="fw-medium ">{{ __('front/apartment.show_on_map') }}</a>
                             </div>
 
 
@@ -284,10 +277,12 @@
 
                         <div class="col-lg-6 p-md-5 p-3 ">
                             <div class="heading-block border-bottom-0">
-                                <h3><span class="text-primary">GoFlexi</span> je moderna platforma specijalizirana za kombi prijevoz putnika.</h3>
+
+                                {!!  __('front/apartment.onama_txt') !!}
                             </div>
-                            <p >Namjera nam je pružiti vrhunski, udoban i siguran prijevoz poštujući želje klijenata.</p>
-                            <p class=" mb-0">Udobnost naših vozila omogućuje putnicima da prijevoz dožive sa potpunom lakoćom, a naša je obaveza osigurati siguran transfer i ugodnost putovanja našim klijentima.</p>
+
+                            {!!  __('front/apartment.onama_txt_lg') !!}
+
                         </div>
                     </div>
 
@@ -298,7 +293,7 @@
                                     <a href="#"><i class="fa-solid fa-drivers-license"></i></a>
                                 </div>
                                 <div class="fbox-content">
-                                    <p >Naši vozači su licencirani profesionalci sa višegodišnjim iskustvom prijevoza putnika u domaćem i međunarodnom prometu.</p>
+                                    <p >{{ __('front/apartment.list_1') }}</p>
                                 </div>
                             </div>
 
@@ -307,7 +302,7 @@
                                     <a href="#"><i class="fa-solid fa-van-shuttle"></i></a>
                                 </div>
                                 <div class="fbox-content">
-                                    <p >Sva naša vozila su neupitne kvalitete, sa ugrađenim klima uređajem i besplatnim wi-fi internetom u putničkom prostoru.</p>
+                                    <p >{{ __('front/apartment.list_2') }}</p>
                                 </div>
                             </div>
 
@@ -316,7 +311,7 @@
                                     <a href="#"><i class="fa-solid fa-award"></i></a>
                                 </div>
                                 <div class="fbox-content">
-                                    <p class="mb-0">Pružamo profesionalnu uslugu prijevoza putničkim kombi vozilima na liniji Zagreb – Split – Zagreb te Zagreb – Rijeka - Zagreb. Uslugu prijevoza vršimo putničkim kombi vozilima 8+1 sjedala.</p>
+                                    <p class="mb-0">{{ __('front/apartment.list_3') }}/p>
                                 </div>
                             </div>
                         </div>
