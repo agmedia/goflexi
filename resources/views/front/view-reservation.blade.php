@@ -203,10 +203,8 @@
         const time_modal = new bootstrap.Modal(document.getElementById('time-short'));
 
         jQuery(document).ready(function() {
-
-
-
-
+            var adult_qty = 1;
+            var child_qty = 0;
             document.getElementById('adult-price').innerText = price_adult.toFixed(2) + ' €';
             document.getElementById('child-price').innerText = price_child.toFixed(2) + ' €';
             document.getElementById('total-price').innerText = price_adult.toFixed(2) + ' €';
@@ -214,24 +212,22 @@
             console.log(price_adult, price_child)
 
             jQuery('#qty-adult').on('change', (ev) => {
-                let qty = ev.currentTarget.value;
+                adult_qty = ev.currentTarget.value;
 
-                document.getElementById('adult-price').innerText = (price_adult * qty).toFixed(2) + ' €';
-                document.getElementById('total-price').innerText = (price_adult * qty).toFixed(2) + ' €';
+                document.getElementById('adult-price').innerText = (price_adult * adult_qty).toFixed(2) + ' €';
+                document.getElementById('total-price').innerText = (price_adult * adult_qty).toFixed(2) + ' €';
             });
 
             jQuery('#qty-child').on('change', (eve) => {
-                let qty = eve.currentTarget.value;
+                child_qty = eve.currentTarget.value;
 
-                console.log(price_adult, price_child)
-
-                document.getElementById('child-price').innerText = (price_child * qty).toFixed(2) + ' €';
-                document.getElementById('total-price').innerText = ((price_adult * qty) + (price_child * qty)).toFixed(2) + ' €';
+                document.getElementById('child-price').innerText = (price_child * child_qty).toFixed(2) + ' €';
+                document.getElementById('total-price').innerText = ((price_adult * adult_qty) + (price_child * child_qty)).toFixed(2) + ' €';
             });
 
-            setTimeout(() => {
+            /*setTimeout(() => {
                 time_modal.show();
-            }, 10000);
+            }, 10000);*/
         });
     </script>
 @endpush
