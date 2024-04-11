@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Back\Sales;
 
+use App\Models\Back\Catalog\Product;
 use App\Models\Back\Orders\Order;
 use App\Models\Back\Settings\Settings;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -16,6 +17,8 @@ class OrdersList extends Component
     public $list = [];
 
     public $drives = [];
+
+    public $customers = [];
 
     public $customer = null;
 
@@ -37,6 +40,7 @@ class OrdersList extends Component
     {
         if ( ! empty($this->list)) {
             $this->statuses = Settings::get('order', 'statuses');
+            $this->drives = $this->getDrives();
         }
     }
 
@@ -44,7 +48,7 @@ class OrdersList extends Component
     public function selectDrive($key)
     {
         if (isset($this->list[$key])) {
-            $this->drives = $this->getOrders($key);
+            $this->customers = $this->getCustomers($key);
         }
 
         $this->dispatch('drives_selected');
@@ -66,21 +70,31 @@ class OrdersList extends Component
 
             $order->completeDelete();
 
-            $this->drives = $this->getOrders($product_id);
+            $this->customers = $this->getCustomers($product_id);
         }
     }
 
 
-    public function updatingSearchOrders(string $value)
+    public function updatingSearchCustomers(string $value)
     {
-        $this->drives = Order::query()->where(function ($query) use ($value) {
+        $this->customers = Order::query()->where(function ($query) use ($value) {
             $query->where('id', 'like', '%' . $value . '%')
                   ->orWhere('payment_fname', 'like', '%' . $value . '%')
                   ->orWhere('payment_lname', 'like', '%' . $value . '%')
                   ->orWhere('payment_email', 'like', '%' . $value . '%');
         })
-                                      ->where('order_status_id', config('settings.order.status.paid'))
-                                      ->get();
+                             ->where('order_status_id', config('settings.order.status.paid'))
+                             ->get();
+    }
+
+
+    public function updatingSearchDrives(string $value)
+    {
+        $this->drives = Product::query()->where(function ($query) use ($value) {
+            $query->whereHas('translations', function ($subquery) use ($value) {
+                $subquery->where('title', 'like', '%' . $value . '%');
+            });
+        })->get();
     }
 
 
@@ -93,16 +107,23 @@ class OrdersList extends Component
             'list' => $this->list,
             'statuses' => $this->statuses,
             'drives' => $this->drives,
+            'customers' => $this->customers,
             'customer' => $this->customer
         ]);
     }
 
 
-    private function getOrders(int $product_id)
+    private function getCustomers(int $product_id)
     {
         return Order::query()->where('product_id', $product_id)
                              ->where('order_status_id', config('settings.order.status.paid'))
                              ->get();
+    }
+
+
+    private function getDrives()
+    {
+        return Product::query()->where('quantity', '<', 8)->where('start_time', '>', now())->get();
     }
 
 }

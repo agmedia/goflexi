@@ -15,32 +15,30 @@
                                     <h5 class="mb-4">Drives <span class="avtar avtar-xs bg-light-primary rounded-circle">{{ count($list) }}</span></h5>
                                     <div class="form-search">
                                         <i class="ti ti-search"></i>
-                                        <input type="search" class="form-control" placeholder="Search Drives">
+                                        <input type="search" wire:model.live="search_drives" class="form-control" placeholder="Search Drives">
                                     </div>
                                 </div>
                                 <div class="scroll-block">
                                     <div class="card-body p-0">
                                         <div class="list-group list-group-flush">
-                                            @foreach ([1, 2, 3, 4] as $user)
-                                                @foreach ($list as $key => $item)
-                                                    <a href="javascript:void(0)" wire:click="selectDrive({{ $key }})" class="list-group-item list-group-item-action p-3">
-                                                        <div class="media align-items-center">
-                                                            <div class="chat-avtar">
-                                                                <img class="rounded-circle img-fluid wid-40" src="{{ asset($item['listing']->image) }}"
-                                                                     alt="User image">
-                                                                <div class="bg-success chat-badge"></div>
-                                                            </div>
-                                                            <div class="media-body mx-2">
-                                                                <h6 class="mb-0">{{ $item['listing']->translation()->title }} <span class="float-end text-sm text-muted f-w-400">2h ago</span></h6>
-                                                                <span class="text-sm text-muted">{{ \Illuminate\Support\Carbon::make($item['listing']->start_time)->format('d.m.Y h:i a') }}
-                                                                <span class="float-end">
-                                                                    <span class="chat-badge-status bg-primary text-white">{{ count($item['items']) }}</span>
-                                                                </span>
-                                                            </span>
-                                                            </div>
+                                            @foreach ($drives as $item)
+                                                <a href="javascript:void(0)" wire:click="selectDrive({{ $item->id }})" class="list-group-item list-group-item-action p-3">
+                                                    <div class="media align-items-center">
+                                                        <div class="chat-avtar">
+                                                            <img class="rounded-circle img-fluid wid-40" src="{{ asset($item->image) }}"
+                                                                 alt="User image">
+                                                            <div class="bg-success chat-badge"></div>
                                                         </div>
-                                                    </a>
-                                                @endforeach
+                                                        <div class="media-body mx-2">
+                                                            <h6 class="mb-0">{{ $item->translation()->title }} {{--<span class="float-end text-sm text-muted f-w-400">2h ago</span>--}}</h6>
+                                                            <span class="text-sm text-muted">{{ \Illuminate\Support\Carbon::make($item->start_time)->format('d.m.Y h:i a') }}
+{{--                                                                <span class="float-end">--}}
+{{--                                                                    <span class="chat-badge-status bg-primary text-white">{{ count($item['items']) }}</span>--}}
+{{--                                                                </span>--}}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             @endforeach
                                         </div>
                                     </div>
@@ -56,20 +54,20 @@
                     <div class="card-header p-3">
                         <div class="d-flex align-items-center">
                             <ul class="list-inline me-auto mb-0">
-                                <li class="list-inline-item align-bottom">
-                                    <a href="#" class="d-xxl-none avtar avtar-s btn-link-secondary" data-bs-toggle="offcanvas"
-                                       data-bs-target="#offcanvas_User_list">
-                                        <i class="ti ti-menu-2 f-18"></i>
-                                    </a>
-                                    <a href="#" class="d-none d-xxl-inline-flex avtar avtar-s btn-link-secondary"
-                                       data-bs-toggle="collapse" data-bs-target="#chat-user_list">
-                                        <i class="ti ti-menu-2 f-18"></i>
-                                    </a>
-                                </li>
+{{--                                <li class="list-inline-item align-bottom">--}}
+{{--                                    <a href="#" class="d-xxl-none avtar avtar-s btn-link-secondary" data-bs-toggle="offcanvas"--}}
+{{--                                       data-bs-target="#offcanvas_User_list">--}}
+{{--                                        <i class="ti ti-menu-2 f-18"></i>--}}
+{{--                                    </a>--}}
+{{--                                    <a href="#" class="d-none d-xxl-inline-flex avtar avtar-s btn-link-secondary"--}}
+{{--                                       data-bs-toggle="collapse" data-bs-target="#chat-user_list">--}}
+{{--                                        <i class="ti ti-menu-2 f-18"></i>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
                                 <li class="list-inline-item">
                                     <div class="media align-items-center">
                                         <div class="media-body mx-3 d-none d-sm-inline-block">
-                                            <h5>Customers <span class="avtar avtar-xs bg-light-primary rounded-circle">{{ count($drives) }}</span></h5>
+                                            <h5>Customers <span class="avtar avtar-xs bg-light-primary rounded-circle">{{ count($customers) }}</span></h5>
                                         </div>
                                     </div>
                                 </li>
@@ -78,7 +76,7 @@
                                 <li class="list-inline-item">
                                     <div class="form-search">
                                         <i class="ti ti-search"></i>
-                                        <input type="search" wire:model.live="search_orders" class="form-control" placeholder="Search Orders & Customers">
+                                        <input type="search" wire:model.live="search_customers" class="form-control" placeholder="Search Orders & Customers">
                                     </div>
                                 </li>
                             </ul>
@@ -98,7 +96,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($drives as $order)
+                                    @foreach ($customers as $order)
                                         <tr>
                                             <td class="text-center">
                                                 <strong>{{ $order->id }}</strong>
@@ -199,9 +197,9 @@
                                             <a href="javascript:void(0)" wire:click="destroyCustomer({{ $customer['id'] }})" class="btn btn-danger d-flex align-items-center justify-content-center">
                                                 <i class="ti ti-plus f-18"></i> Remove Order
                                             </a>
-                                            <a href="{{ route('orders.edit', ['order' => $customer['id']]) }}" class="btn btn-primary d-flex align-items-center justify-content-center mt-3">
-                                                <i class="ti ti-plus f-18"></i> Edit Order
-                                            </a>
+{{--                                            <a href="{{ route('orders.edit', ['order' => $customer['id']]) }}" class="btn btn-primary d-flex align-items-center justify-content-center mt-3">--}}
+{{--                                                <i class="ti ti-plus f-18"></i> Edit Order--}}
+{{--                                            </a>--}}
                                         @endif
                                     </div>
                                 </div>
