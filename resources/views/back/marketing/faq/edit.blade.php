@@ -29,23 +29,34 @@
 
                         <div class="row justify-content-center mb-2 mt-5">
                             <div class="col-md-10 position-relative mb-3">
-                                @include('back.layouts.translations.input', [
-                                            'title' => 'Question',
-                                            'tab_title' => 'title-input',
-                                            'input_name' => 'title',
-                                            'value' => isset($faq) ? $faq->translation($lang->code)->title : old('title.*')
-                                            ])
-                            </div>
-                            <div class="col-md-10 position-relative">
-                                @include('back.layouts.translations.textarea', [
-                                                    'title' => 'Answer',
-                                                    'tab_title' => 'input-description',
-                                                    'input_name' => 'description',
-                                                    'rows' => 4,
-                                                    'max_length' => 0,
-                                                    'simple' => 1,
-                                                    'value' => isset($faq) ? $faq->translation($lang->code)->description : old('description.*')
-                                                    ])
+                                <div class="position-relative">
+                                    <ul class="nav nav-pills position-absolute langimg me-0 mb-2" id="pills-tab" role="tablist">
+                                        @foreach(ag_lang() as $lang)
+                                            <li class="nav-item">
+                                                <a class="btn btn-icon btn-sm btn-link-primary ms-2 @if ($lang->code == current_locale()) active @endif" id="pills-{{ $lang->code }}-tab" data-bs-toggle="pill" href="#pills-{{ $lang->code }}" role="tab" aria-controls="pills-{{ $lang->code }}" aria-selected="true">
+                                                    <img src="{{ asset('assets/flags/' . $lang->code . '.png') }}" />
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+
+                                    <div class="tab-content" id="pills-tabContent">
+                                        @foreach(ag_lang() as $lang)
+                                            <div class="tab-pane fade show @if ($lang->code == current_locale()) active @endif" id="pills-{{ $lang->code }}" role="tabpanel" aria-labelledby="pills-{{ $lang->code }}-tab">
+                                                <div class="form-group row">
+                                                    <div class="col-12">
+                                                        <label for="title-{{ $lang->code }}">Title @include('back.layouts.partials.required')</label>
+                                                        <input type="text" class="form-control" id="title-{{ $lang->code }}" name="title[{{ $lang->code }}]" placeholder="{{ $lang->code }}" value="{{ isset($faq) ? $faq->translation($lang->code)->title : old('title.*') }}" />
+                                                    </div>
+                                                    <div class="col-12 mt-5">
+                                                        <label for="description-{{ $lang->code }}">Short Description</label>
+                                                        <textarea id="description-{{ $lang->code }}" class="form-control" rows="4" name="description[{{ $lang->code }}]" placeholder="{{ $lang->code }}">{{ isset($faq) ? $faq->translation($lang->code)->description : old('description.*') }}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
