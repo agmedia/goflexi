@@ -32,6 +32,8 @@ class Order
 
     public $child_seat = 0;
 
+    public $child_seat_type = '';
+
     public $baggage = 0;
 
     public $customer_message;
@@ -60,6 +62,7 @@ class Order
         $this->additional_person = $this->request->input('additional_person');
         $this->additional_child = $this->request->input('additional_child');
         $this->customer_message = $this->request->input('message');
+        $this->child_seat_type = $this->request->input('data-plans-selected');
 
         $this->setListing()
              ->setPayment($this->request->input('payment'))
