@@ -66,7 +66,17 @@ return [
     'pravila' => 'Pravila privatnosti',
     'odredbe' => 'Odredbe i uvjeti prijevoza',
     'placanje_karticama' => 'Plaćanje karticama',
-    'sva_prava' => 'Sva prava pridržana'
+    'sva_prava' => 'Sva prava pridržana',
+    'table_h' => '      <th class="cart-product-thumbnail bg-light">GoFlexi</th>
+                            <th class="cart-product-name bg-light">Naziv</th>
+                            <th class="cart-product-schedule bg-light">Raspored</th>
+                            <th class="cart-product-name bg-light">Cijena</th>
+                            <th class="cart-product-name bg-light">Sjedala dostupno</th>
+                            <th class="cart-product-name bg-light">Značajke</th>',
+    'price'=> 'Cijena',
+    'sjedala' => 'Sjedala dostupno',
+    'znacajke' => 'Značajke',
+
 
 
 

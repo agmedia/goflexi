@@ -35,12 +35,7 @@
                     <table class="table bg-light cart mb-4">
                         <thead>
                         <tr class="bg-light">
-                            <th class="cart-product-thumbnail bg-light">GoFlexi</th>
-                            <th class="cart-product-name bg-light">Bus Name</th>
-                            <th class="cart-product-schedule bg-light">Schedule</th>
-                            <th class="cart-product-name bg-light">Price</th>
-                            <th class="cart-product-name bg-light">Seats Available</th>
-                            <th class="cart-product-name bg-light">Features</th>
+                            {!! __('front/apartment.table_h') !!}
                         </tr>
                         </thead>
                         <tbody>
@@ -57,13 +52,15 @@
                                 <small class="d-flex justify-content-between p-2 p-md-0"><span class="primary">{{ $reservation->listing->from_city }}</span><span><i class="bi-arrow-right"></i></span><span class="primary ">{{ $reservation->listing->to_city }}</span></small>
                             </td>
                             <td class="cart-product-name">
-                                <small> <span class="d-inline-block d-md-none p-1 p-md-0">Price:</span> <span class="amount p-1 p-md-0">{{ $reservation->listing->price }} €</span></small>
+                                <small> <span class="d-inline-block d-md-none p-1 p-md-0">{{ __('front/apartment.price') }}:</span> <span class="amount p-1 p-md-0">{{  number_format($reservation->listing->price, 2) }} €</span></small>
+                            </td>
+
+
+                            <td class="cart-product-name">
+                                <small>  <span class="d-inline-block d-md-none p-1 p-md-0">{{ __('front/apartment.sjedala') }}:</span> <span class="amount p-1 p-md-0">{{ $reservation->seats }}-8</span></small>
                             </td>
                             <td class="cart-product-name">
-                                <small>  <span class="d-inline-block d-md-none p-1 p-md-0">Seats Available:</span> <span class="amount p-1 p-md-0">{{ $reservation->seats }}-8</span></small>
-                            </td>
-                            <td class="cart-product-name">
-                                <small>  <span class="d-inline-block d-md-none p-1 p-md-0">Features:</span> </small>  <span class="amount color p-1 p-md-0"><i class="fa-solid fa-wifi"></i> <i class="bi-snow"></i></span>
+                                <small>  <span class="d-inline-block d-md-none p-1 p-md-0">{{ __('front/apartment.znacajke') }}:</span> </small>  <span class="amount color p-1 p-md-0"><i class="fa-solid fa-wifi"></i> <i class="bi-snow"></i></span>
                             </td>
                         </tr>
                         </tbody>

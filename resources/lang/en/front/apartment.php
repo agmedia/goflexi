@@ -65,8 +65,16 @@ return [
     'pravila' => 'Privacy policy',
     'odredbe' => 'Terms and conditions of carriage',
     'placanje_karticama' => 'Secure Card Payment',
-    'sva_prava' => 'All rights reserved'
-
+    'sva_prava' => 'All rights reserved',
+    'table_h' => ' <th class="cart-product-thumbnail bg-light">GoFlexi</th>
+                            <th class="cart-product-name bg-light">Bus Name</th>
+                            <th class="cart-product-schedule bg-light">Schedule</th>
+                            <th class="cart-product-name bg-light">Price</th>
+                            <th class="cart-product-name bg-light">Seats Available</th>
+                            <th class="cart-product-name bg-light">Features</th>',
+    'price'=> 'Price',
+    'sjedala' => 'Seats Available',
+'znacajke' => 'Features',
 
 
 ];
