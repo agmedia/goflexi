@@ -68,6 +68,8 @@
                                                     <i class="fa-solid fa-comment me-2"></i> Your Comment: {{$order->customer['comment']}}
                                                 </p>
                                             @endif
+
+
                                         </div>
                                     </div>
 
@@ -92,7 +94,9 @@
                                             </tr>
                                             <tr class="cart_item">
                                                 <td class="cart-product-name">
-                                                    Children x {{ $order->additional_child }}:
+
+
+                                                    Children x {{ $order->additional_child }} @if($order->child_seat_type)<small>( {{  $order->child_seat_type }} )</small>@endif:
                                                 </td>
                                                 <td class="cart-product-name text-end">
                                                     <span class="amount">{{  number_format(($order->listing->price_child * $order->additional_child), 2)}}€ </span>

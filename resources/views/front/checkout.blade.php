@@ -64,13 +64,13 @@
                                 </div>
                                 <div class="col-lg-6 mb-3 form-group mb-2">
                                     <label for="template-contactform-name">Phone <small>*</small></label>
-                                    <input type="text" id="phone" name="phone" class="form-control w-100 mb-1" placeholder="{{ __('front/checkout.mobile_number') }}" value="" required>
+                                    <input type="tel" id="phone" name="phone" class="form-control w-100 mb-1"  pattern="^\+?\d{0,13}" required placeholder="{{ __('front/checkout.mobile_number') }}" value="" required>
                                     <small id="phoneHelp" class="form-text text-muted"><span class="color mb-1"> *</span> Koristi se isključivo za obavijesti o kašnjenjima i promjenama u voznom redu.</small>
                                 </div>
 
                                 <div class="col-lg-6 form-group mb-2">
                                     <label for="template-contactform-name">Email <small>*</small></label>
-                                    <input type="text" id="email" name="email" class="form-control  mb-1" placeholder="{{ __('front/checkout.email_address') }}" value="" required>
+                                    <input type="email" id="email" name="email" class="form-control  mb-1" placeholder="{{ __('front/checkout.email_address') }}" value="" required>
                                     <small id="emailHelp" class="form-text text-muted"><span class="color mb-1"> *</span> Vaša vozna karta i informacije o vožnji će biti dostavljeni na ovaj email.</small>
 
                                 </div>
@@ -311,11 +311,21 @@
 @push('js_after')
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.7/js/intlTelInput.js"></script>
+
     <script>
 
         jQuery(document).ready(function() {
             jQuery("input[name='phone']").intlTelInput({
+                autoHideDialCode: true,
+                autoPlaceholder: "ON",
+                dropdownContainer: document.body,
+                formatOnDisplay: true,
+                hiddenInput: "full_number",
                 initialCountry: "auto",
+                nationalMode: true,
+                placeholderNumberType: "MOBILE",
+                preferredCountries: ['US'],
+                separateDialCode: true,
                 geoIpLookup: callback => {
                     fetch("https://ipapi.co/json")
                         .then(res => res.json())
@@ -325,6 +335,7 @@
                 utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.6/js/utils.js"
             });
         });
+
 
 
         // Set the date we're counting down to
