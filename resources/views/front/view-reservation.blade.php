@@ -215,7 +215,7 @@
                 adult_qty = ev.currentTarget.value;
 
                 document.getElementById('adult-price').innerText = (price_adult * adult_qty).toFixed(2) + ' €';
-                document.getElementById('total-price').innerText = (price_adult * adult_qty).toFixed(2) + ' €';
+                document.getElementById('total-price').innerText = ((price_adult * adult_qty) + (price_child * child_qty)).toFixed(2) + ' €';
             });
 
             jQuery('#qty-child').on('change', (eve) => {
