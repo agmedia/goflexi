@@ -3,6 +3,7 @@
 namespace App\Models\Back\Calendar;
 
 use App\Models\Back\Apartment\Apartment;
+use App\Models\Back\Catalog\Product;
 use App\Models\Back\Orders\Order;
 use App\Models\Back\Orders\OrderHistory;
 use App\Models\Front\Checkout\Checkout;
@@ -30,10 +31,11 @@ class Calendar extends Model
     /**
      * @return HasOne
      */
-    public function apartment(): HasOne
+    public function product(): HasOne
     {
-        return $this->hasOne(Apartment::class, 'id', 'apartment_id');
+        return $this->hasOne(Product::class, 'id', 'product_id');
     }
+
 
 
     /**

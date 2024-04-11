@@ -124,3 +124,22 @@ if ( ! function_exists('ag_date')) {
         return new \Illuminate\Support\Carbon();
     }
 }
+
+/**
+ *
+ */
+if ( ! function_exists('carbon')) {
+    /**
+     * @param string|null $date
+     *
+     * @return int
+     */
+    function carbon($date = null)
+    {
+        if ($date) {
+            return \Illuminate\Support\Carbon::make($date);
+        }
+
+        return \Illuminate\Support\Carbon::class;
+    }
+}

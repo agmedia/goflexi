@@ -77,15 +77,6 @@ class Order extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function deposits()
-    {
-        return $this->hasMany(Deposit::class, 'order_id')->orderBy('created_at', 'desc');
-    }
-
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function totals()
     {
         return $this->hasMany(OrderTotal::class, 'order_id')->orderBy('sort_order');
@@ -138,7 +129,7 @@ class Order extends Model
      */
     public function getStatusAttribute()
     {
-        return Helper::resolveOrderStatus($this->order_status_id);
+        return Settings::get('order', 'statuses')->where('id', $this->order_status_id)->first();
     }
 
 
@@ -308,18 +299,18 @@ class Order extends Model
         if ($request->has('search') && ! empty($request->input('search'))) {
             $query->where(function ($query) use ($request) {
                 $query->where('id', 'like', '%' . $request->input('search') . '%')
-                      ->orWhere('payment_fname', 'like', '%' . $request->input('search'))
-                      ->orWhere('payment_lname', 'like', '%' . $request->input('search'))
-                      ->orWhere('payment_email', 'like', '%' . $request->input('search'));
+                      ->orWhere('payment_fname', 'like', '%' . $request->input('search') . '%')
+                      ->orWhere('payment_lname', 'like', '%' . $request->input('search') . '%')
+                      ->orWhere('payment_email', 'like', '%' . $request->input('search') . '%');
             });
 
-            $query->orWhere(function ($query) use ($request) {
-                $query->whereHas('apartment', function ($subquery) use ($request) {
+            /*$query->orWhere(function ($query) use ($request) {
+                $query->whereHas('product', function ($subquery) use ($request) {
                     $subquery->whereHas('translation_search', function ($sub_subquery) use ($request) {
                         $sub_subquery->where('title', 'like', '%' . $request->input('search') . '%');
                     });
                 });
-            });
+            });*/
         }
 
         if ($request->has('dates') && ! empty($request->input('dates'))) {

@@ -100,13 +100,13 @@
                         <div class="form-group row">
                             <div class="col-md-6 mt-4 mb-3 ">
                                 <div class="form-check form-switch custom-switch-v1">
-                                    <input type="checkbox" class="form-check-input input-success" id="status-swich" name="status" @if (isset($page) and $page->status) checked @endif>
+                                    <input type="checkbox" class="form-check-input input-success" id="status-swich" name="status" @if (isset($option) and $option->status) checked @endif>
                                     <label class="form-check-label" for="status-swich"> Status</label>
                                 </div>
                             </div>
                             <div class="col-md-6 mt-4 mb-2 ">
                                 <div class="form-check form-switch custom-switch-v1">
-                                    <input type="checkbox" class="form-check-input input-success" id="featured-swich" name="featured" @if (isset($page) and $page->featured) checked @endif>
+                                    <input type="checkbox" class="form-check-input input-success" id="featured-swich" name="featured" @if (isset($option) and $option->featured) checked @endif>
                                     <label class="form-check-label" for="featured-swich"> Featured</label>
                                 </div>
                             </div>

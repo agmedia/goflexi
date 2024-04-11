@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Back\Calendar\Calendar;
 use App\Models\Back\Catalog\Author;
+use App\Models\Back\Catalog\Product;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
@@ -23,9 +24,18 @@ class CalendarController extends Controller
     public function index(Request $request, Calendar $calendar)
     {
         $query = $calendar->filter($request);
-        $calendars = $query->with('apartment')->get()/*->appends(request()->query())*/;
+        $calendars = $query->where('order_status_id', config('settings.order.status.paid'))->get();
 
-        return view('back.sales.calendar.index');
+        $drives = [];
+
+        foreach ($calendars as $order) {
+            $drives[$order->product_id]['listing'] = $order->product()->first();
+            $drives[$order->product_id]['items'][] = $order;
+        }
+
+        //$drives = $this->paginateColl($drives, config('settings.pagination.back'), $request->input('page') ?? null);
+
+        return view('back.sales.calendar.index', compact('drives'));
     }
 
 

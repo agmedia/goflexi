@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Back\Sales;
 use App\Helpers\Country;
 use App\Http\Controllers\Controller;
 use App\Models\Back\Apartment\Apartment;
+use App\Models\Back\Catalog\Product;
 use App\Models\Back\Orders\Order;
 use App\Models\Back\Orders\OrderHistory;
 use App\Models\Back\Settings\Settings;
@@ -22,13 +23,15 @@ class OrderController extends Controller
      */
     public function index(Request $request, Order $order)
     {
-        $orders = $order->filter($request)->with('apartment')->paginate(config('settings.pagination.back'));
+        $orders = $order/*->filter($request)*/->with('product')->paginate(config('settings.pagination.back'));
+
+        //dd($orders->toArray());
 
         $statuses   = Settings::get('order', 'statuses');
         $payments   = Settings::getList('payment');
-        $apartments = Apartment::query()->with('translation')->where('status', 1)->get();
+        $products = Product::query()->where('status', 1)->get();
 
-        return view('back.sales.order.index', compact('orders', 'statuses', 'payments', 'apartments'));
+        return view('back.sales.order.index', compact('orders', 'statuses', 'payments', 'products'));
     }
 
 
@@ -82,12 +85,12 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        $countries  = Country::list();
-        $statuses   = Settings::get('order', 'statuses');
-        $payments   = Settings::getList('payment');
-        $apartments = Apartment::query()->with('translation')->where('status', 1)->get();
+        $countries = Country::list();
+        $statuses  = Settings::get('order', 'statuses');
+        $payments  = Settings::getList('payment');
+        $products  = Product::query()->where('status', 1)->get();
 
-        return view('back.sales.order.edit', compact('order', 'countries', 'statuses', 'payments', 'apartments'));
+        return view('back.sales.order.edit', compact('order', 'countries', 'statuses', 'payments', 'products'));
     }
 
 
