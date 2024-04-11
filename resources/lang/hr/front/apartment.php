@@ -62,6 +62,12 @@ return [
     'email_validate' => 'Molimo unesite svoju email adresu!',
     'mobile_validate' => 'Molimo unesite svoj broj mobitela!',
     'message_validate' => 'Molimo unesite svoju poruku!',
+    'uvjeti' => 'Uvijeti korištenja',
+    'pravila' => 'Pravila privatnosti',
+    'odredbe' => 'Odredbe i uvjeti prijevoza',
+    'placanje_karticama' => 'Plaćanje karticama',
+    'sva_prava' => 'Sva prava pridržana'
+
 
 
 

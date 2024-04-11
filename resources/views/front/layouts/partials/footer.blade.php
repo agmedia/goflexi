@@ -6,11 +6,11 @@
 
                 <div class="col-lg-4">
                     <div class="widget widget_links">
-                        <h4>Uvijeti korištenja</h4>
+                        <h4>{{ __('front/apartment.uvjeti') }}</h4>
                         <ul>
-                            <li><a href="#">Pravila privatnosti</a></li>
-                            <li><a href="#">Uvjeti korištenja</a></li>
-                            <li><a href="#">Odredbe i uvjeti prijevoza</a></li>
+                            <li><a href="#">{{ __('front/apartment.pravila') }}</a></li>
+                            <li><a href="#">{{ __('front/apartment.uvjeti') }}</a></li>
+                            <li><a href="#">{{ __('front/apartment.odredbe') }}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
 
                 <div class=" col-lg-4">
                     <div class="widget">
-                        <h4>Plaćanje karticama</h4>
+                        <h4>{{ __('front/apartment.placanje_karticama') }}</h4>
                         <img style="height: 35px;margin-right:3px" src="{{ asset('media/image/visa.svg') }}">
                         <img style="height: 35px;margin-right:3px" src="{{ asset('media/image/maestro.svg') }}">
                         <img style="height: 35px;margin-right:3px" src="{{ asset('media/image/mastercard.svg') }}">
@@ -41,7 +41,7 @@
         <div class="container">
             <div class="w-100 text-md-center">
                 <div class="copyrights-menu copyright-links"></div>
-                GoFlexi©2024. Sva prava pridržana.
+                GoFlexi©2024. {{ __('front/apartment.sva_prava') }}.
             </div>
         </div>
     </div>

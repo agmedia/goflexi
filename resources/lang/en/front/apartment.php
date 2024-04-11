@@ -61,7 +61,11 @@ return [
     'email_validate' => 'Please enter your email address!',
     'mobile_validate' => 'Please enter your mobile number!',
     'message_validate' => 'Please enter your message!',
-
+    'uvjeti' => 'Terms of use',
+    'pravila' => 'Privacy policy',
+    'odredbe' => 'Terms and conditions of carriage',
+    'placanje_karticama' => 'Secure Card Payment',
+    'sva_prava' => 'All rights reserved'
 
 
 
