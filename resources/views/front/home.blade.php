@@ -330,153 +330,31 @@
                         <h2 class="h1">FAQ</h2>
                     </div>
 
+
+
+
+
+
                     <div class="accordion accordion-bg mb-0" data-collapsible="true" data-active="false">
                         <div class="row pb-5">
                             <div class="col-md-6">
+                                @foreach ($faq as $fa)
                                 <div class="accordion-header rounded mb-3 p-2 p-md-4">
                                     <div class="accordion-icon">
                                         <i class="accordion-closed bi-check-circle-fill"></i>
                                         <i class="accordion-open bi-x-circle-fill"></i>
                                     </div>
                                     <div class="accordion-title">
-                                        Kako mogu napraviti rezervaciju?
+                                        {{ $fa->title }}
                                     </div>
                                 </div>
-                                <div class="accordion-content pb-4">Ako želite kupiti voznu kartu, to možete učiniti na našoj web stranici. Na naslovnici odaberite ponuđene parametre te će vas sustav, kroz par jednostavnih koraka, provesti kroz proces rezervacije.</div>
+                                <div class="accordion-content pb-4">{!! $fa->description  !!}</div>
 
-                                <div class="accordion-header rounded mb-3 p-2 p-md-4">
-                                    <div class="accordion-icon">
-                                        <i class="accordion-closed bi-check-circle-fill"></i>
-                                        <i class="accordion-open bi-x-circle-fill"></i>
-                                    </div>
-                                    <div class="accordion-title">
-                                        Mogu li vaše usluge rezervirati telefonom, izravnom uplatom na vaš bankovni račun, ili platiti gotovinski?
-                                    </div>
-                                </div>
-                                <div class="accordion-content pb-4">Na žalost, ne. Naše usluge možete rezervirati isključivo tako da dovršite proces rezervacije na našoj web stranici.</div>
 
-                                <div class="accordion-header rounded mb-3 p-2 p-md-4">
-                                    <div class="accordion-icon">
-                                        <i class="accordion-closed bi-check-circle-fill"></i>
-                                        <i class="accordion-open bi-x-circle-fill"></i>
-                                    </div>
-                                    <div class="accordion-title">
-                                        Mogu li rezervirati transfer za danas, ili sutra?
-                                    </div>
-                                </div>
-                                <div class="accordion-content pb-4">Vaš transfer možete rezervirati kada god želite pa i na sâm dan transfera, ukoliko na dan transfera u vozilu još ima slobodnih mjesta. Imajte na umu da putnička kombi vozila mogu primiti do 8 putnika, stoga svakako preporučujemo što raniju rezervaciju.</div>
-
-                                <div class="accordion-header rounded mb-3 p-2 p-md-4">
-                                    <div class="accordion-icon">
-                                        <i class="accordion-closed bi-check-circle-fill"></i>
-                                        <i class="accordion-open bi-x-circle-fill"></i>
-                                    </div>
-                                    <div class="accordion-title">
-                                        Je li moguće rezervirati povratni transfer?
-                                    </div>
-                                </div>
-                                <div class="accordion-content pb-4">Moguće je rezervirati transfer samo u jednom smjeru. Ukoliko trebate i povratni transfer, savjetujemo da napravite dvije različite rezervacije. Jednu za odlazno putovanje te jednu za povratno putovanje.</div>
-
-                                <div class="accordion-header rounded mb-3 p-2 p-md-4">
-                                    <div class="accordion-icon">
-                                        <i class="accordion-closed bi-check-circle-fill"></i>
-                                        <i class="accordion-open bi-x-circle-fill"></i>
-                                    </div>
-                                    <div class="accordion-title">
-                                        Nisam dobio e-mail sa potvrdom rezervacije. Što mi je činiti?
-                                    </div>
-                                </div>
-                                <div class="accordion-content pb-4"><p>Rezervacija je uspješno privedena kraju kada dođete do posljednjeg koraka procesa rezerviranja i izvršite uplatu, a sustav vam izda broj karte i sažetak svih podataka o transferu. Sustav vam tada šalje voznu kartu sa svim informacijama na vašu email adresu koju ste naveli u postupku rezervacije.</p>
-                                    <p>Ako niste došli do posljednjeg koraka rezervacije, rezervacija vjerojatno nije uspjela jer nije dovršena. U tom slučaju, pričekajte nekoliko minuta i pokušajte ponovno.</p>
-                                    <p>Ako ste prošli posljednji korak rezervacije, ali niste zaprimili e-mail sa potvrdom, pokušajte sljedeće:</p>
-                                    <ul class="iconlist mb-4">
-                                        <li><i class="bi-info-circle-fill"></i>  Pričekajte dvije do tri minute.</li>
-                                        <li><i class="bi-info-circle-fill"></i> Provjerite spam folder(mapa neželjene pošte) u svom e-mail pretincu. Ponekad se automatski generirani mailovi tretiraju kao reklame i završavaju u spam folderima.</li>
-                                    </ul>
-                                    <p>Prije potvrde plaćanja na zadnjem koraku rezervacije dodatno provjerite jeste li unijeli ispravnu e-mail adresu.</p></div>
-
-                                <div class="accordion-header rounded mb-3 p-2 p-md-4">
-                                    <div class="accordion-icon">
-                                        <i class="accordion-closed bi-check-circle-fill"></i>
-                                        <i class="accordion-open bi-x-circle-fill"></i>
-                                    </div>
-                                    <div class="accordion-title">
-                                        Mogu li putovati sa svojim kućnim ljubimcima?
-                                    </div>
-                                </div>
-                                <div class="accordion-content pb-4">Zbog sigurnosnih razloga, ali i obzira prema drugim putnicima, ne odobravamo prijevoz kućnih ljubimaca.</div>
+                                @endforeach
 
                             </div>
-                            <div class="col-md-6">
-                                <div class="accordion-header rounded mb-3 p-2 p-md-4">
-                                    <div class="accordion-icon">
-                                        <i class="accordion-closed bi-check-circle-fill"></i>
-                                        <i class="accordion-open bi-x-circle-fill"></i>
-                                    </div>
-                                    <div class="accordion-title">
-                                        Plaćam li manje ako kupujem voznu kartu za dijete?
-                                    </div>
-                                </div>
-                                <div class="accordion-content pb-4">Cijene vozne karte po putniku su jednake, bez obzira na dob. Stoga vrijede iste cijene za odrasle i djecu. Po potrebi, dječje sjedalice dostupne su prilikom rezervacije i uračunate su u cijenu vozne karte za dijete.</div>
 
-                                <div class="accordion-header rounded mb-3 p-2 p-md-4">
-                                    <div class="accordion-icon">
-                                        <i class="accordion-closed bi-check-circle-fill"></i>
-                                        <i class="accordion-open bi-x-circle-fill"></i>
-                                    </div>
-                                    <div class="accordion-title">
-                                        Kako mogu platiti?
-                                    </div>
-                                </div>
-                                <div class="accordion-content pb-4"><p>Naše usluge možete naručiti putem naše web stranice i platiti na kraju online procesa rezervacije. Sustav će tražiti da na kraju online procesa rezervacije unesete podatke sa svoje kreditne, ili debitne kartice.</p>
-                                    <p>GoFlexi koristi Stripe payment gateway, jedan od najpoznatijih i najsigurnijih sustava za online plaćanja u svijetu. Više na <a href="https://www.stripe.com" target="_blank">www.stripe.com</a></p></div>
-
-                                <div class="accordion-header rounded mb-3 p-2 p-md-4">
-                                    <div class="accordion-icon">
-                                        <i class="accordion-closed bi-check-circle-fill"></i>
-                                        <i class="accordion-open bi-x-circle-fill"></i>
-                                    </div>
-                                    <div class="accordion-title">
-                                        Mogu li platiti karticom koja nije moja?
-                                    </div>
-                                </div>
-                                <div class="accordion-content pb-4">Možete platiti tuđom kreditnom karticom, uz suglasnost vlasnika kreditne kartice.</div>
-
-
-                                <div class="accordion-header rounded mb-3 p-2 p-md-4">
-                                    <div class="accordion-icon">
-                                        <i class="accordion-closed bi-check-circle-fill"></i>
-                                        <i class="accordion-open bi-x-circle-fill"></i>
-                                    </div>
-                                    <div class="accordion-title">
-                                        Hoćete li me čekati ako zakasnim na polazišnu lokaciju?
-                                    </div>
-                                </div>
-                                <div class="accordion-content pb-4">Ukoliko putnik zakasni na lokaciju ukrcaja, vozač će ga nazvati na broj telefona koji je upisao prilikom procesa online rezervacije. Ukoliko je kašnjenje 5 – 10 minuta, vozač će pričekati putnika. Ukoliko je kašnjenje duže od 10 minuta, na žalost, dodatno čekanje neće biti moguće.</div>
-
-                                <div class="accordion-header rounded mb-3 p-2 p-md-4">
-                                    <div class="accordion-icon">
-                                        <i class="accordion-closed bi-check-circle-fill"></i>
-                                        <i class="accordion-open bi-x-circle-fill"></i>
-                                    </div>
-                                    <div class="accordion-title">
-                                        Mogu li promijeniti datum rezerviranog transfera?
-                                    </div>
-                                </div>
-                                <div class="accordion-content pb-4">Nakon što ste rezervirali transfer, više nije moguće promijeniti datum rezervacije.</div>
-
-                                <div class="accordion-header rounded mb-3 p-2 p-md-4">
-                                    <div class="accordion-icon">
-                                        <i class="accordion-closed bi-check-circle-fill"></i>
-                                        <i class="accordion-open bi-x-circle-fill"></i>
-                                    </div>
-                                    <div class="accordion-title">
-                                        Imam li pravo na povrat novca ako otkažem rezervaciju?
-                                    </div>
-                                </div>
-                                <div class="accordion-content pb-4">Ukoliko putnik otkaže rezervaciju, <strong>ne ostvaruje pravo na povrat novca</strong>. Povrat uplaćenih sredstava moguć je isključivo ako prijevoznik iz bilo kojeg razloga otkaže, ili nije u mogućnosti izvršiti transfer na datum rezervacije. Potvrdom i uplatom rezervacije putnik pristaje na <a href="">Opće uvjete prijevoza</a></div>
-
-                            </div>
                         </div>
                     </div>
                 </div>

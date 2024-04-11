@@ -18,6 +18,7 @@ use App\Models\Front\Checkout\Checkout;
 use App\Models\Front\Checkout\Order;
 use App\Models\Front\Checkout\Reservation;
 use App\Models\Front\Faq;
+use App\Models\Front\FaqTranslation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -32,7 +33,12 @@ class HomeController extends FrontBaseController
      */
     public function index(Request $request)
     {
-        return view('front.home');
+
+        $faq = Faq::where('status', 0)->get();
+
+
+
+        return view('front.home',  compact('faq'));
     }
 
 
