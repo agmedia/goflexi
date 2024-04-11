@@ -116,12 +116,12 @@
                                             <td class="cart-product-quantity bg-light">
                                                 <div class="quantity">
                                                     <input type="button" value="-" class="minus">
-                                                    <input type="text" name="quantity_child" value="0" class="qty">
+                                                    <input type="text" name="quantity_child" value="0" class="qty" id="qty-child">
                                                     <input type="button" value="+" class="plus">
                                                 </div>
                                             </td>
                                             <td class="cart-product-name bg-light">
-                                                <small>  <span class="amount" id="child-price">{{ $reservation->listing->price_child }} €</span> </small>
+                                                <small>  <span class="amount" id="child-price"></span> </small>
                                             </td>
                                         </tr>
                                         <tr class="cart_item">
@@ -217,7 +217,16 @@
                 let qty = ev.currentTarget.value;
 
                 document.getElementById('adult-price').innerText = (price_adult * qty).toFixed(2) + ' €';
-                document.getElementById('total-price').innerText = ((price_adult * qty)/* + (price_child * qty)*/).toFixed(2) + ' €';
+                document.getElementById('total-price').innerText = (price_adult * qty).toFixed(2) + ' €';
+            });
+
+            jQuery('#qty-child').on('change', (eve) => {
+                let qty = eve.currentTarget.value;
+
+                console.log(price_adult, price_child)
+
+                document.getElementById('child-price').innerText = (price_child * qty).toFixed(2) + ' €';
+                document.getElementById('total-price').innerText = ((price_adult * qty) + (price_child * qty)).toFixed(2) + ' €';
             });
 
             setTimeout(() => {
