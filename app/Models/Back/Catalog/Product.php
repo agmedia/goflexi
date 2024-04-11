@@ -74,6 +74,12 @@ class Product extends Model
         return $this->hasOne(ProductTranslation::class, 'product_id')->where('lang', $this->locale)->first();
     }
 
+
+    public function translations()
+    {
+        return $this->hasMany(ProductTranslation::class, 'product_id');
+    }
+
     /*******************************************************************************
      *                                Copyright : AGmedia                           *
      *                              email: filip@agmedia.hr                         *

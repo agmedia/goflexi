@@ -456,6 +456,11 @@
                         jQuery('#polazak').append('<option value="' + item + '">' + item + '</option>');
                         jQuery('#polazak').selectpicker('refresh');
                     });
+                } else {
+                    clearSelection(jQuery('#polazak'), 'from');
+
+                    jQuery('#polazak').append('<option value="' + data.from + '" selected>' + data.from + '</option>');
+                    jQuery('#polazak').selectpicker('refresh');
                 }
 
                 if (data.to instanceof Array) {
@@ -465,6 +470,11 @@
                         jQuery('#dolazak').append('<option value="' + item + '">' + item + '</option>');
                         jQuery('#dolazak').selectpicker('refresh');
                     });
+                } else {
+                    clearSelection(jQuery('#dolazak'), 'to');
+
+                    jQuery('#dolazak').append('<option value="' + data.to + '" selected>' + data.to + '</option>');
+                    jQuery('#dolazak').selectpicker('refresh');
                 }
 
                 if (data.items instanceof Array) {

@@ -4,6 +4,7 @@ use App\Http\Controllers\Back\Catalog\ProductController;
 use App\Http\Controllers\Back\Catalog\OptionController;
 use App\Http\Controllers\Back\Catalog\PageController;
 use App\Http\Controllers\Back\Catalog\WidgetController;
+use App\Http\Controllers\Back\Sales\OrderController;
 use App\Http\Controllers\Back\DashboardController;
 use App\Http\Controllers\Back\Marketing\FaqController;
 use App\Http\Controllers\Back\Sales\CalendarController;
@@ -71,6 +72,14 @@ Route::group(
 
         // SALES
         Route::prefix('sales')->group(function () {
+            // ORDERS
+            Route::get('orders', [OrderController::class, 'index'])->name('orders');
+            Route::get('order/create', [OrderController::class, 'create'])->name('orders.create');
+            Route::post('order', [OrderController::class, 'store'])->name('orders.store');
+            Route::get('order/{order}', [OrderController::class, 'show'])->name('orders.show');
+            Route::get('order/{order}/edit', [OrderController::class, 'edit'])->name('orders.edit');
+            Route::patch('order/{order}', [OrderController::class, 'update'])->name('orders.update');
+            Route::get('order/{order}/delete', [OrderController::class, 'destroy'])->name('orders.destroy');
             // KALENDAR
             Route::get('calendar', [CalendarController::class, 'index'])->name('calendar');
             Route::get('calendar/create', [CalendarController::class, 'create'])->name('calendar.create');
@@ -145,6 +154,8 @@ Route::prefix('api')->group(function () {
     Route::post('product/destroy', [ProductController::class, 'destroy'])->name('product.api.destroy');
     // OPTIONS
     Route::post('/options/destroy/api', [OptionController::class, 'destroyApi'])->name('options.destroy.api');
+    // ORDERS
+    Route::post('/order/new', [OrderController::class, 'store_new'])->name('api.order.new');
     // WIDGET
     Route::prefix('widget')->group(function () {
         Route::post('destroy', [WidgetController::class, 'destroy'])->name('widget.destroy');
