@@ -71,7 +71,7 @@ class Stripe
 
         $session = $stripe->checkout->sessions->create([
             'cancel_url' => route('pay-reservation'),
-            'success_url' => route('checkout.success'),
+            'success_url' => route('checkout.success', ['order_id' => $this->order->id]),
             'line_items' => [
                 [
                     'price_data' => [

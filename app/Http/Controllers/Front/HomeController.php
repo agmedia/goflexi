@@ -10,7 +10,10 @@ use App\Helpers\Session\CheckoutSession;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FrontBaseController;
 use App\Imports\ProductImport;
+use App\Mail\AdminOrderMade;
 use App\Mail\ContactFormMessage;
+use App\Mail\CustomerOrderMade;
+use App\Models\Back\Catalog\Product;
 use App\Models\Back\Settings\Settings;
 use App\Models\Front\Apartment\Apartment;
 use App\Models\Front\Catalog\Page;
@@ -55,6 +58,11 @@ class HomeController extends FrontBaseController
         $checkout = new Checkout($request);
         $customer = $checkout->resolveCustomer();
 
+        if ( ! $checkout->is_available_drive) {
+            return route('index')->with(['message' => 'Nažalost, Vaša vožnja više nema slobodnih mjesta..']);
+        }
+        //dd($checkout);
+
         return view('front.checkout', compact('checkout', 'customer'));
     }
 
@@ -63,13 +71,21 @@ class HomeController extends FrontBaseController
     {
         //dd($request->toArray());
 
+        if (session()->has('order_request')) {
+            $request = new Request(session()->get('order_request'));
+        }
+
         $order = new Order($request);
+
+        if ( ! $order->is_available_drive) {
+            return route('index')->with(['message' => 'Nažalost, Vaša vožnja više nema slobodnih mjesta..']);
+        }
 
         $order->create(config('settings.order.status.unfinished'));
 
         $payment_form = $order->resolvePaymentForm();
 
-        //dd($request->toArray(), $order);
+        session()->put('order_request', $request->toArray());
 
         return view('front.pay-reservation', compact('order', 'payment_form'));
     }
@@ -80,7 +96,28 @@ class HomeController extends FrontBaseController
         Log::info('public function success(Request $request) ::::: $request->toArray()');
         Log::info($request->toArray());
 
-        return view('front.checkout.success');
+        if ($request->has('order_id') && $request->input('order_id')) {
+            $order = \App\Models\Back\Orders\Order::query()->where('id', $request->input('order_id'))->first();
+
+            $order->update(['order_status_id' => config('settings.order.status.paid')]);
+
+            $product = Product::query()->where('id', $order->product_id)->first();
+
+            $qty = $product->quantity - $order->adults - $order->children;
+
+            $product->update(['quantity' => $qty]);
+
+            dispatch(function () use ($order, $product) {
+                Mail::to($order->payment_email)->send(new CustomerOrderMade($order, $product));
+                Mail::to(config('settings.admin_email'))->send(new AdminOrderMade($order, $product));
+            })->afterResponse();
+        }
+
+        if (session()->has('order_request')) {
+            session()->forget('order_request');
+        }
+
+        return view('front.checkout.success', compact('order', 'product'));
     }
 
 

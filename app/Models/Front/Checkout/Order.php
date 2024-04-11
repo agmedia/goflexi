@@ -44,6 +44,8 @@ class Order
 
     public $total;
 
+    public $is_available_drive = true;
+
     public $request;
 
 
@@ -68,11 +70,12 @@ class Order
              ->setPayment($this->request->input('payment'))
              ->setCustomer()
              ->setOptions()
-             ->setTotal();
+             ->setTotal()
+             ->isAvailableDrive();
     }
 
 
-    private function setListing(int $id = null)
+    public function setListing(int $id = null)
     {
         if ( ! $id) {
             $id = $this->request->listing;
@@ -84,7 +87,7 @@ class Order
     }
 
 
-    private function setPayment(string $payment = 'stripe', string $state = 'Croatia')
+    public function setPayment(string $payment = 'stripe', string $state = 'Croatia')
     {
         $geo = (new GeoZone())->findState($state);
 
@@ -95,7 +98,7 @@ class Order
     }
 
 
-    private function setCustomer()
+    public function setCustomer()
     {
         $this->customer = [
             'firstname' => $this->request->input('firstname'),
@@ -109,7 +112,7 @@ class Order
     }
 
 
-    private function setOptions()
+    public function setOptions()
     {
         if ($this->request->has('option')) {
             foreach ($this->request->input('option') as $option_id) {
@@ -129,7 +132,7 @@ class Order
     }
 
 
-    private function setTotal()
+    public function setTotal()
     {
         $this->total = $this->listing->price;
 
@@ -146,6 +149,18 @@ class Order
                 $this->total += $option->price;
             }
         }
+
+        return $this;
+    }
+
+
+    public function isAvailableDrive()
+    {
+        if ($this->listing->quantity < (1 + $this->additional_person + $this->additional_child)) {
+            $this->is_available_drive = false;
+        }
+
+        $this->is_available_drive = true;
 
         return $this;
     }

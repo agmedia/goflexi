@@ -29,7 +29,10 @@ class Checkout
 
     public $total;
 
+    public $is_available_drive = true;
+
     public $request;
+
 
 
     /**
@@ -46,7 +49,8 @@ class Checkout
              ->hasAdditionalPerson()
              ->hasAdditionalChild()
              ->getPaymentMethodsList()
-             ->setTotal();
+             ->setTotal()
+             ->isAvailableDrive();
 
         // get payments methods
     }
@@ -189,6 +193,18 @@ class Checkout
         if ($this->payments_list) {
             $this->setPayment($this->request->payment_type);
         }
+
+        return $this;
+    }
+
+
+    private function isAvailableDrive()
+    {
+        if ($this->listing->quantity < (1 + $this->additional_person + $this->additional_child)) {
+            $this->is_available_drive = false;
+        }
+
+        $this->is_available_drive = true;
 
         return $this;
     }

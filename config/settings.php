@@ -22,6 +22,7 @@ return [
     'search_keyword' => 'pojam',
     'admin_input_currency' => 'EUR',
     'default_admin_id' => 1,
+    'admin_email' => 'info@agmedia.hr',
 
     'images_domain' => '#',
     'image_size_ratio' => '1440x960',

@@ -68,11 +68,12 @@ class BookingHelper
         $response = [];
 
         if ($request->has('from') && $request->input('from') && $request->has('to') && $request->input('to')) {
-            $items = Product::query()
-                          ->where('from_city', $request->input('from'))
-                          ->where('to_city', $request->input('to'))
-                          ->take(15)
-                          ->get();
+            $items = Product::query()->where('start_time', '>', now())
+                                     ->where('from_city', $request->input('from'))
+                                     ->where('to_city', $request->input('to'))
+                                     ->where('quantity', '>', 0)
+                                     ->take(15)
+                                     ->get();
 
             foreach ($items as $item) {
                 $date = Carbon::make($item->start_time)->format('d.m l');
