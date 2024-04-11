@@ -337,8 +337,9 @@
 
                     <div class="accordion accordion-bg mb-0" data-collapsible="true" data-active="false">
                         <div class="row pb-5">
-                            <div class="col-md-6">
+
                                 @foreach ($faq as $fa)
+                                <div class="col-md-6">
                                 <div class="accordion-header rounded mb-3 p-2 p-md-4">
                                     <div class="accordion-icon">
                                         <i class="accordion-closed bi-check-circle-fill"></i>
@@ -350,10 +351,10 @@
                                 </div>
                                 <div class="accordion-content pb-4">{!! $fa->description  !!}</div>
 
-
+                                </div>
                                 @endforeach
 
-                            </div>
+
 
                         </div>
                     </div>
@@ -367,7 +368,7 @@
                     <div class="col-lg-6 p-md-5 p-2 ">
                         <div class="card bg-contrast-0 border-0" style="border-radius: 20px;">
                             <div class="card-body p-md-5 p-3">
-                                <h3>Kontaktirajte nas</h3>
+                                <h3>{{ __('front/apartment.enquiry_form') }}</h3>
 
                                 <div class="form-widget">
                                     <div class="form-result"></div>
@@ -380,23 +381,23 @@
 
                                         <div class="row">
                                             <div class="col-12 mb-4">
-                                                <label for="template-contactform-name">Ime i prezime<small>*</small></label>
-                                                <input type="text" id="template-contactform-name" name="template-contactform-name" value="" placeholder="Unesite vaše ime i prezime" class="form-control required">
+                                                <label for="template-contactform-name">{{ __('front/apartment.name') }}<small>*</small></label>
+                                                <input type="text" id="template-contactform-name" name="template-contactform-name" value="" placeholder="{{ __('front/apartment.name_validate') }}" class="form-control required">
                                             </div>
 
                                             <div class="col-md-6 mb-4">
-                                                <label for="template-contactform-email">Email<small>*</small></label>
-                                                <input type="email" id="template-contactform-email" name="template-contactform-email" value="" placeholder="Unesite Email adresu" class="required email form-control">
+                                                <label for="template-contactform-email">{{ __('front/apartment.email') }}<small>*</small></label>
+                                                <input type="email" id="template-contactform-email" name="template-contactform-email" value="" placeholder="{{ __('front/apartment.email_validate') }}" class="required email form-control">
                                             </div>
 
                                             <div class="col-md-6 mb-4">
-                                                <label for="template-contactform-phone">Broj telefona<small>*</small></label>
-                                                <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" placeholder="Unesite broj mtelefona" class="form-control required">
+                                                <label for="template-contactform-phone">{{ __('front/apartment.mobile') }}<small>*</small></label>
+                                                <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" placeholder="{{ __('front/apartment.mobile_validate') }}" class="form-control required">
                                             </div>
 
                                             <div class="col-12 mb-4">
-                                                <label for="template-contactform-message">Poruka<small>*</small></label>
-                                                <textarea class="form-control required" id="template-contactform-message" name="template-contactform-message" placeholder="Unesite tekst poruke..." rows="5" cols="30"></textarea>
+                                                <label for="template-contactform-message">{{ __('front/apartment.message') }}<small>*</small></label>
+                                                <textarea class="form-control required" id="template-contactform-message" name="template-contactform-message" placeholder="{{ __('front/apartment.message_validate') }}" rows="5" cols="30"></textarea>
                                             </div>
 
                                             <div class="col-12 mb-4 d-none">
@@ -404,7 +405,7 @@
                                             </div>
 
                                             <div class="col-12">
-                                                <button class="button button-large bg-primary bg-opacity-75 h-bg-dark rounded-pill m-0 w-100" type="submit" id="template-contactform-submit" name="template-contactform-submit" value="submit">Pošaljite poruku</button>
+                                                <button class="button button-large bg-primary bg-opacity-75 h-bg-dark rounded-pill m-0 w-100" type="submit" id="template-contactform-submit" name="template-contactform-submit" value="submit">{{ __('front/apartment.submit') }}</button>
                                             </div>
                                         </div>
 

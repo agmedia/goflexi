@@ -46,6 +46,22 @@ return [
     'list_2' => 'All our vehicles are of unquestionable quality, with built-in air conditioning and free wi-fi internet in the passenger compartment.',
     'list_3' => 'We provide a professional transport service with passenger vans on the line Zagreb - Split - Zagreb and Zagreb - Rijeka - Zagreb. We provide transportation services in passenger vans with 8+1 seats.',
 
+    'enquiry_form' => 'Contact us',
+    'address' => 'Address',
+    'email' => 'Email address',
+    'pass' => 'Password',
+    'pass_confirm' => 'Confirm Password',
+    'call' => 'Call Us',
+    'name' => 'First and last name',
+    'lname' => 'Lastname',
+    'mobile' => 'Mobile number',
+    'message' => 'Message',
+    'submit' => 'Submit form',
+    'name_validate' => 'Enter your first and last name!',
+    'email_validate' => 'Please enter your email address!',
+    'mobile_validate' => 'Please enter your mobile number!',
+    'message_validate' => 'Please enter your message!',
+
 
 
 

@@ -47,6 +47,21 @@ return [
     'list_2' => 'Sva naša vozila su neupitne kvalitete, sa ugrađenim klima uređajem i besplatnim wi-fi internetom u putničkom prostoru.',
     'list_3' => 'Pružamo profesionalnu uslugu prijevoza putničkim kombi vozilima na liniji Zagreb – Split – Zagreb te Zagreb – Rijeka - Zagreb. Uslugu prijevoza vršimo putničkim kombi vozilima 8+1 sjedala.',
 
+    'enquiry_form' => 'Kontaktirajte nas',
+    'address' => 'Adresa',
+    'email' => 'Email adresa',
+    'pass' => 'Lozinka',
+    'pass_confirm' => 'Potvrdi Lozinku',
+    'call' => 'Nazovite nas',
+    'name' => 'Ime i prezime',
+    'lname' => 'Prezime',
+    'mobile' => 'Broj mobitela',
+    'message' => 'Vaš upit',
+    'submit' => 'Pošaljite upit',
+    'name_validate' => 'Molimo unesite svoje ime!',
+    'email_validate' => 'Molimo unesite svoju email adresu!',
+    'mobile_validate' => 'Molimo unesite svoj broj mobitela!',
+    'message_validate' => 'Molimo unesite svoju poruku!',
 
 
 
