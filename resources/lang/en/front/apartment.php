@@ -19,5 +19,7 @@ return [
     'o_nama' => 'About us',
     'faq' => 'Faq',
     'kontakt' => 'Contact',
+    'main_title_1' => 'Fast and pleasant trips in passenger vans',
+    'main_title_2' => 'To Zagreb, Rijeka and Split in half a click!',
 
 ];

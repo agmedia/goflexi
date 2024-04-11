@@ -18,6 +18,7 @@ return [
     'o_nama' => 'O nama',
     'faq' => 'Faq',
     'kontakt' => 'Kontakt',
-
+    'main_title_1' => 'Brza i ugodna putovanja putničkim kombi vozilima.',
+    'main_title_2' => 'Do Zagreba, Rijeke i Splita u pola klika!',
 
 ];

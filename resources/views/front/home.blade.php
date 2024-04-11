@@ -58,9 +58,9 @@
             <div class="vertical-middle slider-element-fade">
                 <div class="container py-5">
                     <div class="emphasis-title">
-                        <p class="lead d-block fs-3 mb-2" data-animate="fadeInUp">Brza i ugodna putovanja putničkim kombi vozilima.</p>
+                        <p class="lead d-block fs-3 mb-2" data-animate="fadeInUp">{{ __('front/apartment.main_title_1') }}</p>
 
-                        <h3 class="fs-1" data-animate="fadeInUp" data-delay="200">Do Zagreba, Rijeke i Splita u pola klika!</h3>
+                        <h3 class="fs-1" data-animate="fadeInUp" data-delay="200">{{ __('front/apartment.main_title_2') }}</h3>
                     </div>
                 </div>
             </div>
