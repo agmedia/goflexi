@@ -141,13 +141,33 @@
                                 <div class="row">
                                     <h3 class=" h5 color my-2 mt-4"><i class="uil uil-kid text-black "></i> {{ __('Odaberite dječja sjedala') }}</h3>
                                     <small class="mb-4 text-muted"> <span class="color">*</span> Dječje sjedalice su besplatne, odnosno uračunate su u cijenu vozne karte.</small>
+
+                                    <label for="nista" class="col-sm-6 col-md-3">
+                                        <div class="pricing-box text-center shadow-none border">
+                                            <input type="radio" name="data-plans-selected" class="required mt-3" id="nista"  value="Bez sjedalice" checked>
+                                            <div class="pricing-title bg-transparent">
+                                                <p class="text-transform-none text-size-xs ls-0">Bez sjedalice</p>
+
+                                                <img src="{{ asset('media/image/nijedna.svg') }}" alt="Bez sjedalice" class="p-4" style="max-height: 160px;"/>
+                                            </div>
+
+                                            <div class="pricing-features border-0 bg-transparent">
+                                                <ul>
+                                                    <li class="text-transform-none ls-0  text-size-xs fw-normal"><strong>Ne treba mi dječja sjedalica</strong> </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </label>
+
+
                                     <label for="hpojas" class="col-sm-6 col-md-3">
                                         <div class="pricing-box text-center shadow-none border">
                                             <input type="radio" name="data-plans-selected" class="required mt-3" id="hpojas"  value="Dječja sjedalica sa H-pojasom">
                                             <div class="pricing-title bg-transparent">
                                                 <p class="text-transform-none  text-size-xs ls-0">Dječja sjedalica sa H-pojasom</p>
 
-                                                <img src="{{ asset('media/image/prva.svg') }}" alt="Dječja sjedalica sa H-pojasom" class="p-4" style="max-height: 200px;"/>
+                                                <img src="{{ asset('media/image/prva.svg') }}" alt="Dječja sjedalica sa H-pojasom" class="p-4" style="max-height: 160px;"/>
                                             </div>
 
                                             <div class="pricing-features border-0 bg-transparent">
@@ -165,7 +185,7 @@
                                             <div class="pricing-title bg-transparent">
                                                 <p class="text-transform-none text-size-xs ls-0">Dječje sigurnosno sjedalo</p>
 
-                                                <img src="{{ asset('media/image/druga.svg') }}" alt="Dječje sigurnosno sjedalo" class="p-4" style="max-height: 200px;"/>
+                                                <img src="{{ asset('media/image/druga.svg') }}" alt="Dječje sigurnosno sjedalo" class="p-4" style="max-height: 160px;"/>
                                             </div>
 
                                             <div class="pricing-features border-0 bg-transparent">
@@ -179,11 +199,11 @@
 
                                     <label for="booster" class="col-sm-6 col-md-3">
                                         <div class="pricing-box text-center shadow-none border">
-                                            <input type="radio" name="data-plans-selected" class="required mt-3" id="booster"  value="Booster autosjedalica">
+                                            <input type="radio" name="data-plans-selected" class="required mt-3" id="booster"  value="Booster autosjedalica" >
                                             <div class="pricing-title bg-transparent">
                                                 <p class="text-transform-none text-size-xs ls-0">Booster autosjedalica</p>
 
-                                                <img src="{{ asset('media/image/booster2.svg') }}" alt="Booster autosjedalica" class="p-4" style="max-height: 200px;"/>
+                                                <img src="{{ asset('media/image/booster2.svg') }}" alt="Booster autosjedalica" class="p-4" style="max-height: 160px;"/>
                                             </div>
 
                                             <div class="pricing-features border-0 bg-transparent">
@@ -195,23 +215,7 @@
                                         </div>
                                     </label>
 
-                                    <label for="nista" class="col-sm-6 col-md-3">
-                                        <div class="pricing-box text-center shadow-none border">
-                                            <input type="radio" name="data-plans-selected" class="required mt-3" id="nista"  value="Bez sjedalice">
-                                            <div class="pricing-title bg-transparent">
-                                                <p class="text-transform-none text-size-xs ls-0">Bez sjedalice</p>
 
-                                                <img src="{{ asset('media/image/nijedna.svg') }}" alt="Bez sjedalice" class="p-4" style="max-height: 200px;"/>
-                                            </div>
-
-                                            <div class="pricing-features border-0 bg-transparent">
-                                                <ul>
-                                                    <li class="text-transform-none ls-0  text-size-xs fw-normal"><strong>Ne treba mi dječja sjedalica</strong> </li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </label>
 
 
 
