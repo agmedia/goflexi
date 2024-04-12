@@ -1,32 +1,14 @@
 @extends('front.layouts.app')
 
-@section ( 'title', 'FAQ - SelfCheckIns' )
+@section ( 'title', 'Goflexi' )
 
-@push('css')
+@push('css_after')
     <style>
      .desc ul{margin-left:25px}
     </style>
 @endpush
 
-@push('meta_tags')
-    <link rel="canonical" href="{{ env('APP_URL')}}"/>
-    <meta property="og:locale" content="{{ current_locale(true) }}"/>
-    <meta property="og:type" content="page"/>
-    <meta property="og:title" content="{{ __('front/common.faq') }} - SelfCheckIns"/>
-    <meta property="og:description" content="{{ __('front/common.faq') }}"/>
-    <meta property="og:url" content="{{ env('APP_URL')}}"/>
-    <meta property="og:site_name" content="SelfCheckIns"/>
-    <meta property="og:image" content="{{ asset(config('settings.default_apartment_image')) }}"/>
-    <meta property="og:image:secure_url" content="{{ asset(config('settings.default_apartment_image')) }}"/>
-    <meta property="og:image:width" content="1920"/>
-    <meta property="og:image:height" content="720"/>
-    <meta property="og:image:type" content="image/jpeg"/>
-    <meta property="og:image:alt" content="{{ __('front/common.faq') }} - SelfCheckIns"/>
-    <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:title" content="{{ __('front/common.faq') }} - SelfCheckIns"/>
-    <meta name="twitter:description" content="{{ __('front/common.faq') }}"/>
-    <meta name="twitter:image" content="{{ asset(config('settings.default_apartment_image')) }}"/>
-@endpush
+
 
 
 @section('content')
