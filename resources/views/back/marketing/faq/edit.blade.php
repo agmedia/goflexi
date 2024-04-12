@@ -60,6 +60,15 @@
                             </div>
                         </div>
 
+                        <div class="row justify-content-center mb-2 mt-5">
+                            <div class="col-md-10 position-relative mb-3">
+                                <div class="form-check form-switch custom-switch-v1">
+                                    <input type="checkbox" class="form-check-input input-success" id="status-swich" name="status" @if (isset($faq) and $faq->status) checked @endif>
+                                    <label class="form-check-label" for="status-swich"> Status</label>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row justify-content-center push mb-3">
                             <div class="col-md-5">
                                 <button type="submit" class="btn btn-success my-2">

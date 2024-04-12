@@ -30,7 +30,7 @@ class ProductController extends Controller
             $query->where('from_city', 'LIKE', '%' . $request->input('search') . '%');
         }
 
-        $products = $query->orderByDesc('created_at')
+        $products = $query->orderByDesc('start_time')
                          ->paginate(config('settings.pagination.back'))->appends($request->query());
 
         return view('back.catalog.product.index', compact('products'));
@@ -132,12 +132,12 @@ class ProductController extends Controller
     public function storeList(Request $request)
     {
         $from = now();
-        $to = now()->addDays(30);
+        $to = now()->addDays(10);
         $existing = Product::query()->orderBy('start_time', 'desc')->first();
 
         if ($existing) {
-            $from = Carbon::make($existing->start_time);
-            $to = Carbon::make($existing->start_time)->addDays(7);
+            $from = Carbon::make($existing->start_time)->addDays(1);
+            $to = Carbon::make($existing->start_time)->addDays(10);
         }
 
         $days = CarbonPeriod::create($from, $to);
