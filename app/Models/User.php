@@ -13,6 +13,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Laravel\Sanctum\HasApiTokens;
+use Bouncer;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 class User extends Authenticatable
@@ -154,16 +155,17 @@ class User extends Authenticatable
             return $exist;
         }
 
-        $public_user = User::create([
+        $public_user = User::query()->insertGetId([
             'name'     => $this->request->username,
             'email'    => $this->request->email,
             'password' => Hash::make($this->request->password),
+            'role' => $this->request->role ?? 'customer',
         ]);
 
-        Bouncer::assign('customer')->to($public_user);
+        Bouncer::assign($this->request->role ?? 'customer')->to($public_user);
 
-        UserDetail::create([
-            'user_id'    => $public_user->id,
+        UserDetail::query()->insertGetId([
+            'user_id'    => $public_user,
             'fname'      => $this->request->fname,
             'lname'      => $this->request->lname,
             'address'    => $this->request->address ?: '',
@@ -177,15 +179,14 @@ class User extends Authenticatable
             'avatar'     => 'media/avatars/avatar1.jpg',
             'bio'        => '',
             'social'     => '',
-            'role'       => 'customer',
             'status'     => (isset($this->request->status) and $this->request->status == 'on') ? 1 : 0,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
 
-        Mail::to($public_user)->send(new UserRegistered($public_user));
+        //Mail::to($public_user)->send(new UserRegistered($public_user));
 
-        return $public_user;
+        return User::query()->where('id', $public_user)->first();
     }
 
 

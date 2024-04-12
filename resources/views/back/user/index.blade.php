@@ -8,10 +8,15 @@
     <div class="page-header">
         <div class="page-block">
             <div class="row align-items-center">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="page-header-title">
                         <h2 class="mb-0">Users</h2>
                     </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="{{ route('users.create') }}" class="btn btn-primary m-l-20">
+                        <i class="ti ti-plus f-18"></i> Add New User
+                    </a>
                 </div>
             </div>
         </div>
