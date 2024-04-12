@@ -9,7 +9,7 @@
                         <h4>{{ __('front/apartment.uvjeti') }}</h4>
                         <ul>
                             @foreach ($uvjeti as $page)
-                                <li><a class="dropdown-item" href="{{ route('route.page', ['page' => $page]) }}">{{ $page->translation()->title }}</a></li>
+                                <li><a class="dropdown-item" href="{{ route('route.page', ['page' => $page]) }}">{{ $page->translation->title }}</a></li>
                             @endforeach
                         </ul>
                     </div>
