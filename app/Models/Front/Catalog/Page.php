@@ -61,7 +61,7 @@ class Page extends Model
             return $this->hasMany(PageTranslation::class, 'page_id');
         }
 
-        return $this->hasOne(PageTranslation::class, 'page_id')->where('lang', $this->locale)->first();
+        return $this->hasOne(PageTranslation::class, 'page_id')->where('lang', $this->locale);
     }
 
     /*******************************************************************************
