@@ -56,7 +56,7 @@
                                 <a class="btn btn-sm btn-alt-secondary" href="{{ route('options.edit', ['option' => $option]) }}">
                                     <i class="fa fa-fw fa-pencil-alt"></i>
                                 </a>
-                                <button class="btn btn-sm btn-alt-danger" onclick="event.preventDefault(); deleteItem({{ $option->id }}, '{{ route('options.destroy.api') }}');"><i class="fa fa-fw fa-trash-alt"></i></button>
+                                <button class="btn btn-sm btn-alt-danger" onclick="event.preventDefault(); deleteSettingsItem({{ $option->id }}, '{{ route('options.destroy.api') }}');"><i class="fa fa-fw fa-trash-alt"></i></button>
                             </td>
                         </tr>
                     @empty

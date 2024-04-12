@@ -132,8 +132,8 @@ class ProductController extends Controller
     public function storeList(Request $request)
     {
         $from = now();
-        $to = now()->addDays(7);
-        $existing = Product::query()->orderBy('start_time')->first();
+        $to = now()->addDays(30);
+        $existing = Product::query()->orderBy('start_time', 'desc')->first();
 
         if ($existing) {
             $from = Carbon::make($existing->start_time);

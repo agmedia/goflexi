@@ -108,7 +108,7 @@ class OptionController extends Controller
         $destroyed = Option::destroy($option->id);
 
         if ($destroyed) {
-            return redirect()->route('options')->with(['success' => 'OPcija je uspjšeno izbrisana!']);
+            return redirect()->route('options')->with(['success' => 'Opcija je uspjšeno izbrisana!']);
         }
 
         return redirect()->back()->with(['error' => 'Oops..! Greška prilikom brisanja.']);
