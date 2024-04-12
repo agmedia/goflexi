@@ -505,7 +505,7 @@
                 select.append('<option value="">{{ __('front/apartment.daberite_mjesto_polaska') }}</option>');
             }
             if (target == 'to') {
-                select.append('<option value="">{{ __('front/apartment.daberite_mjesto_dolaskaa') }}</option>');
+                select.append('<option value="">{{ __('front/apartment.daberite_mjesto_dolaska') }}</option>');
             }
             if (target == 'items') {
                 select.append('<option value="">{{ __('front/apartment.daberite_datum_polaska') }}</option>');
