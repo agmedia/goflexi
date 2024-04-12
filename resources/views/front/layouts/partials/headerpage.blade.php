@@ -10,7 +10,7 @@
                         <img class="logo-dark" srcset="{{ asset('media/image/logo-goflexi-dark.svg') }}" src="{{ asset('media/image/logo-goflexi-dark.svg.svg') }}" alt="{{ config('app.name') }}" style="max-height:30px;padding:3px">
                     </a>
                 </div>
-                
+
                 <div class="header-misc">
                     <div class="header-misc-icon ms-1">
                         @if (current_locale() == 'en')
@@ -33,19 +33,7 @@
                         <li class="menu-item">
                             <a href="{{ route('index') }}" class="menu-link" data-href="#wrapper"><div>{{ __('front/apartment.home') }}</div></a>
                         </li>
-                        <li class="menu-item">
-                            <a href="{{ route('index') }}" class="menu-link" data-href="#vozni-red" data-offset="100"><div>{{ __('front/apartment.vozni_red') }}</div></a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="{{ route('index') }}" class="menu-link" data-href="#onama"><div>{{ __('front/apartment.o_nama') }}</div></a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="{{ route('index') }}" class="menu-link" data-href="#faq"><div>{{ __('front/apartment.faq') }}</div></a>
-                        </li>
 
-                        <li class="menu-item">
-                            <a href="{{ route('index') }}" class="menu-link" data-href="#contact"><div>{{ __('front/apartment.kontakt') }}</div></a>
-                        </li>
                     </ul>
                 </nav>
             </div>

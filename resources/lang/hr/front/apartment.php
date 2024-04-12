@@ -115,6 +115,7 @@ return [
     'end' => 'Dolazak',
     'start' => 'Polazak',
     'total' => 'Ukupno',
+    'tnx' => 'Zahvaljujemo na narudžbi',
 
 
 

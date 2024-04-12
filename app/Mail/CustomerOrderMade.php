@@ -29,7 +29,7 @@ class CustomerOrderMade extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Zahvaljujemo na narudžbi...',
+            subject: __('front/apartment.tnx'),
         );
     }
 

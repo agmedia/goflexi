@@ -115,6 +115,7 @@ return [
     'end' => 'Start',
     'start' => 'End',
     'total' => 'Total',
+    'tnx' => 'Thank ypu for your order',
 
 
 
