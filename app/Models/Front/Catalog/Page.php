@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Back\Catalog;
+namespace App\Models\Front\Catalog;
 
 use App\Helpers\Helper;
 use Carbon\Carbon;
