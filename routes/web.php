@@ -231,6 +231,7 @@ Route::group(
      */
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::get('faq', [HomeController::class, 'faq'])->name('faq');
+    Route::get('info/{page}', [HomeController::class, 'page'])->name('route.page');
     Route::post('view/reservation', [HomeController::class, 'viewReservation'])->name('view-reservation');
     Route::post('checkout', [HomeController::class, 'checkout'])->name('checkout');
     Route::post('pay/reservation', [HomeController::class, 'payReservation'])->name('pay-reservation');

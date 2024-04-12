@@ -159,6 +159,17 @@ class HomeController extends FrontBaseController
 
 
     /**
+     * @param Faq $faq
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function page(Page $page)
+    {
+        return view('front.page', compact('page'));
+    }
+
+
+    /**
      * @param Request $request
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
