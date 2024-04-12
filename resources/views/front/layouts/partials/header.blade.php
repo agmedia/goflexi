@@ -13,24 +13,14 @@
 
                 <div class="header-misc">
                     <div class="header-misc-icon ms-1">
-                        <a rel="alternate" hreflang="en"
-                           href="/en">
-                            <img src="https://www.optimatransfer.com/media/flags/en.png" />
-                        </a>
-
-
+                        @if (current_locale() == 'en')
+                            <a rel="alternate" hreflang="hr" href="{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedUrl('hr', route('index'), [], true) }}"><img src="https://www.optimatransfer.com/media/flags/hr.png" /></a>
+                        @else
+                            <a rel="alternate" hreflang="en" href="{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedUrl('en', route('index'), [], true) }}"><img src="https://www.optimatransfer.com/media/flags/en.png" /></a>
+                        @endif
                     </div>
                 </div>
 
-                <div class="header-misc">
-                    <div class="header-misc-icon ms-1">
-
-                        <a rel="alternate" hreflang="hr"
-                           href="/hr">
-                            <img src="https://www.optimatransfer.com/media/flags/hr.png" />
-                        </a>
-                    </div>
-                </div>
 
                 <div class="primary-menu-trigger">
                     <button class="cnvs-hamburger" type="button" title="Open Mobile Menu">

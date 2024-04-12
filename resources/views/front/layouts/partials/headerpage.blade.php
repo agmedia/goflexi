@@ -10,13 +10,14 @@
                         <img class="logo-dark" srcset="{{ asset('media/image/logo-goflexi-dark.svg') }}" src="{{ asset('media/image/logo-goflexi-dark.svg.svg') }}" alt="{{ config('app.name') }}" style="max-height:30px;padding:3px">
                     </a>
                 </div>
-
+                
                 <div class="header-misc">
-                    <div class="header-misc-icon ms-5">
-                        <a rel="alternate" hreflang="en"
-                           href="#">
-                            <img src="https://www.optimatransfer.com/media/flags/en.png" />
-                        </a>
+                    <div class="header-misc-icon ms-1">
+                        @if (current_locale() == 'en')
+                            <a rel="alternate" hreflang="hr" href="{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedUrl('hr', route('index'), [], true) }}"><img src="https://www.optimatransfer.com/media/flags/hr.png" /></a>
+                        @else
+                            <a rel="alternate" hreflang="en" href="{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedUrl('en', route('index'), [], true) }}"><img src="https://www.optimatransfer.com/media/flags/en.png" /></a>
+                        @endif
                     </div>
                 </div>
 
