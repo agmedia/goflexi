@@ -37,7 +37,7 @@ class HomeController extends FrontBaseController
     public function index(Request $request)
     {
 
-        $faq = Faq::where('status', 0)->get();
+        $faq = Faq::where('status', 1)->get();
 
 
 
