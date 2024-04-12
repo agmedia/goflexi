@@ -30,7 +30,7 @@
                                 <p class="text-center"><img src="{{ asset('media/img/qr/'.$order->id) }}.png" style="max-width:320px"></p>
                             @endif
                         @endif
-                    <a class="tn bg-color text-white fw-semibold mt-3 me-3" href="{{ route('index') }}">{{ __('front/success.success_btn') }}</a>
+                    <a class="btn bg-color text-white fw-semibold mt-3 me-3" href="{{ route('index') }}">{{ __('front/success.success_btn') }}</a>
                 </div>
             </div>
         </div>
