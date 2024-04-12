@@ -71,13 +71,13 @@
                                 <div class="col-lg-6">
                                     <p>
                                         <small>
-                                            <strong>Boarding Point:</strong> {{ $reservation->listing->from_city }} <br>
-                                            <strong>Dropping Point:</strong> {{ $reservation->listing->to_city }} <br>
-                                            <strong>Type:</strong> One-way <br>
-                                            <strong>Date:</strong> {{ $reservation->time['date'] }}<br>
-                                            <strong>Start time:</strong> {{ $reservation->time['start_time'] }} <br>
-                                            <strong>End time:</strong> {{ $reservation->time['end_time'] }} <br>
-                                            <strong>Duration:</strong> {{ $reservation->time['duration'] }} <br>
+                                            <strong>{{ __('front/apartment.rd1') }}:</strong> {{ $reservation->listing->from_city }} <br>
+                                            <strong>{{ __('front/apartment.rd2') }}:</strong> {{ $reservation->listing->to_city }} <br>
+                                            <strong>{{ __('front/apartment.rd3') }}:</strong> {{ __('front/apartment.rd8') }} <br>
+                                            <strong>{{ __('front/apartment.rd4') }}:</strong> {{ $reservation->time['date'] }}<br>
+                                            <strong>{{ __('front/apartment.rd5') }}:</strong> {{ $reservation->time['start_time'] }} <br>
+                                            <strong>{{ __('front/apartment.rd6') }}:</strong> {{ $reservation->time['end_time'] }} <br>
+                                            <strong>{{ __('front/apartment.rd7') }}:</strong> {{ $reservation->time['duration'] }} <br>
                                         </small>
                                     </p>
                                 </div>
@@ -85,20 +85,20 @@
                                     <table class="table cart-totals ">
                                         <thead>
                                         <tr>
-                                            <th class="cart-product-thumbnail bg-light">Type</th>
-                                            <th class="cart-product-thumbnail text-center bg-light">Quantity</th>
-                                            <th class="cart-product-thumbnail bg-light">Price</th>
+                                            <th class="cart-product-thumbnail bg-light">{{ __('front/apartment.type') }}</th>
+                                            <th class="cart-product-thumbnail text-center bg-light">{{ __('front/apartment.quantity') }}</th>
+                                            <th class="cart-product-thumbnail bg-light">{{ __('front/apartment.price') }}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr class="cart_item">
                                             <td class="bg-light cart-product-name ">
-                                                <small>   <span>Adult</span> </small>
+                                                <small>   <span>{{ __('front/apartment.adult') }}</span> </small>
                                             </td>
                                             <td class="cart-product-quantity bg-light">
                                                 <div class="quantity">
                                                     <input type="button" value="-" class="minus">
-                                                    <input type="text" name="quantity_adult" value="1" class="qty" id="qty-adult" max="{{ $reservation->seats }}">
+                                                    <input type="text" name="quantity_adult" value="1" class="qty" id="qty-adult" >
                                                     <input type="button" value="+" class="plus">
                                                 </div>
                                             </td>
@@ -108,12 +108,12 @@
                                         </tr>
                                         <tr class="cart_item  bg-light">
                                             <td class="bg-light">
-                                                <small><span>Child</span> </small>
+                                                <small><span>{{ __('front/apartment.child') }}</span> </small>
                                             </td>
                                             <td class="cart-product-quantity bg-light">
                                                 <div class="quantity">
                                                     <input type="button" value="-" class="minus">
-                                                    <input type="text" name="quantity_child" value="0" class="qty" id="qty-child" max="2">
+                                                    <input type="text" name="quantity_child" value="0" class="qty" id="qty-child" >
                                                     <input type="button" value="+" class="plus">
                                                 </div>
                                             </td>
@@ -123,7 +123,7 @@
                                         </tr>
                                         <tr class="cart_item">
                                             <td colspan="2" class="cart-product-name bg-light">
-                                                <strong>SubTotal</strong>
+                                                <strong>{{ __('front/apartment.subtotal') }}</strong>
                                             </td>
                                             <td  class="cart-product-name bg-light">
                                                 <span class="amount color lead" id="total-price"><strong></strong></span>
@@ -181,11 +181,11 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Pozor!</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{ __('front/apartment.pozor') }}</h4>
                     <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="mb-0">Dovršite rezervaciju ili će se stranica obnoviti i možda izgubite mjesto a time i Vašu rezervaciju u ovoj vožnji...</p>
+                    <p class="mb-0">{{ __('front/apartment.pozor_txt') }}</p>
                 </div>
             </div>
         </div>

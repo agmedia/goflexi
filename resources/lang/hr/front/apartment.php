@@ -76,6 +76,22 @@ return [
     'price'=> 'Cijena',
     'sjedala' => 'Sjedala dostupno',
     'znacajke' => 'Značajke',
+    'rd1' =>'Polazna točka',
+    'rd2' =>'Mjesto iskrcaja',
+    'rd3' =>'Vrsta',
+    'rd4' =>'Datum',
+    'rd5' =>'Početno vrijeme',
+    'rd6' =>'Završno vrijeme',
+    'rd7' =>'Trajanje',
+    'rd8' =>'Jednosmjerno',
+    'type' => 'Vrsta',
+    'quantity' => 'Količina',
+    'adult' => 'Odrasli',
+    'child' =>'Dijete',
+    'subtotal' => 'Međuzbroj',
+    'pozor' => 'Pažnja!',
+    'pozor_txt' => 'Završite rezervaciju ili ćete osvježiti stranicu i moguće izgubiti mjesto i vrijeme svoje rezervacije u ovoj vožnji.'
+
 
 
 

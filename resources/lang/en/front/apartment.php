@@ -74,7 +74,23 @@ return [
                             <th class="cart-product-name bg-light">Features</th>',
     'price'=> 'Price',
     'sjedala' => 'Seats Available',
-'znacajke' => 'Features',
+        'znacajke' => 'Features',
+    'rd1' =>'Boarding Point',
+    'rd2' =>'Dropping Point',
+    'rd3' =>'Type',
+    'rd4' =>'Date',
+    'rd5' =>'Start time',
+    'rd6' =>'End time',
+    'rd7' =>'Duration',
+    'rd8' =>'One-way ',
+    'type' => 'Type',
+    'quantity' => 'Quantity',
+    'adult' => 'Adult',
+    'child' =>'Child',
+    'subtotal' => 'Subtotal',
+    'pozor' => 'Attention!',
+    'pozor_txt' => 'Complete the reservation or you will refresh the page and possibly lose the place and time of your reservation in this ride.'
+
 
 
 ];
