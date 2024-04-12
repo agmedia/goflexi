@@ -100,7 +100,7 @@ class HomeController extends FrontBaseController
         Log::info($request->toArray());
 
         if ($request->has('order_id') && $request->input('order_id')) {
-            $order = Order::query()->where('id', $request->input('order_id'))->first();
+            $order = \App\Models\Back\Orders\Order::query()->where('id', $request->input('order_id'))->first();
 
             $order->update(['order_status_id' => config('settings.order.status.paid')]);
 
