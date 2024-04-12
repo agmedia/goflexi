@@ -50,7 +50,7 @@
                                                     </div>
                                                     <div class="col-12 mt-5">
                                                         <label for="description-{{ $lang->code }}">Short Description</label>
-                                                        <textarea id="description-{{ $lang->code }}" class="form-control" rows="4" name="description[{{ $lang->code }}]" placeholder="{{ $lang->code }}">{{ isset($faq) ? $faq->translation($lang->code)->description : old('description.*') }}</textarea>
+                                                        <textarea id="description-{{ $lang->code }}" class="form-control" rows="4"  name="description[{{ $lang->code }}]" placeholder="{{ $lang->code }}">{{ isset($faq) ? $faq->translation($lang->code)->description : old('description.*') }}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -102,7 +102,7 @@
     <script>
         $(() => {
             {!! ag_lang() !!}.forEach(function(item) {
-                ClassicEditor.create(document.querySelector('#description-editor-' + item.code))
+                ClassicEditor.create(document.querySelector('#description-' + item.code))
                 .then(editor => {
                     console.log(editor);
                 })
