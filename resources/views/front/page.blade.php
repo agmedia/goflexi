@@ -2,6 +2,12 @@
 
 @section ( 'title', 'FAQ - SelfCheckIns' )
 
+@push('css')
+    <style>
+     .desc ul{margin-left:25px}
+    </style>
+@endpush
+
 @push('meta_tags')
     <link rel="canonical" href="{{ env('APP_URL')}}"/>
     <meta property="og:locale" content="{{ current_locale(true) }}"/>
@@ -44,7 +50,7 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-lg-12">
+                <div class="col-lg-12 desc">
 
 
 
