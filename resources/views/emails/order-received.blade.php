@@ -10,10 +10,12 @@
         </tr>
         <tr>
             <td class="ag-mail-tableset">
+                @include('emails.layouts.partials.order-details', ['order' => $order])
             </td>
         </tr>
         <tr>
             <td class="ag-mail-tableset">
+                @include('emails.layouts.partials.order-price-table', ['order' => $order])
             </td>
         </tr>
         <tr>
