@@ -61,7 +61,7 @@ class PageController extends Controller
         $stored = $page->validateRequest($request)->store();
 
         if ($stored) {
-            return redirect()->back()->with(['success' => 'Stranica je uspješno snimljen!']);
+            return redirect()->route('page.edit', ['page' => $stored])->with(['success' => 'Stranica je uspješno snimljen!']);
         }
 
         return redirect()->back()->with(['error' => 'Whoops..! Desila se greška sa snimanjem stranice.']);
