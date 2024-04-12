@@ -8,9 +8,9 @@
                     <div class="widget widget_links">
                         <h4>{{ __('front/apartment.uvjeti') }}</h4>
                         <ul>
-                            <li><a href="#">{{ __('front/apartment.pravila') }}</a></li>
-                            <li><a href="#">{{ __('front/apartment.uvjeti') }}</a></li>
-                            <li><a href="#">{{ __('front/apartment.odredbe') }}</a></li>
+                            @foreach ($uvjeti as $page)
+                                <li><a class="dropdown-item" href="{{ route('route.page', ['page' => $page]) }}">{{ $page->translation()->title }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>

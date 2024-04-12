@@ -27,9 +27,9 @@ class AppServiceProvider extends ServiceProvider
         $mode = Settings::getCached('app', 'mode');
         View::share('mode', $mode);
 
-        $uvjeti = Page::query()->where('subgroup', 'Uvjeti kupnje')->get();
-        View::share('uvjeti_kupnje', $uvjeti);
-        
+        $uvjeti = Page::query()->where('group', 'Info')->get();
+        View::share('uvjeti', $uvjeti);
+
         Paginator::useBootstrap();
     }
 }
