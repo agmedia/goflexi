@@ -120,7 +120,7 @@ class Option extends Model
 
         if ($id) {
             OptionTranslation::create($id, $this->request);
-            OptionProduct::populate($id, $this->links->toArray());
+            //OptionProduct::populate($id, $this->links->toArray());
 
             return $this->find($id);
         }
@@ -142,7 +142,7 @@ class Option extends Model
 
         if ($updated) {
             OptionTranslation::edit($this->id, $this->request);
-            OptionProduct::populate($this->id, $this->links->toArray());
+            //OptionProduct::populate($this->id, $this->links->toArray());
 
             return $this;
         }
