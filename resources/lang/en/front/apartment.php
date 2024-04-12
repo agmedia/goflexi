@@ -89,7 +89,33 @@ return [
     'child' =>'Child',
     'subtotal' => 'Subtotal',
     'pozor' => 'Attention!',
-    'pozor_txt' => 'Complete the reservation or you will refresh the page and possibly lose the place and time of your reservation in this ride.'
+    'pozor_txt' => 'Complete the reservation or you will refresh the page and possibly lose the place and time of your reservation in this ride.',
+
+    'check_1' => 'Entering the name and surname of the person entering the data is sufficient, regardless of whether one or more persons are traveling.',
+'fname' =>'Name',
+'check_2' => 'Used exclusively for notifications of delays and changes in the timetable.',
+'check_3' => 'Your ticket and travel information will be delivered to this email.',
+'check_4' => 'We can take as much luggage as indicated in the reservation. Pay attention to the maximum dimensions!',
+'check_5' => '1 Carry-on luggage | 7 kg · 42×30×18 cm',
+'check_6' => '1 Checked luggage | 20 kg · 80×50×30 cm',
+'check_7' => 'Additional luggage',
+'check_8' => 'Child seats are free of charge, included in the ticket price',
+'check_9' => 'Without a seat',
+'check_10' => 'I do not need a child seat',
+'sjed_1' => 'Child seat with H-belt',
+'sjed_2' => 'babies - from 9 to 18 kg',
+'sjed_3' => 'Child safety seat',
+'sjed_4' => 'children - from 15 to 38 kg',
+'sjed_5' => 'Booster car seat',
+'sjed_6' => 'children - from 22 to 36 kg',
+'rezervacija' => 'Your reservation',
+    'prtljaga' => 'Luggage',
+    'po_osobi' => 'Included per person',
+        'odaberite_djecja' =>  'Select child seat',
+    'end' => 'Start',
+    'start' => 'End',
+    'total' => 'Total',
+
 
 
 

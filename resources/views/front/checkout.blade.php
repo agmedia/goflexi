@@ -39,39 +39,33 @@
                     <div class="row gutter-40">
                         <div class="col-xl-9">
 
-
-
                             {{--dd($checkout)
-
                             {{ $checkout->listing->toJson() }}--}}
-
-
-
 
                             <div class="row mb-3 ">
                                 <input type="hidden" name="listing" value="{{ $checkout->listing->id }}">
                                 <h3 class=" h5 color my-2 mt-4">  <i class="fa-solid text-black fa-clipboard-user"></i> {{ __('front/checkout.personal_info') }}</h3>
-                                <small class="mb-4 text-muted"> <span class="color">*</span> Dovoljan je unos imena i prezimena samo osobe tko unosi podatke, bez obzira putuje li jedna, ili više osoba.</small>
+                                <small class="mb-4 text-muted"> <span class="color">*</span> {{ __('front/apartment.check_1') }}</small>
 
 
                                 <div class="col-lg-6 form-group mb-2">
-                                    <label for="template-contactform-name">Name <small>*</small></label>
+                                    <label for="template-contactform-name">{{ __('front/apartment.fname') }} <small>*</small></label>
                                     <input type="text" id="name" name="firstname" class="form-control mb-2 " placeholder="{{ __('front/checkout.name') }}" value="" required>
                                 </div>
                                 <div class="col-lg-6 form-group mb-2">
-                                    <label for="template-contactform-name">Surname <small>*</small></label>
+                                    <label for="template-contactform-name">{{ __('front/apartment.lname') }} <small>*</small></label>
                                     <input type="text" id="lastname" name="lastname" class="form-control mb-2 " placeholder="{{ __('front/checkout.surname') }}" value="" required>
                                 </div>
                                 <div class="col-lg-6 mb-3 form-group mb-2">
-                                    <label for="template-contactform-name">Phone <small>*</small></label>
+                                    <label for="template-contactform-name">{{ __('front/apartment.mobile') }} <small>*</small></label>
                                     <input type="tel" id="phone" name="phone" class="form-control w-100 mb-1"  pattern="^\+?\d{0,13}" required placeholder="{{ __('front/checkout.mobile_number') }}" value="" required>
-                                    <small id="phoneHelp" class="form-text text-muted"><span class="color mb-1"> *</span> Koristi se isključivo za obavijesti o kašnjenjima i promjenama u voznom redu.</small>
+                                    <small id="phoneHelp" class="form-text text-muted"><span class="color mb-1"> *</span> {{ __('front/apartment.check_2') }}</small>
                                 </div>
 
                                 <div class="col-lg-6 form-group mb-2">
-                                    <label for="template-contactform-name">Email <small>*</small></label>
+                                    <label for="template-contactform-name">{{ __('front/apartment.email') }} <small>*</small></label>
                                     <input type="email" id="email" name="email" class="form-control  mb-1" placeholder="{{ __('front/checkout.email_address') }}" value="" required>
-                                    <small id="emailHelp" class="form-text text-muted"><span class="color mb-1"> *</span> Vaša vozna karta i informacije o vožnji će biti dostavljeni na ovaj email.</small>
+                                    <small id="emailHelp" class="form-text text-muted"><span class="color mb-1"> *</span> {{ __('front/apartment.check_3') }}</small>
 
                                 </div>
                                 <div class="w-100"></div>
@@ -104,15 +98,15 @@
 
 
                             <div class="row mb-3">
-                                <h3 class=" h5 color my-2 mt-4"><i class="bi-luggage-fill text-black "></i> {{ __('Prtljaga') }}</h3>
-                                <small class="mb-4 text-muted"> <span class="color">*</span> Možemo preuzeti onoliko prtljage koliko je naznačeno u rezervaciji. Obratite pažnju na maksimalne dimenzije!</small>
+                                <h3 class=" h5 color my-2 mt-4"><i class="bi-luggage-fill text-black "></i> {{ __('front/apartment.prtljaga') }}</h3>
+                                <small class="mb-4 text-muted"> <span class="color">*</span> {{ __('front/apartment.check_4') }}</small>
                                 <div class="col-5">
-                                    <h3 class=" fs-6 my-2 mt-0">{{ __('Uključeno po osobi') }}</h3>
+                                    <h3 class=" fs-6 my-2 mt-0">{{ __('front/apartment.po_osobi') }}</h3>
 
                                     <ul class="list-group mb-2 mt-2">
 
-                                        <li class="list-group-item mb-0 text-transform-none fw-normal ls-0 p-3 text-size-xs"><i class="bi-check-lg"></i> 1 Ručna prtljaga | 7 kg · 42×30×18 cm</li>
-                                        <li class="list-group-item mb-0 text-transform-none fw-normal ls-0 p-3 text-size-xs "><i class="bi-check-lg"></i> 1 Predana prtljaga | 20 kg · 80×50×30 cm</li>
+                                        <li class="list-group-item mb-0 text-transform-none fw-normal ls-0 p-3 text-size-xs"><i class="bi-check-lg"></i> {{ __('front/apartment.check_5') }}</li>
+                                        <li class="list-group-item mb-0 text-transform-none fw-normal ls-0 p-3 text-size-xs "><i class="bi-check-lg"></i> {{ __('front/apartment.check_6') }}</li>
 
                                     </ul>
 
@@ -120,7 +114,7 @@
                                 </div>
                                 @if($checkout->available_options)
                                         <div class="col-md-7">
-                                            <h3 class=" fs-6 my-2 mt-0">{{ __('Dodatna prtljaga') }}</h3>
+                                            <h3 class=" fs-6 my-2 mt-0">{{ __('front/apartment.check_7') }}</h3>
                                             <div class="list-group mb-2 mt-2">
                                                 @foreach ($checkout->available_options as $option)
                                                     @if($option->reference == 'other')
@@ -139,21 +133,21 @@
 
                             @if($checkout->additional_child)
                                 <div class="row">
-                                    <h3 class=" h5 color my-2 mt-4"><i class="uil uil-kid text-black "></i> {{ __('Odaberite dječja sjedala') }}</h3>
-                                    <small class="mb-4 text-muted"> <span class="color">*</span> Dječje sjedalice su besplatne, odnosno uračunate su u cijenu vozne karte.</small>
+                                    <h3 class=" h5 color my-2 mt-4"><i class="uil uil-kid text-black "></i> {{ __('front/apartment.odaberite_djecja') }}</h3>
+                                    <small class="mb-4 text-muted"> <span class="color">*</span> {{ __('front/apartment.check_8') }}</small>
 
                                     <label for="nista" class="col-sm-6 col-md-3">
                                         <div class="pricing-box text-center shadow-none border">
                                             <input type="radio" name="data-plans-selected" class="required mt-3" id="nista"  value="Bez sjedalice" checked>
                                             <div class="pricing-title bg-transparent">
-                                                <p class="text-transform-none text-size-xs ls-0">Bez sjedalice</p>
+                                                <p class="text-transform-none text-size-xs ls-0">{{ __('front/apartment.check_9') }}</p>
 
                                                 <img src="{{ asset('media/image/nijedna.svg') }}" alt="Bez sjedalice" class="p-4" style="max-height: 160px;"/>
                                             </div>
 
                                             <div class="pricing-features border-0 bg-transparent">
                                                 <ul>
-                                                    <li class="text-transform-none ls-0  text-size-xs fw-normal"><strong>Ne treba mi dječja sjedalica</strong> </li>
+                                                    <li class="text-transform-none ls-0  text-size-xs fw-normal"><strong>{{ __('front/apartment.check_10') }}</strong> </li>
 
                                                 </ul>
                                             </div>
@@ -163,16 +157,16 @@
 
                                     <label for="hpojas" class="col-sm-6 col-md-3">
                                         <div class="pricing-box text-center shadow-none border">
-                                            <input type="radio" name="data-plans-selected" class="required mt-3" id="hpojas"  value="Dječja sjedalica sa H-pojasom">
+                                            <input type="radio" name="data-plans-selected" class="required mt-3" id="hpojas"  value="{{ __('front/apartment.sjed_1') }}">
                                             <div class="pricing-title bg-transparent">
-                                                <p class="text-transform-none  text-size-xs ls-0">Dječja sjedalica sa H-pojasom</p>
+                                                <p class="text-transform-none  text-size-xs ls-0">{{ __('front/apartment.sjed_1') }}</p>
 
-                                                <img src="{{ asset('media/image/prva.svg') }}" alt="Dječja sjedalica sa H-pojasom" class="p-4" style="max-height: 160px;"/>
+                                                <img src="{{ asset('media/image/prva.svg') }}" alt="{{ __('front/apartment.sjed_1') }}" class="p-4" style="max-height: 160px;"/>
                                             </div>
 
                                             <div class="pricing-features border-0 bg-transparent">
                                                 <ul>
-                                                    <li class="text-transform-none text-size-xs ls-0 fw-normal"><strong>bebe - od 9 do 18 kg</strong> </li>
+                                                    <li class="text-transform-none text-size-xs ls-0 fw-normal"><strong>{{ __('front/apartment.sjed_2') }}</strong> </li>
 
                                                 </ul>
                                             </div>
@@ -181,16 +175,16 @@
 
                                     <label for="sigurnosno" class="col-sm-6 col-md-3">
                                         <div class="pricing-box text-center shadow-none border">
-                                            <input type="radio" name="data-plans-selected" class="required mt-3" id="sigurnosno"  value="Dječje sigurnosno sjedalo">
+                                            <input type="radio" name="data-plans-selected" class="required mt-3" id="sigurnosno"  value="{{ __('front/apartment.sjed_3') }}">
                                             <div class="pricing-title bg-transparent">
-                                                <p class="text-transform-none text-size-xs ls-0">Dječje sigurnosno sjedalo</p>
+                                                <p class="text-transform-none text-size-xs ls-0">{{ __('front/apartment.sjed_3') }}</p>
 
-                                                <img src="{{ asset('media/image/druga.svg') }}" alt="Dječje sigurnosno sjedalo" class="p-4" style="max-height: 160px;"/>
+                                                <img src="{{ asset('media/image/druga.svg') }}" alt="{{ __('front/apartment.sjed_3') }}" class="p-4" style="max-height: 160px;"/>
                                             </div>
 
                                             <div class="pricing-features border-0 bg-transparent">
                                                 <ul>
-                                                    <li class="text-transform-none text-size-xs ls-0 fw-normal"><strong>djeca - od 15 do 38 kg</strong> </li>
+                                                    <li class="text-transform-none text-size-xs ls-0 fw-normal"><strong>{{ __('front/apartment.sjed_4') }}</strong> </li>
 
                                                 </ul>
                                             </div>
@@ -199,16 +193,16 @@
 
                                     <label for="booster" class="col-sm-6 col-md-3">
                                         <div class="pricing-box text-center shadow-none border">
-                                            <input type="radio" name="data-plans-selected" class="required mt-3" id="booster"  value="Booster autosjedalica" >
+                                            <input type="radio" name="data-plans-selected" class="required mt-3" id="booster"  value="{{ __('front/apartment.sjed_5') }}" >
                                             <div class="pricing-title bg-transparent">
-                                                <p class="text-transform-none text-size-xs ls-0">Booster autosjedalica</p>
+                                                <p class="text-transform-none text-size-xs ls-0">{{ __('front/apartment.sjed_5') }}</p>
 
-                                                <img src="{{ asset('media/image/booster2.svg') }}" alt="Booster autosjedalica" class="p-4" style="max-height: 160px;"/>
+                                                <img src="{{ asset('media/image/booster2.svg') }}" alt="{{ __('front/apartment.sjed_5') }}" class="p-4" style="max-height: 160px;"/>
                                             </div>
 
                                             <div class="pricing-features border-0 bg-transparent">
                                                 <ul>
-                                                    <li class="text-transform-none text-size-xs ls-0 fw-normal"><strong>djeca - od 22 do 36 kg</strong> </li>
+                                                    <li class="text-transform-none text-size-xs ls-0 fw-normal"><strong>{{ __('front/apartment.sjed_6') }}</strong> </li>
 
                                                 </ul>
                                             </div>
@@ -235,7 +229,7 @@
                         <div class="col-xl-3">
                             <div class="row">
                                 <div class="col-12 col-lg mt-3 d-flex flex-row justify-content-between">
-                                    <h3 class="h5 color flex-grow-1">Your Reservation</h3> <i class="bi-clock-history me-2"></i> <span class=" countdown-amount fw-bold fs-6" id="listing-timer">  </span>
+                                    <h3 class="h5 color flex-grow-1">{{ __('front/apartment.rezervacija') }}</h3> <i class="bi-clock-history me-2"></i> <span class=" countdown-amount fw-bold fs-6" id="listing-timer">  </span>
                                 </div>
                             </div>
 
@@ -249,8 +243,8 @@
                                         <div class="card mb-3 border-0">
 
                                             <div class="card-body ">
-                                                <p class="card-text"><i class="bi-clock me-2"></i> Start: {{ \Carbon\Carbon::parse($checkout->listing->start_time)->format('H:i')}} <i class="bi-arrow-right-short"></i> {{ $checkout->listing->from_city }}<br>
-                                                    <i class="bi-clock-history me-2"></i> End:  {{ \Carbon\Carbon::parse($checkout->listing->end_time)->format('H:i')}} <i class="bi-arrow-right-short"></i> {{ $checkout->listing->to_city }}</p>
+                                                <p class="card-text"><i class="bi-clock me-2"></i> {{ __('front/apartment.start') }}: {{ \Carbon\Carbon::parse($checkout->listing->start_time)->format('H:i')}} <i class="bi-arrow-right-short"></i> {{ $checkout->listing->from_city }}<br>
+                                                    <i class="bi-clock-history me-2"></i> {{ __('front/apartment.end') }}:  {{ \Carbon\Carbon::parse($checkout->listing->end_time)->format('H:i')}} <i class="bi-arrow-right-short"></i> {{ $checkout->listing->to_city }}</p>
                                             </div>
                                         </div>
 
@@ -260,7 +254,7 @@
                                                 <tbody>
                                                 <tr class="cart_item">
                                                     <td class="cart-product-name">
-                                                        Person x {{ $checkout->additional_person + 1 }}:
+                                                        {{ __('front/apartment.adult') }} x {{ $checkout->additional_person + 1 }}:
                                                     </td>
 
                                                     <td class="cart-product-name text-end">
@@ -270,7 +264,7 @@
 
                                                 <tr class="cart_item">
                                                     <td class="cart-product-name">
-                                                        Children x {{ $checkout->additional_child }}:
+                                                        {{ __('front/apartment.child') }} x {{ $checkout->additional_child }}:
                                                     </td>
 
                                                     <td class="cart-product-name text-end">
@@ -280,7 +274,7 @@
 
                                                 <tr class="cart_item">
                                                     <td class="cart-product-name">
-                                                        Total:
+                                                        {{ __('front/apartment.total') }}:
                                                     </td>
 
                                                     <td class="cart-product-name text-end">

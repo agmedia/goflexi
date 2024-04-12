@@ -90,7 +90,33 @@ return [
     'child' =>'Dijete',
     'subtotal' => 'Međuzbroj',
     'pozor' => 'Pažnja!',
-    'pozor_txt' => 'Završite rezervaciju ili ćete osvježiti stranicu i moguće izgubiti mjesto i vrijeme svoje rezervacije u ovoj vožnji.'
+    'pozor_txt' => 'Završite rezervaciju ili ćete osvježiti stranicu i moguće izgubiti mjesto i vrijeme svoje rezervacije u ovoj vožnji.',
+    'check_1' => 'Dovoljan je unos imena i prezimena samo osobe tko unosi podatke, bez obzira putuje li jedna, ili više osoba.',
+    'fname' =>'Ime',
+    'check_2' => 'Koristi se isključivo za obavijesti o kašnjenjima i promjenama u voznom redu.',
+    'check_3' => 'Vaša vozna karta i informacije o vožnji će biti dostavljeni na ovaj email.',
+    'check_4' => 'Možemo preuzeti onoliko prtljage koliko je naznačeno u rezervaciji. Obratite pažnju na maksimalne dimenzije!',
+    'check_5' => '1 Ručna prtljaga | 7 kg · 42×30×18 cm',
+    'check_6' => '1 Predana prtljaga | 20 kg · 80×50×30 cm',
+    'check_7' => 'Dodatna prtljaga',
+    'check_8' => 'Dječje sjedalice su besplatne, odnosno uračunate su u cijenu vozne karte',
+    'check_9' => 'Bez sjedalice',
+    'check_10' => 'Ne treba mi dječja sjedalica',
+    'sjed_1' => 'Dječja sjedalica sa H-pojasom',
+    'sjed_2' => 'bebe - od 9 do 18 kg',
+    'sjed_3' => 'Dječje sigurnosno sjedalo',
+    'sjed_4' => 'djeca - od 15 do 38 kg',
+    'sjed_5' => 'Booster autosjedalica',
+    'sjed_6' => 'djeca - od 22 do 36 kg',
+    'rezervacija' => 'Vaša rezervacija',
+    'prtljaga' => 'Prtljaga',
+    'odaberite_djecja' =>  'Odaberite dječja sjedala',
+    'po_osobi' => 'Uključeno po osobi',
+    'end' => 'Dolazak',
+    'start' => 'Polazak',
+    'total' => 'Ukupno',
+
+
 
 
 
