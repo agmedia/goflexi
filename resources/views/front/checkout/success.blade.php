@@ -11,27 +11,10 @@
         @endsection
     @endif
 
-        <div class="page-banner full-row bg-white py-5">
-            <div class="container">
-                <div class="row row-cols-md-2 row-cols-1 g-3">
-                    <div class="col">
-                        <h3 class="page-name text-secondary m-0">{{ __('front/success.success_main_title') }}</h3>
-                    </div>
-                    <div class="col">
-                        <nav class="float-start float-md-end">
-                            <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="{{ route('index') }}">{{ __('front/success.success_home') }}</a></li>
 
-                                <li class="breadcrumb-item active">{{ __('front/success.success_main_title') }}</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-    <div class="container pb-5 mb-sm-4">
-        <div class="pt-5">
+    <div class="container pb-5 mt-5 mb-sm-4">
+        <div class="pt-5 mt-5">
             <div class="card py-3 mt-sm-3">
                 <div class="card-body text-center">
                     <h2 class="h4 pb-3">{{ __('front/success.success_sub_title') }}</h2>
@@ -47,7 +30,7 @@
                                 <p class="text-center"><img src="{{ asset('media/img/qr/'.$order->id) }}.png" style="max-width:320px"></p>
                             @endif
                         @endif
-                    <a class="btn btn-secondary mt-3 me-3" href="{{ route('index') }}">{{ __('front/success.success_btn') }}</a>
+                    <a class="tn bg-color text-white fw-semibold mt-3 me-3" href="{{ route('index') }}">{{ __('front/success.success_btn') }}</a>
                 </div>
             </div>
         </div>
