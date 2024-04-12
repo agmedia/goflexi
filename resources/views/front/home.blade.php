@@ -502,13 +502,13 @@
             select.selectpicker('refresh');
 
             if (target == 'from') {
-                select.append('<option value="">Odaberite mjesto polaska...</option>');
+                select.append('<option value="">{{ __('front/apartment.daberite_mjesto_polaska') }}</option>');
             }
             if (target == 'to') {
-                select.append('<option value="">Odaberite lokaciju dolaska...</option>');
+                select.append('<option value="">{{ __('front/apartment.daberite_mjesto_dolaskaa') }}</option>');
             }
             if (target == 'items') {
-                select.append('<option value="">Odaberite datum polaska...</option>');
+                select.append('<option value="">{{ __('front/apartment.daberite_datum_polaska') }}</option>');
             }
 
             select.selectpicker('refresh');
